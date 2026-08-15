@@ -59,24 +59,27 @@ BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
 )
 
-UPLOAD_FOLDER = os.path.join(
-    BASE_DIR,
-    "uploads"
-)
+# Vercel filesystem is read-only except /tmp.
+# Local PC continues using the normal uploads folder.
+if os.environ.get("VERCEL") == "1":
+    UPLOAD_FOLDER = "/tmp/uploads"
+else:
+    UPLOAD_FOLDER = os.path.join(
+        BASE_DIR,
+        "uploads"
+    )
 
+# Sample CSV files are already part of the repository.
+# Do NOT try to create this directory on Vercel.
 SAMPLE_FOLDER = os.path.join(
     BASE_DIR,
     "static",
     "sample"
 )
 
+# Only create the writable upload directory.
 os.makedirs(
     UPLOAD_FOLDER,
-    exist_ok=True
-)
-
-os.makedirs(
-    SAMPLE_FOLDER,
     exist_ok=True
 )
 
@@ -85,7 +88,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = (
     100 * 1024 * 1024
 )
-
 
 # ============================================================
 # CURRENT ANALYSIS
@@ -808,66 +810,127 @@ def get_fraud_probability(
 
     return None
 
-
 # ============================================================
 # CLASSIFICATION
 # ============================================================
 
-def classify_transaction(
+def classify_transaction(transaction):
 
-    transaction
-
-):
+    # --------------------------------------------------------
+    # READ CANONICAL PREDICTION FIRST
+    # --------------------------------------------------------
 
     prediction = str(
-
         transaction.get(
             "prediction",
-            ""
+            transaction.get("Prediction", "")
         )
-
     ).strip().lower()
-
 
     risk_level = str(
-
         transaction.get(
             "risk_level",
-            ""
+            transaction.get("RiskLevel", "")
         )
-
     ).strip().lower()
-
 
     status = str(
-
         transaction.get(
             "status",
-            ""
+            transaction.get("Status", "")
         )
-
     ).strip().lower()
 
+    # --------------------------------------------------------
+    # FRAUD HAS HIGHEST PRIORITY
+    # --------------------------------------------------------
 
-    result = str(
+    if prediction in {
+        "fraud",
+        "fraudulent",
+        "fraud detected",
+        "high fraud risk"
+    }:
+        return "fraud"
 
-        transaction.get(
-            "result",
-            ""
-        )
+    if "fraud" in prediction:
+        return "fraud"
 
-    ).strip().lower()
+    if "fraud detected" in status:
+        return "fraud"
 
+    if "fraud" in status:
+        return "fraud"
 
-    classification = str(
+    # --------------------------------------------------------
+    # RISKY
+    # --------------------------------------------------------
 
-        transaction.get(
-            "classification",
-            ""
-        )
+    if prediction in {
+        "risky",
+        "risk",
+        "medium"
+    }:
+        return "risky"
 
-    ).strip().lower()
+    if risk_level in {
+        "medium",
+        "medium risk",
+        "moderate",
+        "risky"
+    }:
+        return "risky"
 
+    if status in {
+        "requires attention",
+        "warning",
+        "suspicious"
+    }:
+        return "risky"
+
+    # --------------------------------------------------------
+    # SAFE
+    # --------------------------------------------------------
+
+    if prediction in {
+        "safe",
+        "legitimate",
+        "normal"
+    }:
+        return "safe"
+
+    if risk_level in {
+        "low",
+        "low risk"
+    }:
+        return "safe"
+
+    if status in {
+        "legitimate",
+        "safe",
+        "transaction appears safe"
+    }:
+        return "safe"
+
+    # --------------------------------------------------------
+    # NUMERIC FALLBACK
+    # --------------------------------------------------------
+
+    numeric_prediction = safe_float(prediction)
+
+    if numeric_prediction is not None:
+
+        if numeric_prediction == 1:
+            return "fraud"
+
+        if numeric_prediction == 0:
+            return "safe"
+
+    # --------------------------------------------------------
+    # FINAL SAFE FALLBACK
+    # --------------------------------------------------------
+
+    return "safe"
 
     # --------------------------------------------------------
     # FRAUD
