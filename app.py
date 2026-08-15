@@ -50,7 +50,6 @@ app.secret_key = os.environ.get(
     "ibm_pbel_fraud_detection_secret"
 )
 
-
 # ============================================================
 # PATHS
 # ============================================================
@@ -61,7 +60,7 @@ BASE_DIR = os.path.dirname(
 
 # Vercel filesystem is read-only except /tmp.
 # Local PC continues using the normal uploads folder.
-if os.environ.get("VERCEL") == "1":
+if os.environ.get("VERCEL"):
     UPLOAD_FOLDER = "/tmp/uploads"
 else:
     UPLOAD_FOLDER = os.path.join(
@@ -69,19 +68,25 @@ else:
         "uploads"
     )
 
-# Sample CSV files are already part of the repository.
-# Do NOT try to create this directory on Vercel.
 SAMPLE_FOLDER = os.path.join(
     BASE_DIR,
     "static",
     "sample"
 )
 
-# Only create the writable upload directory.
+# Only create writable upload directory.
 os.makedirs(
     UPLOAD_FOLDER,
     exist_ok=True
 )
+
+# static/sample should already exist in GitHub.
+# Do not try to create it on Vercel.
+if not os.environ.get("VERCEL"):
+    os.makedirs(
+        SAMPLE_FOLDER,
+        exist_ok=True
+    )
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
