@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Fraud Veyrix AI{% endblock %}
+    </title>
+
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- =====================================================
+         FRAUD VEYRIX AI LOGO
+         BRANDING ONLY — NO FUNCTIONALITY CHANGED
+    ====================================================== -->
+
+    <style>
+
+        /* =================================================
+           MAIN BRAND
+        ================================================= */
+
+        .fraud-veyrix-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 2px 0;
+            margin-right: 24px;
+            flex-shrink: 0;
+        }
+
+
+        /* =================================================
+           LARGE FRAUD VEYRIX AI LOGO
+        ================================================= */
+
+        .fraud-veyrix-logo {
+            width: 310px;
+            height: 105px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            flex-shrink: 0;
+        }
+
+
+        .navbar .fraud-veyrix-logo {
+            max-width: none;
+        }
+
+
+        /* =================================================
+           TABLET
+        ================================================= */
+
+        @media (max-width: 991.98px) {
+
+            .fraud-veyrix-brand {
+                margin-right: 10px;
+            }
+
+            .fraud-veyrix-logo {
+                width: 260px;
+                height: 88px;
+            }
+
+        }
+
+
+        /* =================================================
+           MOBILE
+        ================================================= */
+
+        @media (max-width: 575.98px) {
+
+            .fraud-veyrix-brand {
+                margin-right: 5px;
+            }
+
+            .fraud-veyrix-logo {
+                width: 210px;
+                height: 72px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar navbar-expand-lg app-navbar">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             FRAUD VEYRIX AI BRAND LOGO
+        ================================================= -->
+
+        <a class="navbar-brand fraud-veyrix-brand"
+           href="{{ url_for('dashboard') if session.get('user_id') else url_for('login') }}">
+
+            <img
+                src="{{ url_for('static', filename='images/fraud-veyrix-ai-logo.png') }}"
+                alt="Fraud Veyrix AI"
+                class="fraud-veyrix-logo"
+            >
+
+        </a>
+
+
+        <!-- MOBILE BUTTON -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- NAVIGATION -->
+        <div class="collapse navbar-collapse"
+             id="mainNavbar">
+
+
+            {% if session.get('user_id') %}
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+
+
+                <!-- Dashboard -->
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('dashboard') }}">
+
+                        <i class="bi bi-cloud-arrow-up-fill me-1"></i>
+                        Upload
+
+                    </a>
+
+                </li>
+
+
+                <!-- Live Prediction -->
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('live_prediction') }}">
+
+                        <i class="bi bi-lightning-charge-fill me-1"></i>
+                        Live Prediction
+
+                    </a>
+
+                </li>
+
+
+                <!-- Upload -->
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('dashboard') }}">
+
+                        <i class="bi bi-cloud-arrow-up-fill me-1"></i>
+                        Upload
+
+                    </a>
+
+                </li>
+
+
+                <!-- User -->
+                <li class="nav-item dropdown ms-lg-2">
+
+                    <a class="nav-link dropdown-toggle user-menu"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+
+                        <i class="bi bi-person-circle me-1"></i>
+
+                        {{ session.get('username', 'User') }}
+
+                    </a>
+
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+
+                        <li>
+
+                            <span class="dropdown-item-text">
+
+                                <i class="bi bi-shield-check me-2"></i>
+                                Account Active
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <hr class="dropdown-divider">
+
+                        </li>
+
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="{{ url_for('dashboard') }}">
+
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="{{ url_for('logout') }}">
+
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                Logout
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                 GUEST NAVIGATION
+            ================================================== -->
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+
+                <!-- Login -->
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('login') }}">
+
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login
+
+                    </a>
+
+                </li>
+
+
+                <!-- Get Started -->
+
+                <li class="nav-item">
+
+                    <a class="btn btn-brand ms-lg-2"
+                       href="{{ url_for('register') }}">
+
+                        <i class="bi bi-person-plus-fill me-1"></i>
+                        Get Started
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     FLASH MESSAGES
+===================================================== -->
+
+<div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            <div class="flash-container">
+
+                {% for category, message in messages %}
+
+                    <div class="alert app-alert alert-dismissible fade show"
+                         role="alert">
+
+
+                        {% if category == 'success' %}
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+
+
+                        {% elif category == 'danger' %}
+
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+
+                        {% elif category == 'warning' %}
+
+                            <i class="bi bi-exclamation-circle-fill me-2"></i>
+
+
+                        {% else %}
+
+                            <i class="bi bi-info-circle-fill me-2"></i>
+
+                        {% endif %}
+
+
+                        {{ message }}
+
+
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close">
+
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="app-main">
+
+    <div class="container py-4">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="app-footer">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+
+            <!-- FOOTER BRAND -->
+
+            <div class="col-md-7">
+
+                <div class="footer-brand">
+
+                    <img
+                        src="{{ url_for('static', filename='images/fraud-veyrix-ai-logo.png') }}"
+                        alt="Fraud Veyrix AI"
+                        style="
+                            width: 125px;
+                            height: 48px;
+                            object-fit: contain;
+                            vertical-align: middle;
+                        "
+                    >
+
+                    <span>
+                        Fraud Veyrix AI
+                    </span>
+
+                </div>
+
+
+                <div class="footer-description">
+
+                    AI-Powered Banking Fraud Detection &amp;
+                    Transaction Security Platform
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER INFORMATION -->
+
+            <div class="col-md-5 text-md-end mt-3 mt-md-0">
+
+                <div class="footer-copy">
+
+                    © 2026 Fraud Veyrix AI
+
+                </div>
+
+
+                <div class="footer-project">
+
+                    Machine Learning • Financial Security • AI
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JAVASCRIPT
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<!-- =====================================================
+     OPTIONAL PAGE JAVASCRIPT
+===================================================== -->
+
+{% block scripts %}
+{% endblock %}
+
+
+</body>
+
+</html>

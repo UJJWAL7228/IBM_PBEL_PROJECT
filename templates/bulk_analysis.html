@@ -1,0 +1,4694 @@
+{% extends "base.html" %}
+
+{% block title %}Bulk Fraud Analysis{% endblock %}
+
+{% block content %}
+
+<!-- ============================================================
+     BOOTSTRAP ICONS
+     Multiple CDN fallbacks so icons load reliably.
+     No JavaScript/functionality is changed.
+============================================================ -->
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+>
+
+<style>
+    /* ============================================================
+   COLORFUL ICONS — FINAL FIX
+   ICONS ONLY — NO FUNCTIONALITY CHANGES
+============================================================ */
+
+.sample-dataset-icon-box i {
+    font-size: 25px;
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+/* Dataset icons */
+
+.sample-dataset-card:nth-child(1)
+.sample-dataset-icon-box i {
+    color: #22c55e !important;
+    filter: drop-shadow(0 0 7px rgba(34,197,94,.40));
+}
+
+.sample-dataset-card:nth-child(2)
+.sample-dataset-icon-box i {
+    color: #38bdf8 !important;
+    filter: drop-shadow(0 0 7px rgba(56,189,248,.40));
+}
+
+.sample-dataset-card:nth-child(3)
+.sample-dataset-icon-box i {
+    color: #a855f7 !important;
+    filter: drop-shadow(0 0 7px rgba(168,85,247,.40));
+}
+
+.sample-dataset-card:nth-child(4)
+.sample-dataset-icon-box i {
+    color: #f59e0b !important;
+    filter: drop-shadow(0 0 7px rgba(245,158,11,.40));
+}
+
+.sample-dataset-card:nth-child(5)
+.sample-dataset-icon-box i {
+    color: #06b6d4 !important;
+    filter: drop-shadow(0 0 7px rgba(6,182,212,.40));
+}
+
+/* General icons */
+
+.bi-database,
+.bi-database-fill,
+.bi-database-fill-check {
+    color: #38bdf8 !important;
+}
+
+.bi-bar-chart-line-fill,
+.bi-graph-up-arrow {
+    color: #a855f7 !important;
+}
+
+.bi-layers-fill {
+    color: #f59e0b !important;
+}
+
+.bi-lightning-charge-fill {
+    color: #facc15 !important;
+}
+
+.bi-file-earmark-spreadsheet-fill {
+    color: #22c55e !important;
+}
+
+.bi-file-earmark {
+    color: #60a5fa !important;
+}
+
+.bi-download {
+    color: #38bdf8 !important;
+}
+
+.bi-cloud-arrow-up {
+    color: #60a5fa !important;
+}
+
+.bi-cpu {
+    color: #a78bfa !important;
+}
+
+.bi-shield-check {
+    color: #22c55e !important;
+}
+
+.bi-check-circle,
+.bi-check-circle-fill {
+    color: #22c55e !important;
+}
+
+.bi-exclamation-triangle {
+    color: #f59e0b !important;
+}
+
+.bi-shield-x {
+    color: #ef4444 !important;
+}
+
+.bi-eye {
+    color: #60a5fa !important;
+}
+
+.bi-search {
+    color: #38bdf8 !important;
+}
+
+.bi-arrow-counterclockwise {
+    color: #a78bfa !important;
+}
+
+.bi-table {
+    color: #818cf8 !important;
+}
+
+.bi-folder-x {
+    color: #f59e0b !important;
+}
+
+/* Header */
+
+.page-header h1 > i {
+    color: #38bdf8 !important;
+    filter: drop-shadow(0 0 8px rgba(56,189,248,.40));
+}
+
+/* Statistics */
+
+.bi-database.fs-2 {
+    color: #38bdf8 !important;
+    filter: drop-shadow(0 0 8px rgba(56,189,248,.40));
+}
+
+.bi-check-circle.fs-2 {
+    color: #22c55e !important;
+    filter: drop-shadow(0 0 8px rgba(34,197,94,.40));
+}
+
+.bi-exclamation-triangle.fs-2 {
+    color: #f59e0b !important;
+    filter: drop-shadow(0 0 8px rgba(245,158,11,.40));
+}
+
+.bi-shield-x.fs-2 {
+    color: #ef4444 !important;
+    filter: drop-shadow(0 0 8px rgba(239,68,68,.40));
+}
+
+/* ============================================================
+   COLORFUL ICONS
+   ICONS ONLY — NO FUNCTIONALITY CHANGES
+============================================================ */
+
+/* Sample dataset icon box */
+.sample-dataset-icon-box {
+    width: 52px;
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(99,102,241,.10);
+
+    border: 1px solid rgba(99,102,241,.22);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* Main sample icons */
+.sample-dataset-icon-box i {
+    font-size: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #38bdf8,
+        #6366f1,
+        #a855f7
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(99,102,241,.35));
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+/* Hover */
+.sample-dataset-card:hover
+.sample-dataset-icon-box i {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(0 0 10px rgba(99,102,241,.55));
+}
+
+
+/* ============================================================
+   DIFFERENT COLORS FOR DIFFERENT DATASET ICONS
+============================================================ */
+
+.sample-dataset-card:nth-child(1)
+.sample-dataset-icon-box i {
+    background: linear-gradient(
+        135deg,
+        #22c55e,
+        #06b6d4
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(34,197,94,.40));
+}
+
+
+.sample-dataset-card:nth-child(2)
+.sample-dataset-icon-box i {
+    background: linear-gradient(
+        135deg,
+        #38bdf8,
+        #2563eb
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(56,189,248,.40));
+}
+
+
+.sample-dataset-card:nth-child(3)
+.sample-dataset-icon-box i {
+    background: linear-gradient(
+        135deg,
+        #a855f7,
+        #ec4899
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(168,85,247,.40));
+}
+
+
+.sample-dataset-card:nth-child(4)
+.sample-dataset-icon-box i {
+    background: linear-gradient(
+        135deg,
+        #f59e0b,
+        #ef4444
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(245,158,11,.40));
+}
+
+
+.sample-dataset-card:nth-child(5)
+.sample-dataset-icon-box i {
+    background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #3b82f6
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 7px rgba(6,182,212,.40));
+}
+
+
+/* ============================================================
+   AMOUNT / TRANSACTION RELATED SMALL ICONS
+============================================================ */
+
+#transactionsTable td i {
+    transition:
+        transform .15s ease,
+        filter .15s ease;
+}
+
+#transactionsTable td:hover i {
+    transform: scale(1.08);
+}
+
+
+/* ============================================================
+   GENERAL BOOTSTRAP ICON COLORS
+============================================================ */
+
+.bi-database,
+.bi-database-fill,
+.bi-database-fill-check {
+    color: #38bdf8;
+}
+
+.bi-bar-chart-line-fill,
+.bi-graph-up-arrow {
+    color: #a855f7;
+}
+
+.bi-layers-fill {
+    color: #f59e0b;
+}
+
+.bi-lightning-charge-fill {
+    color: #facc15;
+}
+
+.bi-file-earmark-spreadsheet-fill {
+    color: #22c55e;
+}
+
+.bi-file-earmark {
+    color: #60a5fa;
+}
+
+.bi-download {
+    color: #38bdf8;
+}
+
+.bi-cloud-arrow-up {
+    color: #60a5fa;
+}
+
+.bi-cpu {
+    color: #a78bfa;
+}
+
+.bi-shield-check {
+    color: #22c55e;
+}
+
+.bi-check-circle,
+.bi-check-circle-fill {
+    color: #22c55e;
+}
+
+.bi-exclamation-triangle {
+    color: #f59e0b;
+}
+
+.bi-shield-x {
+    color: #ef4444;
+}
+
+.bi-eye {
+    color: #60a5fa;
+}
+
+.bi-search {
+    color: #38bdf8;
+}
+
+.bi-arrow-counterclockwise {
+    color: #a78bfa;
+}
+
+.bi-table {
+    color: #818cf8;
+}
+
+.bi-folder-x {
+    color: #f59e0b;
+}
+
+
+/* ============================================================
+   HEADER ICON
+============================================================ */
+
+.page-header h1 > i {
+    background: linear-gradient(
+        135deg,
+        #38bdf8,
+        #6366f1,
+        #a855f7
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    filter:
+        drop-shadow(0 0 8px rgba(99,102,241,.35));
+}
+
+
+/* ============================================================
+   STATISTICS CARD ICONS
+============================================================ */
+
+.card-body > i.fs-2 {
+    display: inline-block;
+
+    margin-top: 8px;
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+.card:hover .card-body > i.fs-2 {
+    transform: scale(1.12);
+}
+
+.bi-database.fs-2 {
+    color: #38bdf8 !important;
+
+    filter:
+        drop-shadow(0 0 8px rgba(56,189,248,.40));
+}
+
+.bi-check-circle.fs-2 {
+    color: #22c55e !important;
+
+    filter:
+        drop-shadow(0 0 8px rgba(34,197,94,.40));
+}
+
+.bi-exclamation-triangle.fs-2 {
+    color: #f59e0b !important;
+
+    filter:
+        drop-shadow(0 0 8px rgba(245,158,11,.40));
+}
+
+.bi-shield-x.fs-2 {
+    color: #ef4444 !important;
+
+    filter:
+        drop-shadow(0 0 8px rgba(239,68,68,.40));
+}
+
+
+/* ============================================================
+   BULK ANALYSIS PAGE
+============================================================ */
+
+.bulk-analysis-page {
+    position: relative;
+}
+
+/* ============================================================
+   UPLOAD CARD
+============================================================ */
+
+.upload-card {
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.upload-card .card-body {
+    padding: 28px;
+}
+
+.upload-title {
+    font-weight: 700;
+}
+
+.upload-description {
+    color: rgba(255,255,255,.68);
+}
+
+/* ============================================================
+   ANALYSIS PROGRESS
+============================================================ */
+
+.analysis-progress-container {
+    display: none;
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.analysis-progress-container.show {
+    display: block;
+    animation: analysisReveal .45s ease forwards;
+}
+
+@keyframes analysisReveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.analysis-loader-card {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 24px;
+    padding: 28px;
+
+    background:
+        radial-gradient(
+            circle at 88% 8%,
+            rgba(99,102,241,.25),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 5% 100%,
+            rgba(56,189,248,.16),
+            transparent 36%
+        ),
+        linear-gradient(
+            135deg,
+            #0b1220 0%,
+            #111a35 48%,
+            #211c4d 100%
+        );
+
+    border: 1px solid rgba(129,140,248,.38);
+
+    box-shadow:
+        0 20px 55px rgba(15,23,42,.34),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.analysis-loader-card::before {
+    content: "";
+
+    position: absolute;
+    inset: -55%;
+
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(96,165,250,.00) 105deg,
+        rgba(96,165,250,.10) 145deg,
+        rgba(168,85,247,.13) 180deg,
+        transparent 225deg
+    );
+
+    animation: analysisAmbient 7s linear infinite;
+
+    pointer-events: none;
+}
+
+.analysis-loader-card::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -35%;
+
+    width: 32%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.11),
+        transparent
+    );
+
+    transform: skewX(-18deg);
+
+    animation: analysisSweep 3.2s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes analysisAmbient {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes analysisSweep {
+
+    0%,20% {
+        left: -35%;
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    72%,100% {
+        left: 120%;
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   ANALYSIS ICON
+============================================================ */
+
+.analysis-icon {
+    position: relative;
+
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(59,130,246,.95),
+            rgba(124,58,237,.95)
+        );
+
+    color: white;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 10px 30px rgba(79,70,229,.34),
+        0 0 26px rgba(99,102,241,.24),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.analysis-icon i {
+    animation: analysisIconFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes analysisIconFloat {
+
+    0%,100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-1px) scale(1.035);
+    }
+}
+
+.analysis-pulse {
+    position: absolute;
+    inset: -5px;
+
+    border-radius: 21px;
+
+    border: 1px solid rgba(129,140,248,.65);
+
+    animation:
+        analysisPulse 2.2s cubic-bezier(.2,.7,.3,1)
+        infinite;
+}
+
+@keyframes analysisPulse {
+
+    0% {
+        transform: scale(.88);
+        opacity: .72;
+    }
+
+    70%,100% {
+        transform: scale(1.28);
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   ANALYSIS TEXT
+============================================================ */
+
+.analysis-status-text {
+    color: rgba(255,255,255,.78);
+
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+}
+
+.analysis-count-badge {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 10px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.075);
+
+    border: 1px solid rgba(255,255,255,.11);
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 13px;
+}
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+
+.analysis-progress-track {
+    position: relative;
+
+    width: 100%;
+    height: 12px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.105);
+
+    box-shadow:
+        inset 0 1px 4px rgba(0,0,0,.35);
+}
+
+.analysis-progress-bar {
+    position: relative;
+
+    width: 5%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #38bdf8 0%,
+            #6366f1 52%,
+            #a855f7 100%
+        );
+
+    box-shadow:
+        0 0 20px rgba(99,102,241,.65),
+        0 0 7px rgba(56,189,248,.55);
+
+    transition:
+        width .35s cubic-bezier(.22,1,.36,1);
+}
+
+.analysis-progress-bar::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 90px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.65),
+            transparent
+        );
+
+    animation:
+        progressShimmer 1.65s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+
+    0% {
+        transform: translateX(-85px);
+        opacity: 0;
+    }
+
+    35% {
+        opacity: .9;
+    }
+
+    100% {
+        transform: translateX(95px);
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   DOTS
+============================================================ */
+
+.analysis-dots {
+    display: flex;
+    align-items: center;
+}
+
+.analysis-dots span {
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background: #60a5fa;
+
+    box-shadow:
+        0 0 10px rgba(96,165,250,.65);
+
+    animation:
+        analysisDots 1.35s ease-in-out infinite;
+}
+
+.analysis-dots span:nth-child(2) {
+    animation-delay: .16s;
+}
+
+.analysis-dots span:nth-child(3) {
+    animation-delay: .32s;
+}
+
+@keyframes analysisDots {
+
+    0%,70%,100% {
+        transform: scale(.55);
+        opacity: .38;
+    }
+
+    35% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   SUCCESS / ERROR
+============================================================ */
+
+.analysis-complete {
+    border-color: rgba(34,197,94,.5);
+}
+
+.analysis-error {
+    border-color: rgba(239,68,68,.55);
+}
+
+/* ============================================================
+   SAMPLE CARDS
+============================================================ */
+
+.sample-dataset-card {
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.sample-dataset-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.15) !important;
+
+    border-color:
+        rgba(99,102,241,.35) !important;
+}
+
+/* ============================================================
+   TRANSACTION TABLE
+============================================================ */
+
+.transaction-table-wrapper {
+    position: relative;
+}
+
+#transactionsTable {
+    min-width: 1450px;
+}
+
+#transactionsTable thead th {
+    white-space: nowrap;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#transactionsTable tbody tr {
+    transition:
+        background-color .15s ease;
+}
+
+#transactionsTable tbody tr:hover {
+    background-color: rgba(99,102,241,.06);
+}
+
+/* ============================================================
+   PAGINATION
+============================================================ */
+
+.transaction-pagination {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.pagination-info {
+    color: rgba(255,255,255,.65);
+
+    font-size: 14px;
+}
+
+.pagination-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.pagination-buttons button {
+    min-width: 40px;
+}
+
+.page-number.active {
+    box-shadow:
+        0 0 0 2px rgba(99,102,241,.22);
+}
+
+/* ============================================================
+   LARGE DATASET NOTICE
+============================================================ */
+
+.large-dataset-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(99,102,241,.10);
+
+    border: 1px solid rgba(99,102,241,.20);
+
+    color: #8ea2ff;
+
+    font-size: 12px;
+}
+
+/* ============================================================
+   EMPTY TABLE
+============================================================ */
+
+.table-loading {
+    padding: 40px;
+
+    text-align: center;
+
+    color: rgba(255,255,255,.6);
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width:768px) {
+
+    .analysis-loader-card {
+        padding: 20px;
+
+        border-radius: 20px;
+    }
+
+    .analysis-icon {
+        width: 50px;
+        height: 50px;
+
+        min-width: 50px;
+
+        border-radius: 15px;
+
+        font-size: 22px;
+    }
+
+    .upload-card .card-body {
+        padding: 20px;
+    }
+
+    .transaction-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+
+<div class="container-fluid py-4 bulk-analysis-page">
+
+    <!-- ========================================================
+         HEADER
+    ========================================================= -->
+
+    <div class="page-header mb-4">
+
+        <h1 class="fw-bold mb-2">
+
+            <i class="bi bi-shield-check me-2"></i>
+
+            Bulk Fraud Analysis
+
+        </h1>
+
+        <p class="text-secondary mb-0">
+
+            Analyze multiple banking transactions using
+            AI-powered fraud detection.
+
+        </p>
+
+    </div>
+
+
+    <!-- ========================================================
+         SAMPLE DATASETS
+
+         ICON LOGIC ONLY:
+         The icon inside each card is selected according to
+         the dataset size.
+
+         NOTHING ELSE IN THE SAMPLE DATASET FUNCTIONALITY
+         HAS BEEN CHANGED.
+    ========================================================= -->
+
+    <div class="card shadow-sm mb-5">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center mb-4">
+
+                <!-- HEADER ICON -->
+
+                <div class="sample-dataset-icon-box me-3">
+
+                    <i class="bi bi-database-fill-check"></i>
+
+                </div>
+
+                <div>
+
+                    <h3 class="fw-bold mb-1">
+                        Sample Banking Datasets
+                    </h3>
+
+                    <p class="text-secondary mb-0">
+
+                        Don't have your own dataset?
+                        Use one of our ready-made banking
+                        transaction files.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                {% if sample_files %}
+
+                    {% for filename in sample_files %}
+
+                        {% set filename_lower =
+                            filename.lower()
+                        %}
+
+
+                        {% if "50000" in filename_lower %}
+
+                            {% set display_count = "50,000" %}
+
+                            {% set description =
+                                "Large-scale banking dataset for extensive fraud detection analysis."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-database-fill-check"
+                            %}
+
+
+                        {% elif "30000" in filename_lower %}
+
+                            {% set display_count = "30,000" %}
+
+                            {% set description =
+                                "Very large banking dataset for extensive fraud detection analysis."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-bar-chart-line-fill"
+                            %}
+
+
+                        {% elif "25000" in filename_lower %}
+
+                            {% set display_count = "25,000" %}
+
+                            {% set description =
+                                "Large banking dataset for comprehensive transaction analysis."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-database-fill"
+                            %}
+
+
+                        {% elif "10000" in filename_lower %}
+
+                            {% set display_count = "10,000" %}
+
+                            {% set description =
+                                "Large banking dataset for comprehensive transaction analysis."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-graph-up-arrow"
+                            %}
+
+
+                        {% elif "5000" in filename_lower %}
+
+                            {% set display_count = "5,000" %}
+
+                            {% set description =
+                                "Extended banking dataset for realistic fraud detection testing."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-layers-fill"
+                            %}
+
+
+                        {% elif "1000" in filename_lower %}
+
+                            {% set display_count = "1,000" %}
+
+                            {% set description =
+                                "Medium-sized banking dataset for detailed bulk analysis."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-database"
+                            %}
+
+
+                        {% elif "500" in filename_lower %}
+
+                            {% set display_count = "500" %}
+
+                            {% set description =
+                                "Small sample dataset ideal for quickly testing the fraud detection system."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-lightning-charge-fill"
+                            %}
+
+
+                        {% else %}
+
+                            {% set display_count =
+                                filename.replace(".csv", "")
+                            %}
+
+                            {% set description =
+                                "Ready-to-use banking transaction dataset for AI fraud detection."
+                            %}
+
+                            {% set dataset_icon =
+                                "bi-file-earmark-spreadsheet-fill"
+                            %}
+
+                        {% endif %}
+
+
+                        <div class="col-md-6 col-xl-4">
+
+                            <div
+                                class="card h-100 shadow-sm sample-dataset-card"
+                                style="
+                                    border-radius:18px;
+                                    background:rgba(255,255,255,.035);
+                                "
+                            >
+
+                                <div class="card-body p-4">
+
+                                    <div
+                                        class="d-flex align-items-center mb-3"
+                                    >
+
+                                        <!-- ==================================================
+                                             DATASET ICON
+                                             ICON ONLY CHANGE
+                                        ================================================== -->
+
+                                        <div
+                                            class="sample-dataset-icon-box me-3"
+                                        >
+
+                                            <i
+                                                class="bi {{ dataset_icon }}"
+                                            ></i>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <h4 class="fw-bold mb-0">
+
+                                                {{ display_count }}
+
+                                                Transactions
+
+                                            </h4>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <p class="text-secondary mb-3">
+
+                                        {{ description }}
+
+                                    </p>
+
+
+                                    <div
+                                        class="small text-secondary mb-3"
+                                        style="
+                                            word-break:break-all;
+                                            opacity:.7;
+                                        "
+                                    >
+
+                                        <i
+                                            class="bi bi-file-earmark me-1"
+                                        ></i>
+
+                                        {{ filename }}
+
+                                    </div>
+
+
+                                    <a
+                                        href="{{ url_for(
+                                            'download_sample',
+                                            filename=filename
+                                        ) }}"
+                                        class="btn btn-outline-primary w-100"
+                                    >
+
+                                        <i
+                                            class="bi bi-download me-2"
+                                        ></i>
+
+                                        Download CSV
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="col-12">
+
+                        <div
+                            class="text-center p-5"
+                            style="
+                                border:1px dashed rgba(255,255,255,.2);
+                                border-radius:15px;
+                            "
+                        >
+
+                            <i
+                                class="bi bi-folder-x fs-1 text-secondary"
+                            ></i>
+
+                            <h5 class="mt-3">
+                                No sample datasets found
+                            </h5>
+
+                            <p class="text-secondary mb-0">
+
+                                Please place your CSV files inside:
+
+                                <br>
+
+                                <code>
+                                    static/sample/
+                                </code>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         UPLOAD CARD
+
+         INTERNAL CODE UNCHANGED.
+    ========================================================= -->
+
+    <div class="card shadow-sm mb-4 upload-card">
+
+        <div class="card-body">
+
+            <h4 class="upload-title mb-2">
+
+                <i class="bi bi-cloud-arrow-up me-2"></i>
+
+                Upload Transaction Dataset
+
+            </h4>
+
+
+            <p class="upload-description mb-3">
+
+                Upload a CSV file containing multiple banking
+                transactions. The system will analyze every
+                transaction and identify potentially fraudulent
+                activity.
+
+            </p>
+
+
+            <form
+                id="uploadForm"
+                action="{{ url_for('upload') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                autocomplete="off"
+            >
+
+                <div class="input-group">
+
+                    <input
+                        type="file"
+                        name="file"
+                        id="datasetFile"
+                        class="form-control"
+                        accept=".csv"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="analyzeButton"
+                    >
+
+                        <i class="bi bi-cpu me-2"></i>
+
+                        Analyze Dataset
+
+                    </button>
+
+                </div>
+
+
+                <small class="text-secondary d-block mt-2">
+
+                    Supported format: CSV
+
+                </small>
+
+            </form>
+
+
+            <!-- ==================================================
+                 ANALYSIS INDICATOR
+            ================================================== -->
+
+            <div
+                id="analysisProgress"
+                class="analysis-progress-container"
+            >
+
+                <div
+                    id="analysisLoaderCard"
+                    class="analysis-loader-card"
+                >
+
+                    <div class="position-relative">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="analysis-icon">
+
+                                <i
+                                    id="analysisIcon"
+                                    class="bi bi-shield-check"
+                                ></i>
+
+                                <span
+                                    class="analysis-pulse"
+                                ></span>
+
+                            </div>
+
+
+                            <div class="ms-3">
+
+                                <h5 class="fw-bold text-white mb-1">
+
+                                    AI Fraud Analysis Running
+
+                                </h5>
+
+
+                                <p
+                                    id="analysisStatus"
+                                    class="analysis-status-text mb-0"
+                                >
+
+                                    Preparing transaction dataset...
+
+                                </p>
+
+
+                                <div
+                                    id="analysisCount"
+                                    class="analysis-count-badge"
+                                >
+
+                                    <i
+                                        class="bi bi-database me-1"
+                                    ></i>
+
+                                    Preparing dataset...
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="analysis-progress-track mt-4"
+                        >
+
+                            <div
+                                id="analysisProgressBar"
+                                class="analysis-progress-bar"
+                            ></div>
+
+                        </div>
+
+
+                        <div
+                            class="d-flex justify-content-between mt-2"
+                        >
+
+                            <small class="text-white opacity-75">
+
+                                <i class="bi bi-cpu me-1"></i>
+
+                                AI Engine Processing
+
+                            </small>
+
+
+                            <small
+                                id="analysisPercent"
+                                class="text-white fw-bold"
+                            >
+                                5%
+                            </small>
+
+                        </div>
+
+
+                        <div class="analysis-dots mt-3">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <small
+                                id="analysisBottomText"
+                                class="text-white opacity-75 ms-2"
+                            >
+
+                                Analyzing transactions...
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="analysisError"
+                class="alert alert-danger mt-3 d-none"
+            >
+
+                <i class="bi bi-exclamation-triangle me-2"></i>
+
+                <span id="analysisErrorText">
+                    Analysis failed.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         STATISTICS
+         
+         KEPT EXACTLY AS-IS.
+    ========================================================= -->
+
+    <div class="row g-4 mb-5">
+
+        <!-- TOTAL -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <p class="text-secondary mb-2">
+                        TOTAL TRANSACTIONS
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        {{ total|default(0) }}
+                    </h2>
+
+                    <i
+                        class="bi bi-database fs-2 text-primary"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAFE -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <p class="text-secondary mb-2">
+                        SAFE TRANSACTIONS
+                    </p>
+
+                    <h2
+                        class="fw-bold text-success mb-0"
+                    >
+                        {{ safe|default(0) }}
+                    </h2>
+
+                    <i
+                        class="bi bi-check-circle fs-2 text-success"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RISKY -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <p class="text-secondary mb-2">
+                        RISKY TRANSACTIONS
+                    </p>
+
+                    <h2
+                        class="fw-bold text-warning mb-0"
+                    >
+                        {{ risky|default(0) }}
+                    </h2>
+
+                    <i
+                        class="bi bi-exclamation-triangle fs-2 text-warning"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FRAUD -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <p class="text-secondary mb-2">
+                        FRAUD TRANSACTIONS
+                    </p>
+
+                    <h2
+                        class="fw-bold text-danger mb-0"
+                    >
+                        {{ fraud|default(0) }}
+                    </h2>
+
+                    <i
+                        class="bi bi-shield-x fs-2 text-danger"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         ANALYZED TRANSACTIONS
+         
+         KEPT EXACTLY AS-IS.
+    ========================================================= -->
+
+    {% if transactions %}
+
+        <div class="card shadow-sm mb-5">
+
+            <div class="card-body p-4">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-4"
+                >
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+
+                            <i
+                                class="bi bi-table me-2"
+                            ></i>
+
+                            Analyzed Transactions
+
+                        </h3>
+
+                        <p class="text-secondary mb-2">
+
+                            Search, filter and inspect every
+                            analyzed banking transaction.
+
+                        </p>
+
+                        <span
+                            id="datasetSizeBadge"
+                            class="large-dataset-badge"
+                        >
+
+                            <i class="bi bi-database"></i>
+
+                            {{ transactions|length|default(0) }}
+                            transactions loaded
+
+                        </span>
+
+                    </div>
+
+
+                    <span class="badge bg-primary fs-6">
+
+                        <span id="visibleTransactionCount">
+
+                            {{ transactions|length }}
+
+                        </span>
+
+                        /
+
+                        {{ transactions|length }}
+
+                        Transactions
+
+                    </span>
+
+                </div>
+
+
+                <!-- ==================================================
+                     SEARCH / FILTER
+                ================================================== -->
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-lg-8">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+                            Search Transactions
+                        </label>
+
+                        <div
+                            class="input-group input-group-lg"
+                        >
+
+                            <span class="input-group-text">
+
+                                <i class="bi bi-search"></i>
+
+                            </span>
+
+
+                            <input
+                                type="search"
+                                id="transactionSearch"
+                                class="form-control"
+                                autocomplete="off"
+                                placeholder="Customer name, Transaction ID, merchant, payment, app or location..."
+                            >
+
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary"
+                                id="clearTransactionSearch"
+                            >
+
+                                <i class="bi bi-x-lg"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-2">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+                            Risk
+                        </label>
+
+                        <select
+                            id="riskFilter"
+                            class="form-select form-select-lg"
+                        >
+
+                            <option value="all">
+                                All
+                            </option>
+
+                            <option value="safe">
+                                Safe
+                            </option>
+
+                            <option value="risky">
+                                Risky
+                            </option>
+
+                            <option value="fraud">
+                                Fraud
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-lg-2">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+                            &nbsp;
+                        </label>
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary btn-lg w-100"
+                            id="resetTransactionFilters"
+                        >
+
+                            <i
+                                class="bi bi-arrow-counterclockwise me-1"
+                            ></i>
+
+                            Reset
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     NO RESULTS
+                ================================================== -->
+
+                <div
+                    id="noTransactionResults"
+                    class="alert alert-info d-none"
+                >
+
+                    <i
+                        class="bi bi-search me-2"
+                    ></i>
+
+                    No transactions match your search/filter.
+
+                </div>
+
+
+                <!-- ==================================================
+                     TABLE
+                ================================================== -->
+
+                <div
+                    class="table-responsive transaction-table-wrapper"
+                >
+
+                    <table
+                        class="table table-hover align-middle text-nowrap"
+                        id="transactionsTable"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+                                <th>Customer</th>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>App / Channel</th>
+                                <th>Merchant / App</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Date & Time</th>
+                                <th>Prediction</th>
+                                <th>Fraud Probability</th>
+                                <th>Risk</th>
+                                <th>Details</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="transactionsTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="14"
+                                    class="table-loading"
+                                >
+
+                                    <span
+                                        class="spinner-border spinner-border-sm me-2"
+                                    ></span>
+
+                                    Loading transactions...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- ==================================================
+                     PAGINATION
+                ================================================== -->
+
+                <div
+                    id="transactionPagination"
+                    class="transaction-pagination mt-4"
+                >
+
+                    <div
+                        id="paginationInfo"
+                        class="pagination-info"
+                    >
+                        Showing 0 - 0 of 0 transactions
+                    </div>
+
+
+                    <div
+                        id="paginationButtons"
+                        class="pagination-buttons"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             COMPACT TRANSACTION DATA
+        ======================================================== -->
+
+        <script id="transactionsData" type="application/json">
+[
+{% for transaction in transactions %}
+
+    {% set transaction_id =
+        transaction.get(
+            "transaction_id",
+            transaction.get(
+                "id",
+                loop.index
+            )
+        )
+    %}
+
+    {% set customer =
+        transaction.get(
+            "customer_name",
+            transaction.get(
+                "customer",
+                "Unknown"
+            )
+        )
+    %}
+
+    {% set amount =
+        transaction.get(
+            "amount",
+            transaction.get(
+                "Amount_INR",
+                transaction.get(
+                    "Amount",
+                    0
+                )
+            )
+        )
+    %}
+
+    {% set payment =
+        transaction.get(
+            "payment_method",
+            transaction.get(
+                "payment_type",
+                "-"
+            )
+        )
+    %}
+
+    {% set channel =
+        transaction.get(
+            "app_channel",
+            transaction.get(
+                "channel",
+                "-"
+            )
+        )
+    %}
+
+    {% set merchant =
+        transaction.get(
+            "merchant",
+            transaction.get(
+                "company_merchant",
+                "-"
+            )
+        )
+    %}
+
+    {% set txn_type =
+        transaction.get(
+            "transaction_type",
+            transaction.get(
+                "type",
+                "-"
+            )
+        )
+    %}
+
+    {% set location =
+        transaction.get(
+            "location",
+            transaction.get(
+                "city",
+                "-"
+            )
+        )
+    %}
+
+    {% set txn_time =
+        transaction.get(
+            "time",
+            transaction.get(
+                "transaction_datetime",
+                "-"
+            )
+        )
+    %}
+
+    {% set prediction =
+        transaction.get(
+            "prediction",
+            transaction.get(
+                "Prediction",
+                transaction.get(
+                    "result",
+                    "Safe"
+                )
+            )
+        )
+    %}
+
+    {% set probability =
+        transaction.get(
+            "fraud_probability_percent",
+            transaction.get(
+                "FraudProbability",
+                transaction.get(
+                    "fraud_probability",
+                    ""
+                )
+            )
+        )
+    %}
+
+    {% set risk =
+        transaction.get(
+            "risk_level",
+            prediction
+        )
+    %}
+
+    {% set bank_name =
+        transaction.get(
+            "bank_name",
+            ""
+        )
+    %}
+
+    {% set device_type =
+        transaction.get(
+            "device_type",
+            ""
+        )
+    %}
+
+    {% set account_type =
+        transaction.get(
+            "account_type",
+            ""
+        )
+    %}
+
+    {
+        "index": {{ loop.index|tojson }},
+        "customer": {{ customer|string|tojson }},
+        "transaction_id": {{ transaction_id|string|tojson }},
+        "amount": {{ amount|string|tojson }},
+        "payment": {{ payment|string|tojson }},
+        "channel": {{ channel|string|tojson }},
+        "merchant": {{ merchant|string|tojson }},
+        "type": {{ txn_type|string|tojson }},
+        "location": {{ location|string|tojson }},
+        "time": {{ txn_time|string|tojson }},
+        "prediction": {{ prediction|string|tojson }},
+        "probability": {{ probability|string|tojson }},
+        "risk": {{ risk|string|tojson }},
+        "bank_name": {{ bank_name|string|tojson }},
+        "device_type": {{ device_type|string|tojson }},
+        "account_type": {{ account_type|string|tojson }}
+    }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+]
+        </script>
+
+
+    {% else %}
+
+
+        <!-- ========================================================
+             EMPTY STATE
+        ======================================================== -->
+
+        <div class="card shadow-sm">
+
+            <div
+                class="card-body text-center p-5"
+            >
+
+                <i
+                    class="bi bi-bar-chart-line fs-1 text-secondary"
+                ></i>
+
+                <h4 class="fw-bold mt-3">
+
+                    No Dataset Analyzed Yet
+
+                </h4>
+
+                <p class="text-secondary mb-0">
+
+                    Upload a CSV dataset or use one
+                    of the sample banking datasets above.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+
+     SAME ANALYSIS / UPLOAD / POLLING / TABLE LOGIC
+============================================================ -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        "use strict";
+
+
+        /* ========================================================
+           ELEMENTS
+        ======================================================== */
+
+        const uploadForm =
+            document.getElementById(
+                "uploadForm"
+            );
+
+        const datasetFile =
+            document.getElementById(
+                "datasetFile"
+            );
+
+        const analyzeButton =
+            document.getElementById(
+                "analyzeButton"
+            );
+
+        const analysisProgress =
+            document.getElementById(
+                "analysisProgress"
+            );
+
+        const analysisLoaderCard =
+            document.getElementById(
+                "analysisLoaderCard"
+            );
+
+        const analysisStatus =
+            document.getElementById(
+                "analysisStatus"
+            );
+
+        const analysisCount =
+            document.getElementById(
+                "analysisCount"
+            );
+
+        const analysisProgressBar =
+            document.getElementById(
+                "analysisProgressBar"
+            );
+
+        const analysisPercent =
+            document.getElementById(
+                "analysisPercent"
+            );
+
+        const analysisIcon =
+            document.getElementById(
+                "analysisIcon"
+            );
+
+        const analysisBottomText =
+            document.getElementById(
+                "analysisBottomText"
+            );
+
+        const analysisError =
+            document.getElementById(
+                "analysisError"
+            );
+
+        const analysisErrorText =
+            document.getElementById(
+                "analysisErrorText"
+            );
+
+
+        /* ========================================================
+           TABLE ELEMENTS
+        ======================================================== */
+
+        const transactionDataElement =
+            document.getElementById(
+                "transactionsData"
+            );
+
+        const tableBody =
+            document.getElementById(
+                "transactionsTableBody"
+            );
+
+        const searchInput =
+            document.getElementById(
+                "transactionSearch"
+            );
+
+        const riskFilter =
+            document.getElementById(
+                "riskFilter"
+            );
+
+        const clearButton =
+            document.getElementById(
+                "clearTransactionSearch"
+            );
+
+        const resetButton =
+            document.getElementById(
+                "resetTransactionFilters"
+            );
+
+        const visibleCount =
+            document.getElementById(
+                "visibleTransactionCount"
+            );
+
+        const noResults =
+            document.getElementById(
+                "noTransactionResults"
+            );
+
+        const pagination =
+            document.getElementById(
+                "transactionPagination"
+            );
+
+        const paginationInfo =
+            document.getElementById(
+                "paginationInfo"
+            );
+
+        const paginationButtons =
+            document.getElementById(
+                "paginationButtons"
+            );
+
+
+        /* ========================================================
+           STATE
+        ======================================================== */
+
+        let pollingTimer = null;
+
+        let visualProgressTimer = null;
+
+        let currentJobId = null;
+
+        let visualProgress = 5;
+
+        let pageReloading = false;
+
+
+        /* ========================================================
+           TRANSACTION STATE
+        ======================================================== */
+
+        let allTransactions = [];
+
+        let filteredTransactions = [];
+
+        let currentPage = 1;
+
+        const ROWS_PER_PAGE = 100;
+
+
+        /* ========================================================
+           LOAD COMPACT TRANSACTION DATA
+        ======================================================== */
+
+        if (transactionDataElement) {
+
+            try {
+
+                const rawData =
+                    transactionDataElement.textContent ||
+                    "[]";
+
+                allTransactions =
+                    JSON.parse(
+                        rawData
+                    );
+
+
+                if (
+                    !Array.isArray(
+                        allTransactions
+                    )
+                ) {
+
+                    allTransactions = [];
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Transaction data parsing failed:",
+                    error
+                );
+
+                allTransactions = [];
+
+            }
+
+        }
+
+
+        filteredTransactions =
+            allTransactions.slice();
+
+
+        /* ========================================================
+           DATASET SIZE BADGE
+        ======================================================== */
+
+        const datasetSizeBadge =
+            document.getElementById(
+                "datasetSizeBadge"
+            );
+
+
+        if (datasetSizeBadge) {
+
+            datasetSizeBadge.innerHTML =
+                '<i class="bi bi-database"></i>' +
+                ' ' +
+                allTransactions.length.toLocaleString() +
+                ' transactions loaded';
+
+        }
+
+
+        /* ========================================================
+           ANALYSIS MESSAGES
+        ======================================================== */
+
+        const analysisMessages = [
+
+            "Reading transaction dataset...",
+
+            "Preparing transaction records...",
+
+            "Scanning transaction patterns...",
+
+            "Checking fraud indicators...",
+
+            "Calculating risk levels...",
+
+            "Evaluating transaction behaviour...",
+
+            "Generating fraud probabilities...",
+
+            "Finalizing AI analysis..."
+
+        ];
+
+
+        /* ========================================================
+           CSV ROW COUNTER
+        ======================================================== */
+
+        function countCsvRows(file) {
+
+            return new Promise(
+                function (resolve) {
+
+                    if (!file) {
+
+                        resolve(0);
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            const text =
+                                event.target.result ||
+                                "";
+
+
+                            if (!text.trim()) {
+
+                                resolve(0);
+
+                                return;
+
+                            }
+
+
+                            let rows = 0;
+
+                            let insideQuotes = false;
+
+
+                            for (
+                                let i = 0;
+                                i < text.length;
+                                i++
+                            ) {
+
+                                const character =
+                                    text[i];
+
+
+                                if (
+                                    character === '"'
+                                ) {
+
+                                    if (
+                                        insideQuotes &&
+                                        text[i + 1] === '"'
+                                    ) {
+
+                                        i++;
+
+                                        continue;
+
+                                    }
+
+
+                                    insideQuotes =
+                                        !insideQuotes;
+
+                                }
+
+
+                                if (
+                                    character === "\n" &&
+                                    !insideQuotes
+                                ) {
+
+                                    rows++;
+
+                                }
+
+                            }
+
+
+                            if (
+                                text.length > 0 &&
+                                text[text.length - 1] !== "\n"
+                            ) {
+
+                                rows++;
+
+                            }
+
+
+                            resolve(
+                                Math.max(
+                                    0,
+                                    rows - 1
+                                )
+                            );
+
+                        };
+
+
+                    reader.onerror =
+                        function () {
+
+                            resolve(0);
+
+                        };
+
+
+                    reader.readAsText(
+                        file
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           PROGRESS
+        ======================================================== */
+
+        function setProgress(value) {
+
+            const safeValue =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(value) || 0
+                    )
+                );
+
+
+            if (analysisProgressBar) {
+
+                analysisProgressBar.style.width =
+                    safeValue + "%";
+
+            }
+
+
+            if (analysisPercent) {
+
+                analysisPercent.textContent =
+                    Math.round(
+                        safeValue
+                    ) + "%";
+
+            }
+
+        }
+
+
+        /* ========================================================
+           STATUS
+        ======================================================== */
+
+        function setStatus(text) {
+
+            if (!analysisStatus) {
+
+                return;
+
+            }
+
+
+            analysisStatus.style.opacity =
+                "0";
+
+            analysisStatus.style.transform =
+                "translateY(3px)";
+
+
+            setTimeout(
+                function () {
+
+                    if (!analysisStatus) {
+
+                        return;
+
+                    }
+
+
+                    analysisStatus.textContent =
+                        text;
+
+
+                    analysisStatus.style.opacity =
+                        "1";
+
+
+                    analysisStatus.style.transform =
+                        "translateY(0)";
+
+                },
+                100
+            );
+
+        }
+
+
+        /* ========================================================
+           STOP POLLING
+        ======================================================== */
+
+        function stopPolling() {
+
+            if (pollingTimer) {
+
+                clearTimeout(
+                    pollingTimer
+                );
+
+                pollingTimer =
+                    null;
+
+            }
+
+        }
+
+
+        /* ========================================================
+           STOP VISUAL PROGRESS
+        ======================================================== */
+
+        function stopVisualProgress() {
+
+            if (
+                visualProgressTimer
+            ) {
+
+                cancelAnimationFrame(
+                    visualProgressTimer
+                );
+
+                visualProgressTimer =
+                    null;
+
+            }
+
+        }
+
+
+        /* ========================================================
+           VISUAL PROGRESS
+        ======================================================== */
+
+        function startVisualProgress() {
+
+            stopVisualProgress();
+
+
+            visualProgress = 5;
+
+
+            setProgress(
+                visualProgress
+            );
+
+
+            let lastTime =
+                performance.now();
+
+
+            function animate(now) {
+
+                if (pageReloading) {
+
+                    return;
+
+                }
+
+
+                const delta =
+                    Math.min(
+                        50,
+                        now - lastTime
+                    );
+
+
+                lastTime =
+                    now;
+
+
+                if (
+                    visualProgress < 92
+                ) {
+
+                    let speed;
+
+
+                    if (
+                        visualProgress < 25
+                    ) {
+
+                        speed = .030;
+
+                    }
+
+                    else if (
+                        visualProgress < 55
+                    ) {
+
+                        speed = .020;
+
+                    }
+
+                    else if (
+                        visualProgress < 78
+                    ) {
+
+                        speed = .012;
+
+                    }
+
+                    else {
+
+                        speed = .005;
+
+                    }
+
+
+                    visualProgress =
+                        Math.min(
+                            92,
+                            visualProgress +
+                            speed * delta
+                        );
+
+
+                    setProgress(
+                        visualProgress
+                    );
+
+                }
+
+
+                visualProgressTimer =
+                    requestAnimationFrame(
+                        animate
+                    );
+
+            }
+
+
+            visualProgressTimer =
+                requestAnimationFrame(
+                    animate
+                );
+
+        }
+
+
+        /* ========================================================
+           ERROR
+        ======================================================== */
+
+        function showAnalysisError(
+            message
+        ) {
+
+            stopPolling();
+
+            stopVisualProgress();
+
+
+            pageReloading =
+                false;
+
+
+            if (analysisErrorText) {
+
+                analysisErrorText.textContent =
+                    message ||
+                    "Analysis failed.";
+
+            }
+
+
+            if (analysisError) {
+
+                analysisError.classList.remove(
+                    "d-none"
+                );
+
+            }
+
+
+            if (analysisLoaderCard) {
+
+                analysisLoaderCard.classList.add(
+                    "analysis-error"
+                );
+
+            }
+
+
+            if (analysisIcon) {
+
+                analysisIcon.className =
+                    "bi bi-exclamation-triangle";
+
+            }
+
+
+            if (analyzeButton) {
+
+                analyzeButton.disabled =
+                    false;
+
+                analyzeButton.innerHTML =
+                    '<i class="bi bi-cpu me-2"></i>' +
+                    'Analyze Dataset';
+
+            }
+
+        }
+
+
+        /* ========================================================
+           ANALYSIS STATUS POLLING
+        ======================================================== */
+
+        async function pollAnalysisStatus() {
+
+            if (
+                !currentJobId ||
+                pageReloading
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const statusUrl =
+                    "{{ url_for('analysis_status', job_id='JOB_ID_PLACEHOLDER') }}"
+                    .replace(
+                        "JOB_ID_PLACEHOLDER",
+                        encodeURIComponent(
+                            currentJobId
+                        )
+                    );
+
+
+                const response =
+                    await fetch(
+                        statusUrl,
+                        {
+                            method: "GET",
+
+                            cache: "no-store",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to read analysis status."
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.error ||
+                        "Analysis status request failed."
+                    );
+
+                }
+
+
+                const backendProgress =
+                    Number(
+                        data.progress
+                    ) || 0;
+
+
+                if (
+                    backendProgress >
+                    visualProgress
+                ) {
+
+                    visualProgress =
+                        backendProgress;
+
+
+                    setProgress(
+                        visualProgress
+                    );
+
+                }
+
+
+                const processed =
+                    Number(
+                        data.processed
+                    ) || 0;
+
+
+                const total =
+                    Number(
+                        data.total
+                    ) || 0;
+
+
+                if (analysisCount) {
+
+                    if (total > 0) {
+
+                        analysisCount.innerHTML =
+                            '<i class="bi bi-database me-1"></i>' +
+                            processed.toLocaleString() +
+                            " / " +
+                            total.toLocaleString() +
+                            " transactions";
+
+                    }
+
+                    else {
+
+                        analysisCount.innerHTML =
+                            '<i class="bi bi-database me-1"></i>' +
+                            "Preparing dataset...";
+
+                    }
+
+                }
+
+
+                if (data.stage) {
+
+                    setStatus(
+                        data.stage
+                    );
+
+                }
+
+
+                if (
+                    data.status ===
+                    "completed"
+                ) {
+
+                    pageReloading =
+                        true;
+
+
+                    stopPolling();
+
+                    stopVisualProgress();
+
+
+                    setProgress(100);
+
+
+                    setStatus(
+                        "Analysis completed successfully."
+                    );
+
+
+                    if (analysisBottomText) {
+
+                        analysisBottomText.textContent =
+                            "Loading analyzed transactions...";
+
+                    }
+
+
+                    if (analysisIcon) {
+
+                        analysisIcon.className =
+                            "bi bi-check-circle-fill";
+
+                    }
+
+
+                    if (analysisLoaderCard) {
+
+                        analysisLoaderCard.classList.add(
+                            "analysis-complete"
+                        );
+
+                    }
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.reload();
+
+                        },
+                        700
+                    );
+
+
+                    return;
+
+                }
+
+
+                if (
+                    data.status ===
+                    "error"
+                ) {
+
+                    showAnalysisError(
+                        data.error ||
+                        "Analysis failed."
+                    );
+
+                    return;
+
+                }
+
+
+                pollingTimer =
+                    setTimeout(
+                        pollAnalysisStatus,
+                        700
+                    );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Analysis polling retry:",
+                    error
+                );
+
+
+                if (!pageReloading) {
+
+                    pollingTimer =
+                        setTimeout(
+                            pollAnalysisStatus,
+                            1200
+                        );
+
+                }
+
+            }
+
+        }
+
+
+        /* ========================================================
+           FILE SELECT
+        ======================================================== */
+
+        if (datasetFile) {
+
+            datasetFile.addEventListener(
+                "change",
+                function () {
+
+                    if (
+                        !this.files ||
+                        !this.files.length
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const file =
+                        this.files[0];
+
+
+                    if (analysisError) {
+
+                        analysisError.classList.add(
+                            "d-none"
+                        );
+
+                    }
+
+
+                    if (analysisStatus) {
+
+                        analysisStatus.textContent =
+                            file.name.length > 48
+                                ? file.name.slice(
+                                    0,
+                                    45
+                                ) + "..."
+                                : file.name;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           UPLOAD HANDLER
+        ======================================================== */
+
+        async function startAnalysis() {
+
+            if (
+                !datasetFile ||
+                !datasetFile.files ||
+                !datasetFile.files.length
+            ) {
+
+                if (datasetFile) {
+
+                    datasetFile.focus();
+
+                }
+
+                return;
+
+            }
+
+
+            const file =
+                datasetFile.files[0];
+
+
+            if (
+                !file.name
+                    .toLowerCase()
+                    .endsWith(".csv")
+            ) {
+
+                showAnalysisError(
+                    "Please select a CSV file."
+                );
+
+                return;
+
+            }
+
+
+            stopPolling();
+
+            stopVisualProgress();
+
+
+            currentJobId =
+                null;
+
+
+            pageReloading =
+                false;
+
+
+            if (analysisError) {
+
+                analysisError.classList.add(
+                    "d-none"
+                );
+
+            }
+
+
+            if (analysisLoaderCard) {
+
+                analysisLoaderCard.classList.remove(
+                    "analysis-error",
+                    "analysis-complete"
+                );
+
+            }
+
+
+            if (analysisIcon) {
+
+                analysisIcon.className =
+                    "bi bi-shield-check";
+
+            }
+
+
+            if (analyzeButton) {
+
+                analyzeButton.disabled =
+                    true;
+
+                analyzeButton.innerHTML =
+                    '<span class="spinner-border spinner-border-sm me-2"></span>' +
+                    'Analyzing...';
+
+            }
+
+
+            if (analysisProgress) {
+
+                analysisProgress.classList.add(
+                    "show"
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        analysisProgress.scrollIntoView(
+                            {
+                                behavior: "smooth",
+                                block: "center"
+                            }
+                        );
+
+                    },
+                    100
+                );
+
+            }
+
+
+            setStatus(
+                "Uploading dataset..."
+            );
+
+
+            setProgress(5);
+
+
+            startVisualProgress();
+
+
+            if (analysisCount) {
+
+                const sizeMB =
+                    (
+                        file.size /
+                        (1024 * 1024)
+                    ).toFixed(2);
+
+
+                analysisCount.innerHTML =
+                    '<i class="bi bi-file-earmark-spreadsheet me-1"></i>' +
+                    file.name +
+                    " • " +
+                    sizeMB +
+                    " MB";
+
+            }
+
+
+            try {
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "file",
+                    file
+                );
+
+
+                const response =
+                    await fetch(
+                        uploadForm.action,
+                        {
+                            method: "POST",
+
+                            body: formData,
+
+                            credentials:
+                                "same-origin",
+
+                            cache: "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const contentType =
+                    response.headers.get(
+                        "content-type"
+                    ) || "";
+
+
+                let data;
+
+
+                if (
+                    contentType
+                        .toLowerCase()
+                        .includes(
+                            "application/json"
+                        )
+                ) {
+
+                    data =
+                        await response.json();
+
+                }
+
+                else {
+
+                    const responseText =
+                        await response.text();
+
+
+                    throw new Error(
+                        "Server returned an unexpected response instead of JSON. " +
+                        "Please check the Flask /upload route."
+                    );
+
+                }
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.error ||
+                        data.message ||
+                        "Unable to start analysis."
+                    );
+
+                }
+
+
+                currentJobId =
+                    data.job_id;
+
+
+                if (!currentJobId) {
+
+                    throw new Error(
+                        "Server did not return an analysis job ID."
+                    );
+
+                }
+
+
+                setStatus(
+                    "AI fraud analysis started..."
+                );
+
+
+                if (analysisBottomText) {
+
+                    analysisBottomText.textContent =
+                        "Analyzing transactions...";
+
+                }
+
+
+                if (analysisCount) {
+
+                    analysisCount.innerHTML =
+                        '<i class="bi bi-database me-1"></i>' +
+                        "AI engine is processing the dataset...";
+
+                }
+
+
+                pollAnalysisStatus();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Upload error:",
+                    error
+                );
+
+
+                showAnalysisError(
+                    error.message ||
+                    "Unable to start analysis."
+                );
+
+            }
+
+        }
+
+
+        /* ========================================================
+           BUTTON CLICK
+        ======================================================== */
+
+        if (analyzeButton) {
+
+            analyzeButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    startAnalysis();
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           PREVENT FORM NATIVE SUBMISSION
+        ======================================================== */
+
+        if (uploadForm) {
+
+            uploadForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    startAnalysis();
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           TRANSACTION HELPERS
+        ======================================================== */
+
+        function escapeHtml(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        function formatAmount(value) {
+
+            const number =
+                Number(
+                    String(value)
+                        .replace(
+                            /,/g,
+                            ""
+                        )
+                        .replace(
+                            /₹/g,
+                            ""
+                        )
+                );
+
+
+            if (
+                Number.isFinite(
+                    number
+                )
+            ) {
+
+                return "₹" +
+                    number.toLocaleString(
+                        "en-IN",
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    );
+
+            }
+
+
+            return "₹" +
+                escapeHtml(
+                    value || "0"
+                );
+
+        }
+
+
+        function getPredictionType(
+            prediction
+        ) {
+
+            const text =
+                String(
+                    prediction || ""
+                ).toLowerCase();
+
+
+            if (
+                text.includes("fraud")
+            ) {
+
+                return "fraud";
+
+            }
+
+
+            if (
+                text.includes("risk") ||
+                text.includes("suspicious")
+            ) {
+
+                return "risky";
+
+            }
+
+
+            return "safe";
+
+        }
+
+
+        function getRiskType(
+            transaction
+        ) {
+
+            const risk =
+                String(
+                    transaction.risk || ""
+                ).toLowerCase();
+
+
+            const prediction =
+                String(
+                    transaction.prediction || ""
+                ).toLowerCase();
+
+
+            if (
+                risk.includes("high") ||
+                risk.includes("fraud") ||
+                prediction.includes("fraud")
+            ) {
+
+                return "high";
+
+            }
+
+
+            if (
+                risk.includes("medium") ||
+                risk.includes("risk") ||
+                risk.includes("suspicious") ||
+                prediction.includes("risk") ||
+                prediction.includes("suspicious")
+            ) {
+
+                return "medium";
+
+            }
+
+
+            return "low";
+
+        }
+
+
+        function getRiskFilterType(
+            transaction
+        ) {
+
+            const predictionType =
+                getPredictionType(
+                    transaction.prediction
+                );
+
+
+            if (
+                predictionType === "fraud"
+            ) {
+
+                return "fraud";
+
+            }
+
+
+            const risk =
+                getRiskType(
+                    transaction
+                );
+
+
+            if (
+                risk === "high"
+            ) {
+
+                return "fraud";
+
+            }
+
+
+            if (
+                risk === "medium"
+            ) {
+
+                return "risky";
+
+            }
+
+
+            return "safe";
+
+        }
+
+
+        function getSearchText(
+            transaction
+        ) {
+
+            return [
+
+                transaction.customer,
+
+                transaction.transaction_id,
+
+                transaction.amount,
+
+                transaction.payment,
+
+                transaction.channel,
+
+                transaction.merchant,
+
+                transaction.type,
+
+                transaction.location,
+
+                transaction.time,
+
+                transaction.bank_name,
+
+                transaction.device_type,
+
+                transaction.account_type,
+
+                transaction.prediction,
+
+                transaction.risk
+
+            ]
+                .join(" ")
+                .toLowerCase();
+
+        }
+
+
+        /* ========================================================
+           CREATE TABLE ROW
+        ======================================================== */
+
+        function createTransactionRow(
+            transaction,
+            absoluteIndex
+        ) {
+
+            const predictionType =
+                getPredictionType(
+                    transaction.prediction
+                );
+
+
+            const riskType =
+                getRiskType(
+                    transaction
+                );
+
+
+            let predictionHtml;
+
+
+            if (
+                predictionType === "fraud"
+            ) {
+
+                predictionHtml =
+                    '<span class="badge bg-danger">' +
+                    '<i class="bi bi-shield-x me-1"></i>' +
+                    'Fraud' +
+                    '</span>';
+
+            }
+
+            else if (
+                predictionType === "risky"
+            ) {
+
+                predictionHtml =
+                    '<span class="badge bg-warning text-dark">' +
+                    '<i class="bi bi-exclamation-triangle me-1"></i>' +
+                    'Risky' +
+                    '</span>';
+
+            }
+
+            else {
+
+                predictionHtml =
+                    '<span class="badge bg-success">' +
+                    '<i class="bi bi-check-circle me-1"></i>' +
+                    'Safe' +
+                    '</span>';
+
+            }
+
+
+            let riskHtml;
+
+
+            if (
+                riskType === "high"
+            ) {
+
+                riskHtml =
+                    '<strong class="text-danger">' +
+                    'High' +
+                    '</strong>';
+
+            }
+
+            else if (
+                riskType === "medium"
+            ) {
+
+                riskHtml =
+                    '<strong class="text-warning">' +
+                    'Medium' +
+                    '</strong>';
+
+            }
+
+            else {
+
+                riskHtml =
+                    '<strong class="text-success">' +
+                    'Low' +
+                    '</strong>';
+
+            }
+
+
+            const probability =
+                transaction.probability !== undefined &&
+                transaction.probability !== null &&
+                String(
+                    transaction.probability
+                ).trim() !== ""
+                    ? escapeHtml(
+                        transaction.probability
+                    ) + "%"
+                    : "N/A";
+
+
+            const transactionId =
+                String(
+                    transaction.transaction_id ||
+                    absoluteIndex
+                );
+
+
+            const detailUrl =
+                "{{ url_for(
+                    'transaction_details',
+                    transaction_id='TRANSACTION_ID_PLACEHOLDER'
+                ) }}"
+                .replace(
+                    "TRANSACTION_ID_PLACEHOLDER",
+                    encodeURIComponent(
+                        transactionId
+                    )
+                );
+
+
+            return (
+
+                '<tr>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            absoluteIndex
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+                        '<strong>' +
+                            escapeHtml(
+                                transaction.customer
+                            ) +
+                        '</strong>' +
+                    '</td>' +
+
+                    '<td>' +
+                        '<strong>' +
+                            escapeHtml(
+                                transactionId
+                            ) +
+                        '</strong>' +
+                    '</td>' +
+
+                    '<td>' +
+                        '<strong>' +
+                            formatAmount(
+                                transaction.amount
+                            ) +
+                        '</strong>' +
+                    '</td>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            transaction.payment
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            transaction.channel
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            transaction.merchant
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+
+                        '<span class="badge bg-light text-dark border">' +
+
+                            escapeHtml(
+                                transaction.type
+                            ) +
+
+                        '</span>' +
+
+                    '</td>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            transaction.location
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+                        escapeHtml(
+                            transaction.time
+                        ) +
+                    '</td>' +
+
+                    '<td>' +
+                        predictionHtml +
+                    '</td>' +
+
+                    '<td>' +
+                        probability +
+                    '</td>' +
+
+                    '<td>' +
+                        riskHtml +
+                    '</td>' +
+
+                    '<td>' +
+
+                        '<a' +
+                            ' href="' +
+                            detailUrl +
+                            '"' +
+                            ' class="btn btn-sm btn-outline-primary"' +
+                        '>' +
+
+                            '<i class="bi bi-eye me-1"></i>' +
+
+                            'View' +
+
+                        '</a>' +
+
+                    '</td>' +
+
+                '</tr>'
+
+            );
+
+        }
+
+
+        /* ========================================================
+           PAGINATION BUTTON
+        ======================================================== */
+
+        function createPageButton(
+            page,
+            text,
+            active,
+            disabled
+        ) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "btn btn-sm " +
+                (
+                    active
+                        ? "btn-primary page-number active"
+                        : "btn-outline-primary page-number"
+                );
+
+
+            button.textContent =
+                text;
+
+
+            button.disabled =
+                Boolean(
+                    disabled
+                );
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        page === currentPage
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    currentPage =
+                        page;
+
+
+                    renderTransactionTable();
+
+
+                    const table =
+                        document.getElementById(
+                            "transactionsTable"
+                        );
+
+
+                    if (table) {
+
+                        table.scrollIntoView(
+                            {
+                                behavior:
+                                    "smooth",
+                                block:
+                                    "start"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+
+            return button;
+
+        }
+
+
+        /* ========================================================
+           PAGINATION RENDER
+        ======================================================== */
+
+        function renderPagination() {
+
+            if (
+                !paginationButtons ||
+                !paginationInfo
+            ) {
+
+                return;
+
+            }
+
+
+            paginationButtons.innerHTML =
+                "";
+
+
+            const totalItems =
+                filteredTransactions.length;
+
+
+            const totalPages =
+                Math.max(
+                    1,
+                    Math.ceil(
+                        totalItems /
+                        ROWS_PER_PAGE
+                    )
+                );
+
+
+            if (
+                currentPage >
+                totalPages
+            ) {
+
+                currentPage =
+                    totalPages;
+
+            }
+
+
+            const start =
+                totalItems === 0
+                    ? 0
+                    : (
+                        (
+                            currentPage - 1
+                        ) *
+                        ROWS_PER_PAGE
+                    ) + 1;
+
+
+            const end =
+                Math.min(
+                    totalItems,
+                    currentPage *
+                    ROWS_PER_PAGE
+                );
+
+
+            paginationInfo.textContent =
+                "Showing " +
+                start.toLocaleString() +
+                " - " +
+                end.toLocaleString() +
+                " of " +
+                totalItems.toLocaleString() +
+                " transactions";
+
+
+            if (
+                totalItems === 0
+            ) {
+
+                return;
+
+            }
+
+
+            paginationButtons.appendChild(
+                createPageButton(
+                    Math.max(
+                        1,
+                        currentPage - 1
+                    ),
+                    "‹",
+                    false,
+                    currentPage === 1
+                )
+            );
+
+
+            const pages =
+                new Set();
+
+
+            pages.add(1);
+
+            pages.add(totalPages);
+
+            pages.add(currentPage);
+
+            pages.add(
+                Math.max(
+                    1,
+                    currentPage - 1
+                )
+            );
+
+            pages.add(
+                Math.min(
+                    totalPages,
+                    currentPage + 1
+                )
+            );
+
+
+            const sortedPages =
+                Array.from(
+                    pages
+                ).sort(
+                    function (a,b) {
+                        return a - b;
+                    }
+                );
+
+
+            let previousPage =
+                null;
+
+
+            sortedPages.forEach(
+                function (page) {
+
+                    if (
+                        previousPage !== null &&
+                        page -
+                        previousPage >
+                        1
+                    ) {
+
+                        const dots =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        dots.className =
+                            "px-1 text-secondary";
+
+
+                        dots.textContent =
+                            "…";
+
+
+                        paginationButtons.appendChild(
+                            dots
+                        );
+
+                    }
+
+
+                    paginationButtons.appendChild(
+                        createPageButton(
+                            page,
+                            String(page),
+                            page === currentPage,
+                            false
+                        )
+                    );
+
+
+                    previousPage =
+                        page;
+
+                }
+            );
+
+
+            paginationButtons.appendChild(
+                createPageButton(
+                    Math.min(
+                        totalPages,
+                        currentPage + 1
+                    ),
+                    "›",
+                    false,
+                    currentPage === totalPages
+                )
+            );
+
+        }
+
+
+        /* ========================================================
+           RENDER TABLE
+        ======================================================== */
+
+        function renderTransactionTable() {
+
+            if (!tableBody) {
+
+                return;
+
+            }
+
+
+            const totalItems =
+                filteredTransactions.length;
+
+
+            if (
+                totalItems === 0
+            ) {
+
+                tableBody.innerHTML =
+
+                    '<tr>' +
+
+                        '<td' +
+                            ' colspan="14"' +
+                            ' class="table-loading"' +
+                        '>' +
+
+                            '<i class="bi bi-search fs-3 d-block mb-2"></i>' +
+
+                            'No matching transactions.' +
+
+                        '</td>' +
+
+                    '</tr>';
+
+
+                if (noResults) {
+
+                    noResults.classList.remove(
+                        "d-none"
+                    );
+
+                }
+
+
+                if (visibleCount) {
+
+                    visibleCount.textContent =
+                        "0";
+
+                }
+
+
+                renderPagination();
+
+                return;
+
+            }
+
+
+            if (noResults) {
+
+                noResults.classList.add(
+                    "d-none"
+                );
+
+            }
+
+
+            const startIndex =
+                (
+                    currentPage - 1
+                ) *
+                ROWS_PER_PAGE;
+
+
+            const endIndex =
+                Math.min(
+                    startIndex +
+                    ROWS_PER_PAGE,
+                    totalItems
+                );
+
+
+            const visibleTransactions =
+                filteredTransactions.slice(
+                    startIndex,
+                    endIndex
+                );
+
+
+            let html =
+                "";
+
+
+            for (
+                let i = 0;
+                i < visibleTransactions.length;
+                i++
+            ) {
+
+                html +=
+                    createTransactionRow(
+                        visibleTransactions[i],
+                        startIndex + i + 1
+                    );
+
+            }
+
+
+            tableBody.innerHTML =
+                html;
+
+
+            if (visibleCount) {
+
+                visibleCount.textContent =
+                    totalItems.toLocaleString();
+
+            }
+
+
+            renderPagination();
+
+        }
+
+
+        /* ========================================================
+           FILTER
+        ======================================================== */
+
+        function filterTransactions() {
+
+            const query =
+                (
+                    searchInput?.value ||
+                    ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            const selectedRisk =
+                (
+                    riskFilter?.value ||
+                    "all"
+                )
+                    .toLowerCase();
+
+
+            filteredTransactions =
+                allTransactions.filter(
+                    function (transaction) {
+
+                        const searchableText =
+                            getSearchText(
+                                transaction
+                            );
+
+
+                        const matchesSearch =
+                            query === "" ||
+                            searchableText.includes(
+                                query
+                            );
+
+
+                        let matchesRisk =
+                            true;
+
+
+                        if (
+                            selectedRisk ===
+                            "fraud"
+                        ) {
+
+                            matchesRisk =
+                                getRiskFilterType(
+                                    transaction
+                                ) === "fraud";
+
+                        }
+
+                        else if (
+                            selectedRisk ===
+                            "risky"
+                        ) {
+
+                            matchesRisk =
+                                getRiskFilterType(
+                                    transaction
+                                ) === "risky";
+
+                        }
+
+                        else if (
+                            selectedRisk ===
+                            "safe"
+                        ) {
+
+                            matchesRisk =
+                                getRiskFilterType(
+                                    transaction
+                                ) === "safe";
+
+                        }
+
+
+                        return (
+                            matchesSearch &&
+                            matchesRisk
+                        );
+
+                    }
+                );
+
+
+            currentPage =
+                1;
+
+
+            renderTransactionTable();
+
+        }
+
+
+        /* ========================================================
+           SEARCH
+        ======================================================== */
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                filterTransactions
+            );
+
+        }
+
+
+        /* ========================================================
+           RISK
+        ======================================================== */
+
+        if (riskFilter) {
+
+            riskFilter.addEventListener(
+                "change",
+                filterTransactions
+            );
+
+        }
+
+
+        /* ========================================================
+           CLEAR
+        ======================================================== */
+
+        if (clearButton) {
+
+            clearButton.addEventListener(
+                "click",
+                function () {
+
+                    if (searchInput) {
+
+                        searchInput.value =
+                            "";
+
+                        filterTransactions();
+
+                        searchInput.focus();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           RESET
+        ======================================================== */
+
+        if (resetButton) {
+
+            resetButton.addEventListener(
+                "click",
+                function () {
+
+                    if (searchInput) {
+
+                        searchInput.value =
+                            "";
+
+                    }
+
+
+                    if (riskFilter) {
+
+                        riskFilter.value =
+                            "all";
+
+                    }
+
+
+                    filterTransactions();
+
+                }
+            );
+
+        }
+
+
+        /* ========================================================
+           INITIAL TABLE
+        ======================================================== */
+
+        if (
+            allTransactions.length > 0
+        ) {
+
+            renderTransactionTable();
+
+        }
+
+
+        /* ========================================================
+           CLEANUP
+        ======================================================== */
+
+        window.addEventListener(
+            "beforeunload",
+            function () {
+
+                stopPolling();
+
+                stopVisualProgress();
+
+                pageReloading =
+                    true;
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Real-Time Transaction Risk Assessment{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="fw-bold">
+        ⚡ Real-Time Transaction Risk Assessment
+    </h1>
+
+    <p class="lead text-secondary mb-4">
+        Analyze a single financial transaction instantly using AI.
+    </p>
+
+    <div class="dashboard-card p-4">
+
+        <form method="POST" action="{{ url_for('live_prediction') }}">
+
+            <div class="row">
+
+                <!-- Transaction Amount -->
+
+                <div class="col-md-6 mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Transaction Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="amount"
+                        placeholder="Enter Amount"
+                        required>
+
+                </div>
+
+                <!-- Transaction Time -->
+
+                <div class="col-md-6 mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Transaction Time
+                    </label>
+
+                    <input
+                        type="time"
+                        class="form-control"
+                        name="time"
+                        required>
+
+                </div>
+
+                <!-- Merchant Category -->
+
+                <div class="col-md-6 mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Merchant Category
+                    </label>
+
+                    <select
+                        class="form-select"
+                        name="merchant">
+
+                        <option>Electronics</option>
+                        <option>Shopping</option>
+                        <option>Travel</option>
+                        <option>Restaurant</option>
+                        <option>Healthcare</option>
+                        <option>Fuel</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Transaction Type -->
+
+                <div class="col-md-6 mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Transaction Type
+                    </label>
+
+                    <select
+                        class="form-select"
+                        name="transaction_type">
+
+                        <option>Online</option>
+                        <option>Offline</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary btn-lg">
+
+                <i class="bi bi-search me-2"></i>
+
+                Predict Risk
+
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="mt-5">
+
+            {% if prediction == "High Fraud Risk" %}
+
+            <div class="alert alert-danger">
+
+                <h3>
+                    🔴 {{ prediction }}
+                </h3>
+
+                <p class="mb-0">
+                    AI Confidence:
+                    <strong>{{ confidence }}</strong>
+                </p>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-success">
+
+                <h3>
+                    🟢 {{ prediction }}
+                </h3>
+
+                <p class="mb-0">
+                    AI Confidence:
+                    <strong>{{ confidence }}</strong>
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

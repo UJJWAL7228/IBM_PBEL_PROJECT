@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+.env
+uploads/*
+fraud_detection.db
+IBM_PBEL_PROJECT - Shortcut.zip
+dataset/creditcard.csv

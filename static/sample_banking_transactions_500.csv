@@ -1,0 +1,501 @@
+TransactionID,CustomerName,AccountNumber,BankName,AccountType,Amount,PaymentMethod,AppChannel,Merchant,TransactionType,Location,DeviceType,IPAddress,DateTime,PreviousAmount,TransactionsLast24Hours,UnusualLocation,Prediction,FraudProbability
+TXN000001,Pooja Yadav,63249917,Axis Bank,Savings,12617.11,UPI,ATM,Zomato,Recharge,Jaipur,Windows Laptop,192.168.152.17,2026-08-02 20:20:00,19230.17,11,No,Safe,14.6
+TXN000002,Aditya Rao,37008716,Punjab National Bank,Current,23098.41,Credit Card,POS,Reliance Digital,Purchase,Noida,iPhone,192.168.66.223,2026-08-05 19:19:00,16038.85,4,No,Safe,3.0
+TXN000003,Sneha Agarwal,65479308,HDFC Bank,Savings,8801.78,Debit Card,Web Banking,Walmart,Recharge,Pune,Android,192.168.76.64,2026-08-09 00:55:00,3935.91,11,Yes,Safe,5.5
+TXN000004,Rahul Sharma,22180493,Kotak Mahindra Bank,Current,23300.19,Net Banking,ATM,Airtel,Bill Payment,Mumbai,Windows Laptop,192.168.35.165,2026-08-05 02:41:00,18664.73,7,No,Safe,0.2
+TXN000005,Rohit Mishra,77135524,ICICI Bank,Savings,11535.93,UPI,Web Banking,Myntra,Purchase,Bengaluru,Android,192.168.51.59,2026-08-13 01:05:00,2626.09,3,No,Safe,16.0
+TXN000006,Sneha Agarwal,42106625,Axis Bank,Savings,3271.86,Wallet,Web Banking,IRCTC,Recharge,Jaipur,Android,192.168.235.241,2026-08-08 09:34:00,10614.45,10,No,Safe,6.7
+TXN000007,Sneha Agarwal,21700782,Axis Bank,Savings,10803.35,Wallet,Mobile Banking,Airtel,Recharge,Jaipur,Windows Laptop,192.168.166.68,2026-08-03 06:34:00,16803.39,9,No,Safe,15.0
+TXN000008,Rahul Sharma,48713896,Punjab National Bank,Current,16947.04,Wallet,Web Banking,IRCTC,Bill Payment,Mumbai,Android,192.168.94.37,2026-08-07 01:02:00,18921.86,11,No,Safe,5.9
+TXN000009,Anjali Mehta,28724783,Axis Bank,Current,17311.62,Debit Card,UPI App,Zomato,Transfer,Lucknow,Windows Laptop,192.168.48.53,2026-08-07 07:09:00,4299.53,8,No,Safe,7.7
+TXN000010,Karan Patel,56646655,Punjab National Bank,Savings,23638.5,Credit Card,ATM,IRCTC,Recharge,Lucknow,Android,192.168.178.188,2026-08-14 17:23:00,16715.99,11,No,Safe,6.3
+TXN000011,Rahul Sharma,73780997,HDFC Bank,Current,22829.01,Credit Card,ATM,Swiggy,Transfer,Mumbai,iPhone,192.168.19.96,2026-08-09 00:13:00,5110.2,8,No,Safe,11.7
+TXN000012,Riya Gupta,11949699,Punjab National Bank,Savings,19164.13,Net Banking,Mobile Banking,Myntra,Recharge,Lucknow,Windows Laptop,192.168.45.146,2026-08-11 03:55:00,12448.99,3,No,Safe,10.3
+TXN000013,Priya Singh,51135783,Punjab National Bank,Savings,22923.74,UPI,POS,BigBasket,Bill Payment,Noida,iPhone,192.168.33.81,2026-08-08 05:17:00,12747.92,5,No,Safe,5.1
+TXN000014,Pooja Yadav,87335376,State Bank of India,Current,23912.91,Debit Card,POS,Swiggy,Bill Payment,Gurugram,Windows Laptop,192.168.198.254,2026-08-03 12:12:00,11124.92,8,No,Fraud,86.0
+TXN000015,Priya Singh,29904840,HDFC Bank,Savings,4516.1,Credit Card,Mobile Banking,IRCTC,Recharge,Mumbai,MacBook,192.168.99.187,2026-08-06 15:15:00,8567.3,2,No,Safe,17.1
+TXN000016,Anjali Mehta,19426971,Axis Bank,Savings,348.31,Net Banking,POS,IRCTC,Recharge,Bengaluru,Android,192.168.89.179,2026-08-10 12:33:00,12025.85,11,No,Safe,16.1
+TXN000017,Simran Kaur,85847866,Axis Bank,Savings,18966.55,Credit Card,UPI App,Myntra,Bill Payment,Lucknow,Windows Laptop,192.168.254.148,2026-08-14 11:49:00,1980.17,9,No,Safe,9.1
+TXN000018,Vikas Malhotra,13388719,Axis Bank,Savings,15248.92,Credit Card,Mobile Banking,Swiggy,Bill Payment,Lucknow,MacBook,192.168.2.204,2026-08-12 12:43:00,2783.46,2,No,Safe,1.9
+TXN000019,Riya Gupta,27475388,HDFC Bank,Savings,18483.51,Net Banking,ATM,Amazon,Purchase,Lucknow,Android,192.168.105.66,2026-08-09 09:29:00,7881.63,4,No,Safe,11.7
+TXN000020,Priya Singh,26438121,HDFC Bank,Savings,6679.96,Net Banking,UPI App,Myntra,Purchase,Bengaluru,MacBook,192.168.17.75,2026-08-03 12:46:00,8146.36,3,No,Safe,2.6
+TXN000021,Rohit Mishra,90073260,ICICI Bank,Savings,1168.55,Wallet,ATM,Amazon,Recharge,Hyderabad,iPhone,192.168.82.51,2026-08-10 02:59:00,6444.46,1,No,Safe,13.4
+TXN000022,Sneha Agarwal,65786842,Punjab National Bank,Savings,19047.44,Net Banking,Mobile Banking,Walmart,Recharge,Delhi,Tablet,192.168.36.15,2026-08-09 15:46:00,1118.25,11,No,Safe,1.0
+TXN000023,Sneha Agarwal,13470909,Punjab National Bank,Savings,3736.49,Credit Card,UPI App,Airtel,Purchase,Delhi,Windows Laptop,192.168.193.29,2026-08-13 22:51:00,3078.13,6,No,Safe,3.0
+TXN000024,Anjali Mehta,98143633,State Bank of India,Current,1970.37,Credit Card,POS,Walmart,Bill Payment,Delhi,Windows Laptop,192.168.5.97,2026-08-09 23:57:00,7696.29,5,No,Safe,7.4
+TXN000025,Rahul Sharma,57245164,Axis Bank,Current,553.5,Credit Card,POS,Walmart,Recharge,Mumbai,Android,192.168.160.75,2026-08-07 02:34:00,6633.85,10,No,Safe,4.8
+TXN000026,Simran Kaur,10337258,HDFC Bank,Savings,3675.13,UPI,ATM,BigBasket,Transfer,Noida,MacBook,192.168.251.118,2026-08-02 04:59:00,8269.04,12,No,Safe,14.5
+TXN000027,Rahul Sharma,44588272,HDFC Bank,Current,20533.92,Net Banking,ATM,Airtel,Bill Payment,Delhi,iPhone,192.168.170.75,2026-08-05 08:13:00,10492.88,5,No,Safe,14.5
+TXN000028,Anjali Mehta,19060360,State Bank of India,Savings,3586.43,Net Banking,UPI App,Airtel,Purchase,Bengaluru,Android,192.168.147.250,2026-08-03 19:11:00,10216.16,3,No,Safe,14.8
+TXN000029,Karan Patel,86227817,HDFC Bank,Current,389.01,Wallet,Mobile Banking,IRCTC,Transfer,Gurugram,Windows Laptop,192.168.220.101,2026-08-11 18:52:00,638.32,6,No,Safe,6.9
+TXN000030,Rohit Mishra,47035126,Kotak Mahindra Bank,Savings,9588.61,Wallet,ATM,Airtel,Transfer,Noida,MacBook,192.168.222.130,2026-08-08 22:53:00,14896.85,8,No,Safe,2.0
+TXN000031,Simran Kaur,36794716,State Bank of India,Savings,946.0,Net Banking,Mobile Banking,BigBasket,Purchase,Delhi,Android,192.168.112.26,2026-08-01 15:07:00,18738.71,8,No,Safe,4.7
+TXN000032,Rahul Sharma,23988832,Axis Bank,Current,9467.68,UPI,Mobile Banking,Airtel,Recharge,Jaipur,Windows Laptop,192.168.80.143,2026-08-13 00:13:00,10152.74,6,No,Safe,9.3
+TXN000033,Anjali Mehta,21844529,State Bank of India,Current,9910.41,Debit Card,POS,Walmart,Recharge,Bengaluru,Android,192.168.16.100,2026-08-15 05:28:00,14348.96,7,No,Safe,5.9
+TXN000034,Nikhil Verma,41736566,HDFC Bank,Current,12941.02,UPI,UPI App,IRCTC,Recharge,Hyderabad,Tablet,192.168.244.197,2026-08-14 20:26:00,7123.53,3,No,Safe,1.2
+TXN000035,Sneha Agarwal,41754011,ICICI Bank,Current,5326.02,Debit Card,ATM,Amazon,Transfer,Pune,Windows Laptop,192.168.117.238,2026-08-05 04:14:00,18075.06,8,Yes,Safe,14.9
+TXN000036,Anjali Mehta,90994803,ICICI Bank,Savings,17295.94,Wallet,UPI App,Airtel,Transfer,Noida,Android,192.168.101.24,2026-08-13 02:39:00,12133.02,4,No,Safe,15.1
+TXN000037,Anjali Mehta,85235452,HDFC Bank,Current,13187.21,Wallet,ATM,Airtel,Bill Payment,Bengaluru,MacBook,192.168.210.175,2026-08-01 20:12:00,15875.55,8,No,Safe,3.0
+TXN000038,Riya Gupta,94198782,Kotak Mahindra Bank,Current,6760.74,Wallet,UPI App,Reliance Digital,Transfer,Hyderabad,Android,192.168.170.141,2026-08-10 16:29:00,3346.26,8,No,Safe,15.7
+TXN000039,Aditya Rao,80306762,Kotak Mahindra Bank,Current,9501.37,Credit Card,Web Banking,Reliance Digital,Bill Payment,Noida,Tablet,192.168.44.212,2026-08-14 13:45:00,10102.66,6,No,Safe,3.7
+TXN000040,Amit Kumar,79679019,Axis Bank,Savings,15170.7,Wallet,Mobile Banking,Airtel,Bill Payment,Hyderabad,iPhone,192.168.97.55,2026-08-09 05:46:00,655.3,9,No,Safe,2.5
+TXN000041,Pooja Yadav,57366830,Punjab National Bank,Savings,7355.17,UPI,UPI App,Zomato,Purchase,Bengaluru,Android,192.168.74.84,2026-08-09 07:35:00,5038.96,9,No,Safe,17.7
+TXN000042,Aditya Rao,39427878,HDFC Bank,Current,413.53,Wallet,ATM,Zomato,Bill Payment,Gurugram,Android,192.168.50.181,2026-08-07 02:23:00,17351.86,3,No,Safe,17.0
+TXN000043,Vikas Malhotra,14510211,Axis Bank,Current,19833.85,Wallet,Mobile Banking,Swiggy,Bill Payment,Mumbai,Windows Laptop,192.168.182.71,2026-08-07 08:00:00,3679.03,7,No,Safe,11.4
+TXN000044,Amit Kumar,35866144,ICICI Bank,Savings,13063.21,Wallet,Web Banking,Flipkart,Purchase,Bengaluru,MacBook,192.168.192.66,2026-08-07 08:29:00,10605.16,11,No,Safe,6.8
+TXN000045,Sneha Agarwal,60958839,Punjab National Bank,Current,13415.53,Wallet,UPI App,Walmart,Recharge,Mumbai,Windows Laptop,192.168.91.134,2026-08-08 22:40:00,19526.51,5,No,Safe,11.4
+TXN000046,Simran Kaur,45379831,Axis Bank,Savings,10335.43,UPI,Web Banking,Walmart,Bill Payment,Delhi,iPhone,192.168.38.167,2026-08-13 02:08:00,15007.66,1,Yes,Safe,10.2
+TXN000047,Sneha Agarwal,53094263,Kotak Mahindra Bank,Current,8393.81,UPI,UPI App,Walmart,Purchase,Bengaluru,Tablet,192.168.251.253,2026-08-10 19:30:00,8088.64,7,No,Safe,4.4
+TXN000048,Neha Joshi,29496708,Axis Bank,Savings,14881.05,Credit Card,ATM,Swiggy,Purchase,Bengaluru,Windows Laptop,192.168.183.27,2026-08-10 02:16:00,13871.39,1,No,Safe,4.2
+TXN000049,Vikas Malhotra,24652558,Kotak Mahindra Bank,Savings,7224.53,Debit Card,Web Banking,Swiggy,Purchase,Jaipur,Tablet,192.168.232.81,2026-08-15 08:04:00,15492.68,11,No,Safe,13.0
+TXN000050,Nikhil Verma,55873671,HDFC Bank,Current,19324.91,Wallet,POS,Walmart,Purchase,Bengaluru,MacBook,192.168.211.228,2026-08-08 23:29:00,6977.78,6,No,Safe,6.8
+TXN000051,Vikas Malhotra,56572012,HDFC Bank,Current,1335.54,Wallet,UPI App,Zomato,Transfer,Bengaluru,Windows Laptop,192.168.155.136,2026-08-14 18:14:00,8808.27,6,No,Safe,16.4
+TXN000052,Vikas Malhotra,40414566,HDFC Bank,Current,9625.83,Net Banking,UPI App,Airtel,Bill Payment,Jaipur,iPhone,192.168.74.62,2026-08-08 22:31:00,7701.83,4,No,Safe,10.8
+TXN000053,Vikas Malhotra,24688387,ICICI Bank,Current,23541.25,Net Banking,ATM,Swiggy,Bill Payment,Noida,Android,192.168.243.57,2026-08-14 06:29:00,10124.76,5,No,Safe,15.5
+TXN000054,Karan Patel,92084507,HDFC Bank,Savings,17114.2,UPI,Mobile Banking,Swiggy,Bill Payment,Lucknow,iPhone,192.168.95.171,2026-08-02 09:46:00,7672.95,12,No,Safe,6.1
+TXN000055,Riya Gupta,18389603,Punjab National Bank,Current,16653.53,Wallet,POS,BigBasket,Bill Payment,Noida,Android,192.168.5.138,2026-08-03 01:09:00,3726.25,7,No,Safe,15.2
+TXN000056,Riya Gupta,81075725,Kotak Mahindra Bank,Current,10062.09,Debit Card,POS,Zomato,Transfer,Lucknow,MacBook,192.168.119.43,2026-08-11 01:00:00,12377.21,3,No,Safe,13.9
+TXN000057,Nikhil Verma,78305696,Kotak Mahindra Bank,Savings,21470.15,Credit Card,Web Banking,Flipkart,Purchase,Gurugram,iPhone,192.168.78.198,2026-08-02 11:14:00,8282.59,6,No,Safe,7.2
+TXN000058,Neha Joshi,10304667,ICICI Bank,Savings,10491.18,UPI,Web Banking,Airtel,Purchase,Pune,Windows Laptop,192.168.84.138,2026-08-04 22:27:00,12395.86,7,No,Safe,10.8
+TXN000059,Arjun Kapoor,27739686,ICICI Bank,Savings,23168.18,Debit Card,ATM,Airtel,Purchase,Noida,Windows Laptop,192.168.146.168,2026-08-03 05:26:00,10574.54,3,No,Safe,3.1
+TXN000060,Karan Patel,53680768,Kotak Mahindra Bank,Current,5938.27,Net Banking,POS,Zomato,Purchase,Pune,Android,192.168.181.178,2026-08-01 21:44:00,6268.17,8,Yes,Safe,1.6
+TXN000061,Nikhil Verma,45251123,ICICI Bank,Current,4820.61,UPI,UPI App,Swiggy,Bill Payment,Bengaluru,Windows Laptop,192.168.244.237,2026-08-07 04:41:00,8124.89,8,No,Safe,6.9
+TXN000062,Nikhil Verma,94652395,Kotak Mahindra Bank,Current,12476.53,Net Banking,POS,IRCTC,Bill Payment,Bengaluru,MacBook,192.168.247.152,2026-08-08 01:37:00,19821.55,5,No,Safe,2.0
+TXN000063,Vikas Malhotra,43479112,State Bank of India,Current,17895.69,UPI,ATM,Reliance Digital,Bill Payment,Lucknow,Android,192.168.109.198,2026-08-14 11:22:00,6042.32,12,No,Safe,11.9
+TXN000064,Rohit Mishra,89770823,State Bank of India,Current,19175.57,Debit Card,Mobile Banking,Swiggy,Bill Payment,Hyderabad,Windows Laptop,192.168.132.47,2026-08-05 10:07:00,15848.02,3,No,Safe,17.6
+TXN000065,Arjun Kapoor,99377966,Kotak Mahindra Bank,Savings,13255.51,Wallet,ATM,Walmart,Transfer,Hyderabad,Android,192.168.101.43,2026-08-01 09:04:00,7179.63,4,No,Safe,4.7
+TXN000066,Arjun Kapoor,35819934,Kotak Mahindra Bank,Current,1738.74,Credit Card,ATM,Flipkart,Recharge,Jaipur,MacBook,192.168.1.155,2026-08-04 14:10:00,18416.24,4,No,Safe,7.1
+TXN000067,Aditya Rao,41387276,HDFC Bank,Current,24434.35,Net Banking,POS,Walmart,Recharge,Bengaluru,Windows Laptop,192.168.59.194,2026-08-02 01:09:00,18072.49,1,No,Safe,16.8
+TXN000068,Sneha Agarwal,98541410,Kotak Mahindra Bank,Current,17661.05,Debit Card,POS,IRCTC,Recharge,Delhi,iPhone,192.168.148.207,2026-08-05 08:38:00,5027.52,6,No,Safe,10.6
+TXN000069,Sneha Agarwal,22347493,Punjab National Bank,Current,7836.82,Wallet,Mobile Banking,Airtel,Recharge,Jaipur,iPhone,192.168.109.190,2026-08-07 23:01:00,16196.0,4,No,Safe,2.9
+TXN000070,Aditya Rao,48084745,State Bank of India,Savings,22297.18,Wallet,Mobile Banking,IRCTC,Bill Payment,Pune,Android,192.168.217.7,2026-08-01 13:11:00,15406.58,11,No,Safe,11.1
+TXN000071,Pooja Yadav,97918014,Punjab National Bank,Savings,14739.88,Debit Card,POS,Myntra,Recharge,Lucknow,Tablet,192.168.60.23,2026-08-14 12:30:00,19273.05,10,No,Safe,16.5
+TXN000072,Nikhil Verma,66706265,Punjab National Bank,Current,3252.66,Net Banking,Web Banking,Zomato,Transfer,Noida,Android,192.168.194.231,2026-08-10 02:13:00,7046.33,11,No,Fraud,96.5
+TXN000073,Riya Gupta,70640045,HDFC Bank,Savings,24113.37,Net Banking,Mobile Banking,Walmart,Recharge,Gurugram,Windows Laptop,192.168.68.227,2026-08-12 14:53:00,737.89,5,No,Safe,2.2
+TXN000074,Aditya Rao,75261950,Punjab National Bank,Current,1464.93,Net Banking,POS,Zomato,Transfer,Mumbai,Android,192.168.122.244,2026-08-02 17:38:00,8111.4,11,No,Safe,3.0
+TXN000075,Riya Gupta,98852784,Punjab National Bank,Current,12613.02,Net Banking,UPI App,BigBasket,Transfer,Hyderabad,iPhone,192.168.245.134,2026-08-06 10:04:00,12541.17,10,No,Fraud,88.3
+TXN000076,Nikhil Verma,82789993,Axis Bank,Savings,16680.94,Wallet,Mobile Banking,Flipkart,Bill Payment,Delhi,iPhone,192.168.56.192,2026-08-10 18:07:00,6646.29,4,No,Safe,7.2
+TXN000077,Simran Kaur,88807880,State Bank of India,Savings,19160.4,Net Banking,Web Banking,Amazon,Purchase,Pune,iPhone,192.168.43.123,2026-08-02 13:01:00,5997.5,5,No,Safe,5.8
+TXN000078,Karan Patel,73744579,ICICI Bank,Savings,8076.32,UPI,UPI App,IRCTC,Recharge,Mumbai,Windows Laptop,192.168.172.40,2026-08-10 23:50:00,15825.74,5,Yes,Safe,11.8
+TXN000079,Rohit Mishra,77239518,Punjab National Bank,Current,6704.36,UPI,UPI App,Walmart,Bill Payment,Pune,Tablet,192.168.185.191,2026-08-07 05:29:00,2355.6,6,No,Safe,5.0
+TXN000080,Arjun Kapoor,21279280,State Bank of India,Current,15930.72,Debit Card,Web Banking,Zomato,Bill Payment,Noida,Tablet,192.168.56.174,2026-08-02 14:59:00,4407.32,4,No,Safe,6.1
+TXN000081,Neha Joshi,83608181,Punjab National Bank,Current,10054.0,UPI,POS,Myntra,Transfer,Bengaluru,Tablet,192.168.229.117,2026-08-05 23:07:00,5283.82,12,No,Safe,1.0
+TXN000082,Vikas Malhotra,49656380,State Bank of India,Savings,6275.12,Credit Card,UPI App,Reliance Digital,Transfer,Hyderabad,Windows Laptop,192.168.80.177,2026-08-05 01:41:00,11404.11,2,No,Safe,5.7
+TXN000083,Riya Gupta,71606730,Punjab National Bank,Savings,18887.79,Credit Card,ATM,IRCTC,Transfer,Delhi,Android,192.168.113.252,2026-08-09 01:36:00,9195.39,6,No,Safe,8.0
+TXN000084,Sneha Agarwal,83323274,ICICI Bank,Savings,11237.27,Wallet,POS,BigBasket,Bill Payment,Gurugram,Android,192.168.121.107,2026-08-11 10:39:00,14986.74,4,No,Safe,0.3
+TXN000085,Simran Kaur,18434440,Axis Bank,Savings,4618.18,Credit Card,Web Banking,Myntra,Bill Payment,Lucknow,Android,192.168.20.49,2026-08-04 16:25:00,5154.97,1,No,Safe,14.2
+TXN000086,Priya Singh,52949291,State Bank of India,Current,3334.23,Net Banking,Web Banking,Walmart,Transfer,Bengaluru,MacBook,192.168.219.79,2026-08-05 19:24:00,5864.54,3,No,Safe,15.7
+TXN000087,Simran Kaur,31071785,Axis Bank,Current,4909.46,Debit Card,Mobile Banking,Myntra,Bill Payment,Noida,Windows Laptop,192.168.188.240,2026-08-10 18:39:00,11602.75,10,No,Safe,11.9
+TXN000088,Vikas Malhotra,78100890,HDFC Bank,Savings,12818.63,Net Banking,ATM,Flipkart,Transfer,Mumbai,Android,192.168.154.40,2026-08-06 00:37:00,13935.71,5,No,Safe,15.0
+TXN000089,Rohit Mishra,71032950,Punjab National Bank,Current,22238.77,Wallet,UPI App,Zomato,Purchase,Bengaluru,Android,192.168.162.213,2026-08-10 15:06:00,13466.69,5,No,Safe,9.2
+TXN000090,Rahul Sharma,16267999,Kotak Mahindra Bank,Savings,4573.84,UPI,ATM,Swiggy,Bill Payment,Noida,MacBook,192.168.37.182,2026-08-13 13:10:00,15588.13,12,No,Safe,13.3
+TXN000091,Neha Joshi,33589009,Axis Bank,Current,11343.22,UPI,ATM,Amazon,Purchase,Mumbai,Android,192.168.251.253,2026-08-06 14:02:00,15394.62,11,No,Safe,10.2
+TXN000092,Neha Joshi,19931520,HDFC Bank,Savings,10329.19,Debit Card,Web Banking,Airtel,Transfer,Noida,iPhone,192.168.115.132,2026-08-15 06:02:00,11410.08,12,No,Safe,2.5
+TXN000093,Simran Kaur,29819304,HDFC Bank,Savings,16481.84,Debit Card,Mobile Banking,Flipkart,Recharge,Mumbai,MacBook,192.168.48.91,2026-08-07 21:12:00,6568.3,9,No,Safe,9.2
+TXN000094,Riya Gupta,69975396,Kotak Mahindra Bank,Current,14463.13,UPI,Web Banking,IRCTC,Bill Payment,Delhi,Windows Laptop,192.168.122.138,2026-08-13 18:11:00,9582.05,12,No,Safe,9.5
+TXN000095,Arjun Kapoor,54154181,Kotak Mahindra Bank,Current,22590.64,Credit Card,Mobile Banking,Swiggy,Bill Payment,Hyderabad,Android,192.168.48.173,2026-08-09 20:10:00,4521.66,4,No,Safe,4.1
+TXN000096,Aditya Rao,78263602,ICICI Bank,Savings,14180.79,Net Banking,ATM,Myntra,Transfer,Delhi,Android,192.168.43.175,2026-08-13 02:43:00,15049.56,1,Yes,Safe,3.7
+TXN000097,Karan Patel,91607422,Axis Bank,Savings,10682.04,Credit Card,UPI App,Airtel,Recharge,Jaipur,Tablet,192.168.61.50,2026-08-10 00:10:00,6592.68,11,No,Safe,5.9
+TXN000098,Nikhil Verma,82959421,HDFC Bank,Savings,10971.02,Wallet,UPI App,Airtel,Purchase,Lucknow,iPhone,192.168.138.37,2026-08-06 14:01:00,10909.26,7,No,Safe,15.2
+TXN000099,Sneha Agarwal,98410721,State Bank of India,Savings,19408.35,Credit Card,ATM,Reliance Digital,Purchase,Bengaluru,Windows Laptop,192.168.124.178,2026-08-02 10:40:00,7161.76,7,No,Safe,1.9
+TXN000100,Sneha Agarwal,28460711,Axis Bank,Savings,13981.58,Credit Card,UPI App,Zomato,Transfer,Mumbai,Windows Laptop,192.168.79.119,2026-08-13 05:22:00,1527.76,1,No,Safe,7.4
+TXN000101,Karan Patel,34046070,Kotak Mahindra Bank,Savings,4478.18,Net Banking,Web Banking,Airtel,Transfer,Hyderabad,iPhone,192.168.26.201,2026-08-02 15:51:00,1007.17,1,Yes,Safe,1.7
+TXN000102,Riya Gupta,29743933,Kotak Mahindra Bank,Current,11799.76,Net Banking,UPI App,Swiggy,Recharge,Bengaluru,MacBook,192.168.103.236,2026-08-08 16:26:00,12364.07,3,No,Safe,11.3
+TXN000103,Arjun Kapoor,87758049,Axis Bank,Current,10663.09,UPI,POS,Walmart,Recharge,Noida,Tablet,192.168.16.205,2026-08-03 11:12:00,17993.21,10,No,Safe,1.9
+TXN000104,Simran Kaur,53053099,ICICI Bank,Current,22918.65,Credit Card,ATM,Swiggy,Transfer,Jaipur,Windows Laptop,192.168.71.119,2026-08-04 03:03:00,5781.62,11,No,Safe,17.7
+TXN000105,Amit Kumar,87154566,HDFC Bank,Savings,6046.5,Credit Card,Web Banking,Reliance Digital,Transfer,Hyderabad,iPhone,192.168.49.62,2026-08-05 10:37:00,4939.19,11,No,Safe,13.9
+TXN000106,Vikas Malhotra,31079525,Axis Bank,Savings,5793.62,UPI,UPI App,Flipkart,Transfer,Noida,Android,192.168.63.156,2026-08-07 13:29:00,5635.04,11,No,Safe,5.1
+TXN000107,Amit Kumar,85706540,Punjab National Bank,Savings,10150.13,UPI,ATM,Airtel,Recharge,Delhi,Android,192.168.214.168,2026-08-07 07:32:00,5019.81,12,Yes,Safe,7.7
+TXN000108,Neha Joshi,60068493,HDFC Bank,Current,14794.06,Debit Card,Web Banking,Swiggy,Recharge,Pune,MacBook,192.168.172.129,2026-08-11 07:30:00,16255.51,2,No,Safe,5.3
+TXN000109,Nikhil Verma,61215035,Punjab National Bank,Savings,8502.79,Wallet,Web Banking,Walmart,Recharge,Jaipur,Tablet,192.168.137.210,2026-08-10 19:31:00,6726.69,12,No,Safe,13.1
+TXN000110,Simran Kaur,54377893,Axis Bank,Current,7042.08,UPI,POS,Flipkart,Transfer,Bengaluru,Windows Laptop,192.168.157.108,2026-08-11 16:31:00,5460.88,10,No,Safe,14.6
+TXN000111,Rahul Sharma,54595594,Kotak Mahindra Bank,Savings,6102.52,UPI,Web Banking,Walmart,Purchase,Mumbai,Windows Laptop,192.168.65.227,2026-08-08 22:31:00,2805.5,10,No,Safe,7.5
+TXN000112,Nikhil Verma,89649808,Punjab National Bank,Savings,17770.27,Debit Card,Mobile Banking,Swiggy,Recharge,Delhi,Tablet,192.168.123.47,2026-08-01 14:33:00,11243.05,5,No,Safe,5.9
+TXN000113,Anjali Mehta,84838670,Punjab National Bank,Current,15261.87,Wallet,Web Banking,Walmart,Bill Payment,Gurugram,Windows Laptop,192.168.204.69,2026-08-09 02:50:00,5317.52,3,No,Safe,4.2
+TXN000114,Karan Patel,14786827,State Bank of India,Savings,6754.21,Debit Card,ATM,Airtel,Recharge,Pune,Tablet,192.168.36.100,2026-08-01 11:25:00,2383.78,7,No,Safe,12.1
+TXN000115,Amit Kumar,27177647,Punjab National Bank,Savings,24984.91,Net Banking,Web Banking,Myntra,Bill Payment,Jaipur,Windows Laptop,192.168.18.200,2026-08-12 06:49:00,17440.15,1,No,Safe,8.5
+TXN000116,Vikas Malhotra,11704179,Axis Bank,Current,4556.79,Debit Card,Mobile Banking,Airtel,Transfer,Noida,Android,192.168.12.116,2026-08-06 01:52:00,2057.39,12,No,Safe,14.8
+TXN000117,Sneha Agarwal,38754972,HDFC Bank,Savings,17667.76,UPI,Web Banking,Myntra,Bill Payment,Mumbai,iPhone,192.168.22.147,2026-08-09 09:00:00,9746.66,3,No,Safe,9.9
+TXN000118,Anjali Mehta,81229920,State Bank of India,Savings,15112.75,Wallet,Web Banking,Reliance Digital,Bill Payment,Mumbai,iPhone,192.168.89.210,2026-08-12 16:38:00,9925.79,1,No,Safe,12.0
+TXN000119,Rohit Mishra,34665583,ICICI Bank,Savings,20384.88,Credit Card,Mobile Banking,Flipkart,Recharge,Mumbai,Windows Laptop,192.168.40.50,2026-08-03 22:10:00,5500.12,2,No,Safe,10.6
+TXN000120,Priya Singh,86046249,State Bank of India,Current,23053.37,Wallet,Web Banking,Swiggy,Recharge,Pune,Tablet,192.168.100.242,2026-08-11 10:19:00,16004.19,1,No,Fraud,88.5
+TXN000121,Amit Kumar,72143313,State Bank of India,Current,16718.02,Debit Card,Web Banking,Walmart,Purchase,Delhi,MacBook,192.168.241.204,2026-08-09 16:38:00,12023.38,11,No,Safe,16.1
+TXN000122,Pooja Yadav,49325001,Kotak Mahindra Bank,Savings,21801.48,UPI,Mobile Banking,Flipkart,Bill Payment,Delhi,Windows Laptop,192.168.89.52,2026-08-13 14:55:00,19832.06,12,No,Fraud,79.1
+TXN000123,Sneha Agarwal,14449839,Kotak Mahindra Bank,Savings,1746.34,Debit Card,Mobile Banking,Myntra,Bill Payment,Mumbai,Android,192.168.90.1,2026-08-15 01:59:00,15456.45,8,No,Safe,10.1
+TXN000124,Simran Kaur,40704055,HDFC Bank,Savings,4537.45,Debit Card,UPI App,Swiggy,Recharge,Noida,iPhone,192.168.63.241,2026-08-08 22:04:00,2075.55,6,No,Safe,10.2
+TXN000125,Priya Singh,25750454,Punjab National Bank,Current,9079.69,Net Banking,POS,Myntra,Purchase,Delhi,Tablet,192.168.156.199,2026-08-15 02:26:00,6155.55,5,Yes,Fraud,76.8
+TXN000126,Nikhil Verma,80415050,HDFC Bank,Savings,18507.52,Debit Card,POS,Swiggy,Purchase,Pune,MacBook,192.168.45.119,2026-08-04 14:29:00,16651.24,5,No,Safe,7.7
+TXN000127,Nikhil Verma,80645120,Axis Bank,Savings,12312.7,Credit Card,POS,Swiggy,Recharge,Lucknow,iPhone,192.168.84.122,2026-08-11 05:49:00,10549.02,5,No,Safe,16.3
+TXN000128,Karan Patel,12463746,Axis Bank,Savings,9521.42,UPI,ATM,Amazon,Recharge,Lucknow,Tablet,192.168.53.147,2026-08-06 10:17:00,4845.12,3,No,Safe,4.9
+TXN000129,Karan Patel,71986838,Kotak Mahindra Bank,Current,20949.05,Debit Card,Mobile Banking,Flipkart,Bill Payment,Jaipur,Windows Laptop,192.168.145.97,2026-08-11 09:10:00,15756.94,2,No,Safe,8.7
+TXN000130,Vikas Malhotra,70029185,Axis Bank,Current,3470.98,Wallet,POS,Amazon,Transfer,Pune,iPhone,192.168.12.33,2026-08-03 22:04:00,5766.96,4,Yes,Safe,16.8
+TXN000131,Nikhil Verma,95260138,Axis Bank,Savings,21877.86,Net Banking,Web Banking,Zomato,Recharge,Noida,iPhone,192.168.155.75,2026-08-03 04:13:00,19713.09,2,Yes,Safe,10.1
+TXN000132,Riya Gupta,87684249,Axis Bank,Savings,24591.53,Net Banking,UPI App,Airtel,Purchase,Noida,Android,192.168.66.104,2026-08-05 04:38:00,5393.0,3,No,Safe,8.5
+TXN000133,Amit Kumar,78329948,Axis Bank,Current,24588.86,Credit Card,Web Banking,Swiggy,Purchase,Lucknow,Windows Laptop,192.168.248.161,2026-08-06 15:48:00,19670.52,5,Yes,Safe,6.1
+TXN000134,Arjun Kapoor,92723362,ICICI Bank,Current,9213.71,Debit Card,Mobile Banking,Reliance Digital,Recharge,Bengaluru,MacBook,192.168.212.179,2026-08-14 11:12:00,18075.8,5,No,Safe,1.9
+TXN000135,Arjun Kapoor,22618525,HDFC Bank,Current,9426.78,Net Banking,UPI App,BigBasket,Purchase,Noida,Tablet,192.168.16.97,2026-08-15 01:04:00,13256.61,7,No,Safe,6.7
+TXN000136,Amit Kumar,36454343,State Bank of India,Savings,1864.75,Credit Card,ATM,Zomato,Purchase,Pune,iPhone,192.168.193.27,2026-08-09 07:13:00,19775.51,8,No,Safe,0.8
+TXN000137,Vikas Malhotra,73593737,Axis Bank,Current,23180.73,Net Banking,Mobile Banking,IRCTC,Bill Payment,Lucknow,Tablet,192.168.197.37,2026-08-07 01:19:00,12958.85,7,No,Safe,18.0
+TXN000138,Simran Kaur,38089758,Kotak Mahindra Bank,Current,6242.72,Debit Card,Web Banking,Myntra,Recharge,Pune,Tablet,192.168.203.118,2026-08-13 12:40:00,3085.11,4,No,Safe,15.5
+TXN000139,Karan Patel,77928997,HDFC Bank,Savings,5580.76,UPI,Mobile Banking,Amazon,Purchase,Lucknow,Tablet,192.168.206.207,2026-08-02 22:28:00,8193.49,12,No,Safe,1.0
+TXN000140,Neha Joshi,48186308,HDFC Bank,Savings,19229.09,Wallet,UPI App,Amazon,Purchase,Noida,Tablet,192.168.227.168,2026-08-08 02:56:00,8158.22,9,No,Safe,0.8
+TXN000141,Riya Gupta,42434489,ICICI Bank,Current,15454.98,Debit Card,Web Banking,Myntra,Recharge,Lucknow,Android,192.168.228.246,2026-08-10 00:18:00,14770.84,12,No,Safe,6.6
+TXN000142,Amit Kumar,31156325,ICICI Bank,Current,4006.84,Net Banking,Mobile Banking,Flipkart,Bill Payment,Delhi,Tablet,192.168.204.14,2026-08-04 03:37:00,11025.73,6,No,Safe,11.2
+TXN000143,Karan Patel,29777803,Punjab National Bank,Current,16387.17,Debit Card,Web Banking,Zomato,Recharge,Noida,Tablet,192.168.252.2,2026-08-15 08:00:00,8282.2,7,No,Safe,11.7
+TXN000144,Priya Singh,47270263,Axis Bank,Current,921.09,Credit Card,UPI App,Zomato,Bill Payment,Noida,Tablet,192.168.170.195,2026-08-03 02:40:00,8720.05,10,No,Safe,14.7
+TXN000145,Vikas Malhotra,66695105,State Bank of India,Savings,23657.17,Net Banking,UPI App,Airtel,Purchase,Lucknow,MacBook,192.168.195.109,2026-08-06 09:19:00,1517.3,4,No,Safe,0.9
+TXN000146,Neha Joshi,96639048,ICICI Bank,Savings,2807.67,Debit Card,POS,IRCTC,Recharge,Pune,MacBook,192.168.167.109,2026-08-13 22:50:00,15628.55,4,No,Safe,8.6
+TXN000147,Amit Kumar,11558583,HDFC Bank,Savings,22824.88,UPI,Web Banking,Zomato,Transfer,Noida,Windows Laptop,192.168.26.144,2026-08-04 11:25:00,11566.61,6,No,Safe,16.9
+TXN000148,Riya Gupta,60629972,HDFC Bank,Current,12560.8,Net Banking,Mobile Banking,IRCTC,Recharge,Pune,Tablet,192.168.59.30,2026-08-02 01:55:00,7191.55,2,No,Safe,8.6
+TXN000149,Aditya Rao,21597379,ICICI Bank,Current,6347.69,Net Banking,UPI App,Walmart,Bill Payment,Pune,Android,192.168.81.171,2026-08-13 03:55:00,6195.11,12,No,Safe,4.0
+TXN000150,Aditya Rao,27712884,State Bank of India,Savings,10620.84,UPI,Web Banking,IRCTC,Transfer,Delhi,Windows Laptop,192.168.108.217,2026-08-08 03:47:00,8977.75,6,No,Safe,11.5
+TXN000151,Nikhil Verma,51049993,HDFC Bank,Current,18134.91,UPI,Mobile Banking,Amazon,Purchase,Hyderabad,Android,192.168.137.87,2026-08-14 18:16:00,13622.33,12,No,Safe,5.0
+TXN000152,Neha Joshi,58403403,State Bank of India,Current,3058.38,Net Banking,Web Banking,BigBasket,Recharge,Hyderabad,Android,192.168.197.4,2026-08-09 17:08:00,7549.18,8,No,Safe,16.2
+TXN000153,Amit Kumar,15430057,Punjab National Bank,Current,12427.17,Debit Card,Web Banking,IRCTC,Transfer,Noida,Android,192.168.7.165,2026-08-14 02:13:00,2595.16,3,No,Fraud,93.9
+TXN000154,Riya Gupta,12832578,Axis Bank,Savings,12943.98,Net Banking,Web Banking,IRCTC,Purchase,Pune,MacBook,192.168.195.105,2026-08-14 22:35:00,16605.9,4,No,Safe,7.5
+TXN000155,Rohit Mishra,40898624,Axis Bank,Savings,2032.56,Debit Card,UPI App,Myntra,Recharge,Gurugram,Tablet,192.168.176.238,2026-08-12 12:50:00,9396.25,5,No,Safe,5.8
+TXN000156,Karan Patel,59136257,Axis Bank,Savings,8317.42,UPI,ATM,Swiggy,Purchase,Hyderabad,Tablet,192.168.50.98,2026-08-12 05:59:00,5682.32,4,No,Safe,10.1
+TXN000157,Nikhil Verma,16492651,State Bank of India,Savings,4603.23,Net Banking,Mobile Banking,Walmart,Purchase,Bengaluru,iPhone,192.168.160.137,2026-08-07 17:35:00,947.32,7,No,Safe,2.6
+TXN000158,Sneha Agarwal,20798423,HDFC Bank,Savings,14508.89,Wallet,UPI App,BigBasket,Transfer,Bengaluru,iPhone,192.168.44.39,2026-08-12 05:23:00,652.49,2,No,Safe,13.9
+TXN000159,Neha Joshi,19895301,Punjab National Bank,Current,9983.88,Wallet,Web Banking,Walmart,Recharge,Hyderabad,Android,192.168.19.51,2026-08-08 22:01:00,12033.13,2,No,Safe,16.6
+TXN000160,Karan Patel,41994514,State Bank of India,Current,16579.08,Debit Card,Web Banking,Reliance Digital,Transfer,Lucknow,iPhone,192.168.26.191,2026-08-04 10:06:00,12465.21,11,No,Safe,10.2
+TXN000161,Nikhil Verma,13557419,HDFC Bank,Current,20082.21,Net Banking,UPI App,Amazon,Bill Payment,Delhi,iPhone,192.168.11.160,2026-08-11 16:27:00,4431.85,5,No,Safe,6.1
+TXN000162,Simran Kaur,43074771,ICICI Bank,Savings,15286.24,Wallet,UPI App,Reliance Digital,Recharge,Lucknow,iPhone,192.168.74.18,2026-08-10 19:33:00,3420.72,11,No,Safe,2.1
+TXN000163,Priya Singh,70641835,Kotak Mahindra Bank,Current,6395.55,Debit Card,POS,IRCTC,Recharge,Gurugram,Tablet,192.168.72.71,2026-08-12 11:17:00,9515.16,8,No,Safe,7.1
+TXN000164,Nikhil Verma,21069788,Axis Bank,Savings,286.83,UPI,Mobile Banking,Reliance Digital,Bill Payment,Pune,MacBook,192.168.72.160,2026-08-05 08:04:00,5334.52,9,No,Safe,13.9
+TXN000165,Anjali Mehta,33927246,Kotak Mahindra Bank,Savings,2608.67,Debit Card,POS,Airtel,Bill Payment,Noida,iPhone,192.168.48.220,2026-08-09 21:40:00,7434.29,1,No,Safe,8.0
+TXN000166,Nikhil Verma,28368248,State Bank of India,Savings,16601.47,Credit Card,UPI App,Reliance Digital,Bill Payment,Delhi,Android,192.168.29.207,2026-08-02 17:25:00,1501.86,9,No,Safe,18.0
+TXN000167,Riya Gupta,14768013,State Bank of India,Current,22446.1,Credit Card,Web Banking,IRCTC,Transfer,Bengaluru,Tablet,192.168.58.38,2026-08-12 20:12:00,19037.73,11,No,Safe,11.7
+TXN000168,Neha Joshi,12499569,Kotak Mahindra Bank,Savings,845.59,Net Banking,ATM,BigBasket,Purchase,Bengaluru,Tablet,192.168.145.210,2026-08-12 01:12:00,16446.65,1,No,Safe,12.5
+TXN000169,Vikas Malhotra,44617782,Kotak Mahindra Bank,Savings,3706.57,Net Banking,Mobile Banking,Myntra,Bill Payment,Noida,MacBook,192.168.119.82,2026-08-02 13:46:00,7203.62,12,No,Safe,2.7
+TXN000170,Arjun Kapoor,53117909,Axis Bank,Current,12602.03,Credit Card,Mobile Banking,Airtel,Purchase,Hyderabad,iPhone,192.168.83.128,2026-08-03 21:29:00,18578.66,6,No,Safe,3.3
+TXN000171,Arjun Kapoor,11191810,State Bank of India,Savings,24101.97,Wallet,UPI App,Walmart,Bill Payment,Delhi,Windows Laptop,192.168.56.76,2026-08-05 15:24:00,2046.55,9,No,Safe,15.7
+TXN000172,Karan Patel,76237028,HDFC Bank,Savings,8210.8,Wallet,UPI App,Myntra,Bill Payment,Noida,Windows Laptop,192.168.164.172,2026-08-13 17:41:00,17729.58,10,No,Safe,13.3
+TXN000173,Pooja Yadav,66242371,Axis Bank,Savings,5739.66,UPI,Mobile Banking,Amazon,Bill Payment,Noida,Tablet,192.168.35.179,2026-08-07 12:32:00,18139.07,5,No,Safe,11.3
+TXN000174,Amit Kumar,62217951,Kotak Mahindra Bank,Current,24039.43,Debit Card,UPI App,BigBasket,Recharge,Hyderabad,Android,192.168.73.82,2026-08-14 18:07:00,5372.38,4,No,Safe,14.4
+TXN000175,Sneha Agarwal,41155387,Kotak Mahindra Bank,Current,9160.29,Wallet,Mobile Banking,Flipkart,Recharge,Pune,Android,192.168.15.12,2026-08-01 17:00:00,6823.42,2,No,Safe,17.9
+TXN000176,Neha Joshi,94294256,HDFC Bank,Current,7734.27,Wallet,ATM,Myntra,Recharge,Lucknow,MacBook,192.168.79.167,2026-08-14 12:29:00,7099.09,5,No,Safe,4.7
+TXN000177,Rahul Sharma,64957404,Punjab National Bank,Current,4197.24,Credit Card,ATM,Walmart,Recharge,Bengaluru,MacBook,192.168.16.231,2026-08-06 11:39:00,16709.74,2,No,Safe,9.2
+TXN000178,Neha Joshi,54720628,ICICI Bank,Savings,3729.02,Net Banking,UPI App,IRCTC,Purchase,Bengaluru,MacBook,192.168.84.211,2026-08-08 13:09:00,5955.97,7,Yes,Safe,8.7
+TXN000179,Simran Kaur,79189506,State Bank of India,Savings,8694.07,Credit Card,ATM,Swiggy,Bill Payment,Noida,Windows Laptop,192.168.197.217,2026-08-12 07:47:00,18255.41,2,No,Safe,8.7
+TXN000180,Vikas Malhotra,34297830,Punjab National Bank,Savings,18141.87,Wallet,POS,Swiggy,Recharge,Delhi,Android,192.168.149.32,2026-08-03 14:02:00,6483.29,5,No,Safe,12.8
+TXN000181,Rahul Sharma,34343247,Axis Bank,Savings,23223.44,Credit Card,Mobile Banking,Flipkart,Transfer,Mumbai,Tablet,192.168.117.236,2026-08-10 20:20:00,16358.88,4,No,Safe,10.8
+TXN000182,Vikas Malhotra,26649241,Kotak Mahindra Bank,Current,18513.26,Credit Card,Mobile Banking,Airtel,Purchase,Mumbai,Windows Laptop,192.168.242.78,2026-08-04 22:21:00,15410.23,4,No,Safe,10.4
+TXN000183,Riya Gupta,37099613,State Bank of India,Savings,11160.25,Net Banking,Web Banking,Walmart,Bill Payment,Noida,MacBook,192.168.94.181,2026-08-10 12:24:00,16213.64,10,No,Safe,4.3
+TXN000184,Nikhil Verma,70175874,Axis Bank,Current,5911.5,Credit Card,ATM,Zomato,Transfer,Jaipur,iPhone,192.168.183.36,2026-08-08 05:18:00,13661.14,8,No,Safe,16.2
+TXN000185,Karan Patel,70317386,Axis Bank,Savings,2211.35,Credit Card,Web Banking,IRCTC,Bill Payment,Mumbai,Tablet,192.168.9.69,2026-08-05 02:20:00,2944.06,8,No,Safe,16.4
+TXN000186,Pooja Yadav,78908630,Axis Bank,Savings,21475.54,Net Banking,Web Banking,Zomato,Purchase,Pune,Tablet,192.168.247.49,2026-08-11 06:54:00,3916.74,6,No,Safe,5.9
+TXN000187,Anjali Mehta,64649644,Kotak Mahindra Bank,Savings,1236.75,Wallet,ATM,Reliance Digital,Bill Payment,Delhi,Tablet,192.168.232.156,2026-08-10 21:45:00,13795.33,4,No,Safe,2.6
+TXN000188,Pooja Yadav,95106256,HDFC Bank,Savings,3575.23,Net Banking,Web Banking,BigBasket,Recharge,Pune,MacBook,192.168.69.70,2026-08-13 13:36:00,16335.43,2,No,Fraud,96.6
+TXN000189,Riya Gupta,33170211,Axis Bank,Savings,11158.45,Credit Card,UPI App,Reliance Digital,Recharge,Gurugram,iPhone,192.168.229.124,2026-08-03 23:53:00,10752.39,11,No,Safe,4.6
+TXN000190,Karan Patel,55103138,Kotak Mahindra Bank,Current,7140.68,UPI,Web Banking,Airtel,Purchase,Lucknow,Android,192.168.136.155,2026-08-12 19:14:00,13785.28,2,No,Safe,5.5
+TXN000191,Priya Singh,51667968,Kotak Mahindra Bank,Savings,18341.23,Credit Card,POS,IRCTC,Transfer,Delhi,MacBook,192.168.185.158,2026-08-07 11:46:00,18919.5,2,No,Safe,10.7
+TXN000192,Sneha Agarwal,81796685,Punjab National Bank,Current,1262.45,Debit Card,Mobile Banking,Swiggy,Bill Payment,Mumbai,Tablet,192.168.142.90,2026-08-09 06:47:00,13276.39,1,No,Safe,15.6
+TXN000193,Karan Patel,90590752,Punjab National Bank,Savings,6205.72,Wallet,Web Banking,Airtel,Bill Payment,Gurugram,Tablet,192.168.29.63,2026-08-03 11:56:00,11898.52,10,No,Safe,12.0
+TXN000194,Aditya Rao,25409790,ICICI Bank,Savings,367.63,Credit Card,Web Banking,Airtel,Bill Payment,Jaipur,Tablet,192.168.61.96,2026-08-07 12:15:00,16132.13,10,No,Safe,4.2
+TXN000195,Pooja Yadav,64042334,Kotak Mahindra Bank,Savings,9136.46,Debit Card,Mobile Banking,IRCTC,Bill Payment,Pune,Tablet,192.168.28.88,2026-08-07 20:15:00,2200.59,2,No,Safe,16.6
+TXN000196,Sneha Agarwal,80991209,State Bank of India,Current,14476.25,Debit Card,Mobile Banking,IRCTC,Purchase,Jaipur,MacBook,192.168.111.58,2026-08-09 11:51:00,15737.05,6,No,Safe,6.3
+TXN000197,Simran Kaur,62525406,ICICI Bank,Savings,8044.94,Net Banking,ATM,IRCTC,Purchase,Delhi,MacBook,192.168.182.4,2026-08-01 13:04:00,5389.72,12,No,Safe,9.4
+TXN000198,Aditya Rao,61347356,HDFC Bank,Savings,4657.9,Wallet,Web Banking,Airtel,Recharge,Hyderabad,Windows Laptop,192.168.29.214,2026-08-13 00:35:00,359.89,12,No,Safe,4.5
+TXN000199,Sneha Agarwal,20048191,Punjab National Bank,Savings,11016.69,Debit Card,UPI App,Amazon,Transfer,Lucknow,iPhone,192.168.6.205,2026-08-05 06:50:00,9610.79,1,No,Safe,16.5
+TXN000200,Nikhil Verma,51111420,ICICI Bank,Savings,9807.13,UPI,ATM,Zomato,Bill Payment,Bengaluru,Tablet,192.168.246.3,2026-08-02 17:28:00,7979.16,9,No,Safe,9.6
+TXN000201,Riya Gupta,30905553,HDFC Bank,Savings,2544.5,Wallet,ATM,BigBasket,Bill Payment,Bengaluru,Windows Laptop,192.168.88.227,2026-08-10 19:23:00,15075.5,7,Yes,Safe,2.0
+TXN000202,Pooja Yadav,56432925,Kotak Mahindra Bank,Current,22001.29,Credit Card,Mobile Banking,Reliance Digital,Recharge,Noida,Tablet,192.168.83.114,2026-08-04 07:01:00,10450.53,11,No,Safe,7.1
+TXN000203,Nikhil Verma,21554532,Axis Bank,Current,19984.07,Net Banking,POS,Walmart,Bill Payment,Gurugram,Tablet,192.168.59.16,2026-08-01 12:00:00,14332.65,11,No,Safe,6.7
+TXN000204,Nikhil Verma,91622767,ICICI Bank,Current,9262.89,UPI,UPI App,Walmart,Purchase,Bengaluru,iPhone,192.168.240.212,2026-08-03 03:01:00,19624.71,9,No,Safe,4.8
+TXN000205,Rohit Mishra,30411131,ICICI Bank,Savings,15337.56,Wallet,Web Banking,Myntra,Purchase,Noida,Android,192.168.68.180,2026-08-09 12:16:00,13357.43,10,No,Safe,1.8
+TXN000206,Nikhil Verma,37607326,Kotak Mahindra Bank,Savings,5060.23,Debit Card,UPI App,Myntra,Recharge,Bengaluru,iPhone,192.168.111.30,2026-08-08 15:56:00,13025.26,6,No,Safe,3.6
+TXN000207,Priya Singh,58618403,Punjab National Bank,Savings,3995.67,Credit Card,UPI App,IRCTC,Transfer,Hyderabad,MacBook,192.168.132.218,2026-08-07 22:35:00,10536.19,4,No,Safe,9.3
+TXN000208,Sneha Agarwal,76286598,ICICI Bank,Savings,18240.33,Net Banking,POS,Myntra,Bill Payment,Jaipur,MacBook,192.168.91.84,2026-08-07 00:49:00,13808.11,4,No,Safe,5.1
+TXN000209,Rahul Sharma,27444320,HDFC Bank,Savings,9124.4,Wallet,ATM,Flipkart,Transfer,Bengaluru,Tablet,192.168.63.92,2026-08-09 23:25:00,4981.62,2,Yes,Safe,3.2
+TXN000210,Simran Kaur,30486284,Axis Bank,Savings,295.15,Net Banking,Web Banking,Amazon,Purchase,Gurugram,MacBook,192.168.50.41,2026-08-02 17:18:00,948.32,12,Yes,Safe,16.7
+TXN000211,Rahul Sharma,12373748,State Bank of India,Current,3666.21,UPI,Web Banking,Airtel,Recharge,Noida,Tablet,192.168.138.32,2026-08-08 19:53:00,3902.04,3,No,Safe,13.4
+TXN000212,Priya Singh,32565134,Axis Bank,Savings,9208.47,Credit Card,Web Banking,Flipkart,Bill Payment,Gurugram,iPhone,192.168.212.68,2026-08-15 04:25:00,19985.86,6,No,Safe,11.4
+TXN000213,Anjali Mehta,39649293,ICICI Bank,Current,22728.36,UPI,Mobile Banking,Flipkart,Bill Payment,Bengaluru,iPhone,192.168.239.128,2026-08-03 22:34:00,1993.52,4,No,Safe,17.4
+TXN000214,Pooja Yadav,53968067,Punjab National Bank,Savings,5307.8,UPI,UPI App,Myntra,Purchase,Mumbai,iPhone,192.168.34.45,2026-08-04 15:52:00,2262.22,3,No,Safe,12.5
+TXN000215,Pooja Yadav,41254907,Punjab National Bank,Savings,16294.13,Wallet,Web Banking,Amazon,Bill Payment,Pune,Windows Laptop,192.168.71.244,2026-08-05 03:06:00,547.41,3,No,Safe,15.9
+TXN000216,Anjali Mehta,87524783,Axis Bank,Current,9577.48,Debit Card,UPI App,Zomato,Transfer,Lucknow,iPhone,192.168.112.177,2026-08-11 14:04:00,19754.53,3,No,Safe,4.8
+TXN000217,Priya Singh,93623075,Kotak Mahindra Bank,Savings,6685.68,UPI,POS,Myntra,Transfer,Delhi,Windows Laptop,192.168.10.234,2026-08-01 14:30:00,9677.36,4,No,Safe,7.2
+TXN000218,Nikhil Verma,23969304,Kotak Mahindra Bank,Savings,5100.71,Credit Card,POS,IRCTC,Recharge,Mumbai,Android,192.168.21.21,2026-08-04 01:27:00,8523.57,2,No,Safe,17.5
+TXN000219,Rohit Mishra,21806846,Kotak Mahindra Bank,Savings,10424.85,Wallet,POS,Amazon,Purchase,Delhi,MacBook,192.168.141.185,2026-08-05 13:57:00,15824.06,4,No,Safe,1.5
+TXN000220,Arjun Kapoor,87664704,Kotak Mahindra Bank,Current,10229.28,Credit Card,UPI App,BigBasket,Transfer,Bengaluru,Tablet,192.168.85.57,2026-08-02 09:30:00,5177.81,7,No,Safe,7.0
+TXN000221,Priya Singh,99630283,HDFC Bank,Savings,14081.08,UPI,Web Banking,Airtel,Transfer,Hyderabad,Android,192.168.242.162,2026-08-10 05:00:00,4303.55,7,No,Safe,2.1
+TXN000222,Pooja Yadav,15305201,State Bank of India,Current,13679.12,Net Banking,Mobile Banking,IRCTC,Recharge,Lucknow,MacBook,192.168.119.153,2026-08-08 10:14:00,8006.31,3,No,Safe,4.1
+TXN000223,Karan Patel,33251986,HDFC Bank,Current,20301.7,Wallet,POS,Airtel,Purchase,Jaipur,Windows Laptop,192.168.85.201,2026-08-08 07:37:00,2401.77,8,Yes,Safe,7.1
+TXN000224,Simran Kaur,15082027,HDFC Bank,Current,7179.16,Net Banking,Mobile Banking,Flipkart,Transfer,Jaipur,Android,192.168.183.190,2026-08-10 10:35:00,3833.68,6,No,Safe,13.0
+TXN000225,Neha Joshi,22582252,State Bank of India,Current,3104.45,Debit Card,ATM,BigBasket,Purchase,Pune,Tablet,192.168.144.28,2026-08-03 18:51:00,14498.15,9,No,Safe,7.5
+TXN000226,Riya Gupta,84780942,Punjab National Bank,Savings,13767.57,Credit Card,UPI App,Flipkart,Purchase,Delhi,Windows Laptop,192.168.80.149,2026-08-05 16:27:00,8252.85,7,No,Safe,8.1
+TXN000227,Vikas Malhotra,76146137,State Bank of India,Current,10835.31,Debit Card,POS,Zomato,Purchase,Mumbai,Windows Laptop,192.168.227.11,2026-08-08 01:32:00,4618.83,6,No,Safe,12.4
+TXN000228,Amit Kumar,19542887,Kotak Mahindra Bank,Current,9178.32,UPI,Web Banking,BigBasket,Bill Payment,Mumbai,Android,192.168.165.114,2026-08-03 21:26:00,14301.77,6,No,Safe,16.3
+TXN000229,Riya Gupta,93797263,State Bank of India,Savings,18882.76,UPI,UPI App,Myntra,Recharge,Mumbai,iPhone,192.168.14.44,2026-08-13 15:49:00,15649.88,3,No,Safe,0.9
+TXN000230,Anjali Mehta,16188056,ICICI Bank,Savings,24198.04,Wallet,Mobile Banking,Flipkart,Purchase,Bengaluru,Tablet,192.168.134.145,2026-08-09 08:28:00,10344.21,5,No,Safe,16.3
+TXN000231,Vikas Malhotra,56960178,Axis Bank,Savings,18659.82,Debit Card,POS,Amazon,Purchase,Bengaluru,Windows Laptop,192.168.201.77,2026-08-02 01:33:00,4809.34,3,No,Safe,15.4
+TXN000232,Vikas Malhotra,71448356,Kotak Mahindra Bank,Savings,6056.4,Wallet,ATM,Myntra,Purchase,Jaipur,iPhone,192.168.171.193,2026-08-04 15:47:00,6225.47,6,No,Safe,13.3
+TXN000233,Pooja Yadav,12081566,Axis Bank,Savings,9357.22,Wallet,POS,Amazon,Transfer,Mumbai,Tablet,192.168.54.98,2026-08-14 08:32:00,18200.44,6,No,Safe,10.2
+TXN000234,Rohit Mishra,13717868,Kotak Mahindra Bank,Savings,8161.3,Net Banking,ATM,IRCTC,Recharge,Hyderabad,MacBook,192.168.240.209,2026-08-02 05:50:00,17490.79,2,Yes,Safe,6.4
+TXN000235,Simran Kaur,56163100,ICICI Bank,Current,16060.79,Wallet,UPI App,Walmart,Bill Payment,Jaipur,iPhone,192.168.4.249,2026-08-02 21:05:00,15735.09,2,No,Safe,6.8
+TXN000236,Pooja Yadav,69670896,ICICI Bank,Current,10368.96,Net Banking,ATM,IRCTC,Transfer,Noida,iPhone,192.168.15.189,2026-08-04 05:56:00,4471.47,5,No,Safe,8.1
+TXN000237,Riya Gupta,57418047,Punjab National Bank,Savings,22361.91,UPI,ATM,Flipkart,Transfer,Delhi,Tablet,192.168.148.87,2026-08-04 05:28:00,6956.99,4,No,Safe,12.6
+TXN000238,Aditya Rao,72804423,Punjab National Bank,Savings,13638.04,Wallet,ATM,Amazon,Recharge,Bengaluru,Tablet,192.168.36.55,2026-08-03 19:24:00,1228.9,4,No,Safe,10.8
+TXN000239,Simran Kaur,36842259,Kotak Mahindra Bank,Current,6169.87,Wallet,Mobile Banking,Amazon,Purchase,Bengaluru,Windows Laptop,192.168.131.118,2026-08-03 23:27:00,12453.73,6,No,Safe,6.8
+TXN000240,Karan Patel,79352308,Kotak Mahindra Bank,Current,5842.64,Net Banking,POS,Amazon,Purchase,Lucknow,Windows Laptop,192.168.140.74,2026-08-05 10:55:00,19713.14,6,No,Safe,10.9
+TXN000241,Aditya Rao,11560254,HDFC Bank,Current,19268.67,UPI,ATM,Myntra,Transfer,Gurugram,MacBook,192.168.166.221,2026-08-12 15:06:00,8682.75,12,No,Safe,2.8
+TXN000242,Rohit Mishra,44860896,Punjab National Bank,Current,21457.72,Net Banking,Mobile Banking,Zomato,Purchase,Jaipur,iPhone,192.168.21.35,2026-08-03 15:02:00,14507.69,9,No,Safe,11.0
+TXN000243,Riya Gupta,40423959,State Bank of India,Savings,1122.37,Net Banking,Mobile Banking,Walmart,Purchase,Lucknow,Tablet,192.168.38.188,2026-08-13 06:14:00,19713.81,2,No,Safe,8.3
+TXN000244,Rahul Sharma,98558405,ICICI Bank,Current,12809.17,Debit Card,ATM,Flipkart,Purchase,Bengaluru,MacBook,192.168.192.192,2026-08-11 20:36:00,14544.1,8,No,Fraud,92.5
+TXN000245,Neha Joshi,36596832,Axis Bank,Savings,541.95,UPI,ATM,Walmart,Transfer,Bengaluru,Tablet,192.168.183.166,2026-08-09 09:14:00,7590.78,5,No,Safe,10.9
+TXN000246,Nikhil Verma,22736474,Punjab National Bank,Current,10730.79,Wallet,POS,Flipkart,Recharge,Pune,iPhone,192.168.114.26,2026-08-05 19:46:00,19439.15,4,No,Safe,2.4
+TXN000247,Priya Singh,78616958,State Bank of India,Savings,11562.59,Debit Card,Web Banking,Flipkart,Purchase,Delhi,Tablet,192.168.85.144,2026-08-07 08:00:00,16478.23,9,No,Safe,4.8
+TXN000248,Riya Gupta,19625217,Punjab National Bank,Current,21170.65,Wallet,Web Banking,Reliance Digital,Purchase,Bengaluru,MacBook,192.168.115.163,2026-08-09 18:32:00,6134.74,4,No,Safe,7.1
+TXN000249,Pooja Yadav,27082142,State Bank of India,Current,18210.42,UPI,UPI App,IRCTC,Recharge,Jaipur,MacBook,192.168.4.202,2026-08-05 12:02:00,6287.64,12,No,Safe,7.6
+TXN000250,Pooja Yadav,66366662,Axis Bank,Savings,21969.4,UPI,Web Banking,IRCTC,Transfer,Noida,iPhone,192.168.61.89,2026-08-06 16:17:00,18588.34,10,No,Fraud,81.2
+TXN000251,Neha Joshi,91640564,State Bank of India,Savings,1260.23,Credit Card,UPI App,IRCTC,Transfer,Bengaluru,iPhone,192.168.137.152,2026-08-06 20:24:00,3973.79,5,No,Safe,7.3
+TXN000252,Vikas Malhotra,60969319,Axis Bank,Savings,15457.66,UPI,Mobile Banking,Reliance Digital,Recharge,Jaipur,Windows Laptop,192.168.216.221,2026-08-13 05:38:00,5925.28,8,No,Safe,3.7
+TXN000253,Arjun Kapoor,47558578,HDFC Bank,Savings,22275.48,Credit Card,Mobile Banking,Zomato,Purchase,Bengaluru,iPhone,192.168.51.190,2026-08-09 20:09:00,951.44,1,No,Safe,12.9
+TXN000254,Simran Kaur,75952197,HDFC Bank,Current,2663.87,Debit Card,Mobile Banking,Myntra,Transfer,Bengaluru,Windows Laptop,192.168.233.136,2026-08-11 13:27:00,9387.21,7,No,Safe,15.2
+TXN000255,Sneha Agarwal,19183894,HDFC Bank,Current,13892.62,Net Banking,POS,Myntra,Transfer,Lucknow,Android,192.168.233.242,2026-08-12 01:51:00,4033.36,12,No,Safe,17.4
+TXN000256,Rahul Sharma,31032452,ICICI Bank,Current,14526.74,Wallet,UPI App,Amazon,Recharge,Delhi,Windows Laptop,192.168.90.27,2026-08-10 09:55:00,10112.33,5,No,Safe,0.3
+TXN000257,Pooja Yadav,39239383,Kotak Mahindra Bank,Current,24267.79,Debit Card,Web Banking,IRCTC,Transfer,Bengaluru,Tablet,192.168.192.38,2026-08-05 02:12:00,4388.54,1,No,Safe,3.2
+TXN000258,Neha Joshi,26737875,Axis Bank,Current,12416.44,Wallet,Mobile Banking,Airtel,Purchase,Gurugram,MacBook,192.168.148.85,2026-08-05 04:46:00,9693.84,7,No,Safe,2.6
+TXN000259,Anjali Mehta,42367462,State Bank of India,Savings,20484.72,UPI,Web Banking,Flipkart,Recharge,Lucknow,Android,192.168.129.104,2026-08-14 20:24:00,4710.08,3,No,Safe,14.7
+TXN000260,Neha Joshi,63464750,HDFC Bank,Savings,6157.79,Debit Card,ATM,Reliance Digital,Purchase,Hyderabad,Android,192.168.66.227,2026-08-15 06:30:00,10088.82,1,No,Safe,5.9
+TXN000261,Amit Kumar,75548561,State Bank of India,Current,7372.63,UPI,Mobile Banking,BigBasket,Transfer,Delhi,Android,192.168.114.27,2026-08-09 14:00:00,11364.88,3,No,Safe,12.2
+TXN000262,Simran Kaur,82229352,Axis Bank,Current,19696.01,Net Banking,Mobile Banking,Zomato,Purchase,Pune,Windows Laptop,192.168.248.30,2026-08-09 21:11:00,12224.37,1,No,Safe,15.5
+TXN000263,Priya Singh,36877370,ICICI Bank,Savings,1044.07,Net Banking,POS,Flipkart,Recharge,Gurugram,iPhone,192.168.29.222,2026-08-15 00:06:00,659.67,3,Yes,Safe,17.9
+TXN000264,Priya Singh,19870714,ICICI Bank,Savings,12820.49,Debit Card,UPI App,Myntra,Transfer,Hyderabad,Tablet,192.168.205.94,2026-08-06 01:13:00,3865.98,3,Yes,Safe,0.4
+TXN000265,Anjali Mehta,81287665,State Bank of India,Savings,2885.95,Net Banking,POS,Amazon,Purchase,Noida,Tablet,192.168.197.119,2026-08-03 06:43:00,16261.87,12,No,Safe,16.9
+TXN000266,Pooja Yadav,75540836,HDFC Bank,Current,23215.58,Net Banking,UPI App,IRCTC,Bill Payment,Jaipur,MacBook,192.168.171.82,2026-08-05 15:56:00,1505.62,4,No,Safe,17.6
+TXN000267,Vikas Malhotra,94493264,Kotak Mahindra Bank,Savings,13045.84,Debit Card,Web Banking,Myntra,Recharge,Lucknow,iPhone,192.168.230.57,2026-08-03 07:30:00,252.05,1,No,Safe,14.3
+TXN000268,Priya Singh,62664182,Axis Bank,Savings,1917.2,UPI,Mobile Banking,IRCTC,Transfer,Lucknow,Tablet,192.168.89.5,2026-08-11 11:35:00,18647.8,7,No,Safe,7.9
+TXN000269,Sneha Agarwal,79301005,Punjab National Bank,Current,1106.78,Wallet,UPI App,Myntra,Transfer,Mumbai,Windows Laptop,192.168.70.159,2026-08-07 00:29:00,1396.5,3,No,Safe,13.8
+TXN000270,Rohit Mishra,98502921,Punjab National Bank,Savings,16236.74,Debit Card,UPI App,Swiggy,Bill Payment,Hyderabad,MacBook,192.168.142.171,2026-08-11 09:54:00,8008.0,3,No,Safe,15.9
+TXN000271,Priya Singh,93678934,ICICI Bank,Savings,23473.56,UPI,ATM,Amazon,Transfer,Lucknow,Android,192.168.222.178,2026-08-14 04:01:00,14204.86,12,No,Safe,5.6
+TXN000272,Vikas Malhotra,18773905,State Bank of India,Savings,974.38,Wallet,ATM,Flipkart,Recharge,Bengaluru,Android,192.168.203.72,2026-08-07 06:48:00,13738.66,3,No,Safe,4.4
+TXN000273,Amit Kumar,52007527,ICICI Bank,Current,5371.11,UPI,Web Banking,Reliance Digital,Recharge,Jaipur,Android,192.168.67.16,2026-08-12 20:29:00,11916.34,7,No,Safe,8.0
+TXN000274,Arjun Kapoor,31609175,ICICI Bank,Current,679.07,Net Banking,UPI App,BigBasket,Bill Payment,Delhi,Android,192.168.82.223,2026-08-03 15:53:00,2903.14,8,No,Safe,9.5
+TXN000275,Pooja Yadav,11248358,HDFC Bank,Savings,1451.84,Net Banking,POS,Airtel,Transfer,Jaipur,Windows Laptop,192.168.155.119,2026-08-06 21:01:00,7288.33,3,No,Safe,17.0
+TXN000276,Riya Gupta,44968703,Axis Bank,Savings,19319.24,Wallet,ATM,Swiggy,Recharge,Noida,Android,192.168.185.215,2026-08-13 11:29:00,4506.57,4,No,Safe,0.7
+TXN000277,Sneha Agarwal,16673674,HDFC Bank,Savings,982.35,UPI,Web Banking,Swiggy,Purchase,Delhi,MacBook,192.168.23.198,2026-08-10 12:01:00,11950.19,12,No,Safe,8.0
+TXN000278,Sneha Agarwal,91096766,State Bank of India,Savings,1345.18,Wallet,UPI App,Amazon,Bill Payment,Bengaluru,Tablet,192.168.214.138,2026-08-08 17:48:00,5721.64,1,No,Safe,4.8
+TXN000279,Priya Singh,24418119,State Bank of India,Current,20943.69,UPI,ATM,Walmart,Transfer,Delhi,Windows Laptop,192.168.172.17,2026-08-04 04:29:00,250.55,9,No,Safe,8.7
+TXN000280,Neha Joshi,88859348,HDFC Bank,Current,14870.46,Credit Card,UPI App,Reliance Digital,Recharge,Gurugram,Tablet,192.168.217.237,2026-08-04 10:28:00,8797.31,7,No,Safe,11.2
+TXN000281,Neha Joshi,58451242,HDFC Bank,Savings,16067.91,Net Banking,Web Banking,BigBasket,Purchase,Hyderabad,Tablet,192.168.5.239,2026-08-09 19:30:00,18489.22,6,No,Safe,12.0
+TXN000282,Amit Kumar,27141237,Punjab National Bank,Savings,16667.71,Debit Card,POS,Swiggy,Purchase,Mumbai,Windows Laptop,192.168.159.125,2026-08-08 08:37:00,4239.94,5,No,Safe,12.4
+TXN000283,Anjali Mehta,51270238,State Bank of India,Savings,11604.26,Wallet,ATM,Zomato,Recharge,Noida,Tablet,192.168.92.163,2026-08-13 22:16:00,16785.09,3,No,Safe,10.7
+TXN000284,Aditya Rao,90831832,Axis Bank,Current,13096.15,UPI,ATM,Airtel,Purchase,Gurugram,Windows Laptop,192.168.204.251,2026-08-02 22:20:00,12616.33,2,No,Safe,2.9
+TXN000285,Sneha Agarwal,50225380,State Bank of India,Savings,16153.97,Debit Card,Web Banking,Zomato,Recharge,Mumbai,Android,192.168.194.35,2026-08-04 10:57:00,9940.52,2,No,Safe,1.0
+TXN000286,Riya Gupta,35811648,Punjab National Bank,Savings,12473.19,Wallet,Web Banking,IRCTC,Recharge,Pune,Windows Laptop,192.168.143.53,2026-08-11 00:38:00,7569.49,4,No,Safe,5.8
+TXN000287,Vikas Malhotra,91387416,State Bank of India,Savings,7411.89,Debit Card,POS,Myntra,Purchase,Hyderabad,Tablet,192.168.132.182,2026-08-04 05:36:00,19695.42,8,No,Safe,2.4
+TXN000288,Arjun Kapoor,18426353,State Bank of India,Current,21308.04,Wallet,Web Banking,Walmart,Purchase,Lucknow,iPhone,192.168.194.67,2026-08-11 12:41:00,7207.69,11,No,Safe,6.2
+TXN000289,Aditya Rao,66956980,HDFC Bank,Current,23619.02,Net Banking,ATM,IRCTC,Bill Payment,Lucknow,Windows Laptop,192.168.51.28,2026-08-05 00:04:00,12668.3,6,No,Safe,11.7
+TXN000290,Amit Kumar,81444177,Kotak Mahindra Bank,Savings,8607.2,Net Banking,UPI App,Swiggy,Recharge,Mumbai,iPhone,192.168.142.192,2026-08-08 09:28:00,12497.13,2,No,Safe,5.0
+TXN000291,Vikas Malhotra,19444604,State Bank of India,Savings,19663.9,Net Banking,Mobile Banking,Walmart,Transfer,Gurugram,Windows Laptop,192.168.79.148,2026-08-03 16:19:00,9708.26,1,No,Safe,1.7
+TXN000292,Aditya Rao,38460582,Kotak Mahindra Bank,Current,5335.65,Credit Card,Mobile Banking,Zomato,Purchase,Jaipur,Tablet,192.168.233.195,2026-08-12 07:23:00,15137.68,1,No,Safe,1.6
+TXN000293,Aditya Rao,18732902,ICICI Bank,Savings,15259.1,Wallet,Web Banking,Myntra,Bill Payment,Noida,Windows Laptop,192.168.215.216,2026-08-03 00:20:00,13076.08,2,No,Safe,12.3
+TXN000294,Amit Kumar,72225107,HDFC Bank,Current,24313.94,Net Banking,UPI App,Zomato,Purchase,Mumbai,Android,192.168.138.32,2026-08-01 19:25:00,8943.44,6,No,Safe,7.4
+TXN000295,Amit Kumar,50661807,ICICI Bank,Savings,23644.9,Credit Card,ATM,Amazon,Bill Payment,Lucknow,Android,192.168.168.74,2026-08-01 16:11:00,14083.54,12,No,Safe,8.3
+TXN000296,Simran Kaur,53806198,ICICI Bank,Savings,16723.34,UPI,POS,Airtel,Transfer,Delhi,Windows Laptop,192.168.239.223,2026-08-05 02:36:00,5011.04,5,No,Safe,1.7
+TXN000297,Rahul Sharma,12618156,Punjab National Bank,Savings,7989.7,Credit Card,Web Banking,Myntra,Purchase,Pune,iPhone,192.168.156.78,2026-08-10 13:29:00,428.38,12,No,Safe,14.9
+TXN000298,Nikhil Verma,52534494,ICICI Bank,Savings,23763.59,UPI,Web Banking,IRCTC,Recharge,Gurugram,Windows Laptop,192.168.40.64,2026-08-11 21:40:00,11503.28,8,No,Safe,0.2
+TXN000299,Amit Kumar,31991645,Punjab National Bank,Savings,6099.45,Debit Card,ATM,Zomato,Purchase,Mumbai,Android,192.168.210.39,2026-08-06 05:28:00,12517.59,8,No,Safe,9.5
+TXN000300,Amit Kumar,39220605,State Bank of India,Current,18850.16,Wallet,POS,Flipkart,Transfer,Mumbai,MacBook,192.168.44.56,2026-08-01 23:09:00,16156.66,7,No,Safe,14.7
+TXN000301,Amit Kumar,39901691,Kotak Mahindra Bank,Savings,11387.12,Wallet,POS,Airtel,Purchase,Mumbai,iPhone,192.168.145.119,2026-08-14 06:52:00,5557.45,3,No,Safe,1.6
+TXN000302,Sneha Agarwal,60229685,Kotak Mahindra Bank,Current,17166.44,UPI,ATM,Airtel,Transfer,Delhi,Tablet,192.168.11.1,2026-08-10 18:22:00,3117.49,2,No,Safe,17.5
+TXN000303,Neha Joshi,29253822,State Bank of India,Savings,24684.37,Net Banking,Mobile Banking,Reliance Digital,Bill Payment,Noida,iPhone,192.168.252.177,2026-08-07 02:03:00,606.49,6,No,Safe,11.0
+TXN000304,Priya Singh,61728729,Kotak Mahindra Bank,Current,8289.83,Wallet,Mobile Banking,IRCTC,Transfer,Gurugram,Tablet,192.168.204.162,2026-08-13 06:14:00,17464.12,6,No,Safe,12.3
+TXN000305,Neha Joshi,43734000,Axis Bank,Savings,13302.36,Debit Card,Mobile Banking,IRCTC,Purchase,Noida,MacBook,192.168.207.56,2026-08-14 13:29:00,5448.29,7,No,Safe,0.8
+TXN000306,Amit Kumar,66319045,HDFC Bank,Savings,18972.97,Credit Card,Web Banking,IRCTC,Transfer,Noida,iPhone,192.168.93.238,2026-08-13 14:27:00,13143.07,4,No,Safe,8.3
+TXN000307,Sneha Agarwal,95683295,Kotak Mahindra Bank,Current,18306.81,Net Banking,POS,Flipkart,Recharge,Bengaluru,iPhone,192.168.145.127,2026-08-04 20:45:00,7826.41,2,No,Safe,6.4
+TXN000308,Aditya Rao,65776771,Kotak Mahindra Bank,Current,24743.09,Wallet,ATM,Myntra,Recharge,Pune,MacBook,192.168.120.175,2026-08-07 02:42:00,9009.76,8,No,Safe,5.9
+TXN000309,Karan Patel,11818880,ICICI Bank,Current,17133.29,Wallet,Mobile Banking,IRCTC,Purchase,Mumbai,Tablet,192.168.218.205,2026-08-06 16:09:00,1064.55,4,No,Safe,14.3
+TXN000310,Riya Gupta,14090899,HDFC Bank,Savings,11557.85,Wallet,POS,Amazon,Transfer,Hyderabad,Android,192.168.27.208,2026-08-03 11:36:00,690.22,9,No,Safe,15.5
+TXN000311,Simran Kaur,17012470,State Bank of India,Current,16539.06,UPI,POS,Walmart,Recharge,Pune,Windows Laptop,192.168.115.27,2026-08-14 21:12:00,13086.82,10,No,Safe,8.2
+TXN000312,Rohit Mishra,40195469,State Bank of India,Savings,1242.37,UPI,POS,Flipkart,Purchase,Gurugram,Android,192.168.56.75,2026-08-06 12:31:00,14837.17,4,No,Safe,1.0
+TXN000313,Vikas Malhotra,65315557,Kotak Mahindra Bank,Current,7270.58,Wallet,UPI App,Swiggy,Purchase,Hyderabad,Android,192.168.142.249,2026-08-01 13:37:00,529.77,9,No,Fraud,80.1
+TXN000314,Rohit Mishra,60779718,Axis Bank,Current,4610.61,Net Banking,Mobile Banking,IRCTC,Transfer,Delhi,Tablet,192.168.55.48,2026-08-09 05:21:00,15954.84,5,Yes,Safe,1.8
+TXN000315,Karan Patel,54709490,HDFC Bank,Current,7363.75,Credit Card,ATM,Airtel,Recharge,Delhi,Windows Laptop,192.168.70.191,2026-08-09 00:05:00,19122.63,4,No,Safe,1.1
+TXN000316,Amit Kumar,39937081,ICICI Bank,Current,11545.67,Wallet,Web Banking,Amazon,Bill Payment,Jaipur,MacBook,192.168.72.174,2026-08-09 10:40:00,10376.05,10,No,Safe,0.4
+TXN000317,Arjun Kapoor,12542989,Kotak Mahindra Bank,Savings,17117.73,Net Banking,Mobile Banking,Airtel,Purchase,Lucknow,Android,192.168.128.19,2026-08-09 04:19:00,6466.52,1,No,Safe,1.7
+TXN000318,Rohit Mishra,75776162,Kotak Mahindra Bank,Savings,13837.93,Credit Card,Web Banking,Myntra,Transfer,Gurugram,Tablet,192.168.207.65,2026-08-08 13:24:00,5049.67,11,No,Safe,11.1
+TXN000319,Nikhil Verma,76578253,Kotak Mahindra Bank,Current,2301.57,Debit Card,UPI App,Walmart,Bill Payment,Bengaluru,iPhone,192.168.33.233,2026-08-07 02:05:00,7457.68,11,No,Safe,12.9
+TXN000320,Neha Joshi,22232433,HDFC Bank,Current,158.56,Credit Card,UPI App,Swiggy,Recharge,Noida,Android,192.168.170.161,2026-08-01 14:05:00,585.84,9,No,Safe,13.3
+TXN000321,Pooja Yadav,93750945,HDFC Bank,Current,22167.81,UPI,POS,Swiggy,Purchase,Lucknow,MacBook,192.168.167.185,2026-08-05 15:28:00,16700.46,5,No,Safe,12.7
+TXN000322,Karan Patel,50215739,ICICI Bank,Current,19664.48,Debit Card,Web Banking,Myntra,Transfer,Lucknow,MacBook,192.168.38.136,2026-08-01 15:37:00,9910.73,6,No,Fraud,93.9
+TXN000323,Anjali Mehta,10345726,Kotak Mahindra Bank,Savings,20361.28,Wallet,Mobile Banking,Reliance Digital,Recharge,Noida,Tablet,192.168.105.98,2026-08-06 21:59:00,1969.42,6,No,Safe,13.1
+TXN000324,Aditya Rao,48117432,ICICI Bank,Current,21536.73,UPI,POS,BigBasket,Recharge,Mumbai,iPhone,192.168.163.102,2026-08-04 10:20:00,8795.64,7,Yes,Safe,14.9
+TXN000325,Karan Patel,52660552,Punjab National Bank,Current,10784.88,Net Banking,Mobile Banking,BigBasket,Bill Payment,Jaipur,Tablet,192.168.194.36,2026-08-15 05:34:00,7080.81,12,No,Safe,17.5
+TXN000326,Nikhil Verma,52081356,Axis Bank,Savings,21719.15,Wallet,Mobile Banking,Airtel,Recharge,Hyderabad,Tablet,192.168.121.99,2026-08-03 18:07:00,9710.65,11,No,Safe,15.2
+TXN000327,Rahul Sharma,49188684,Punjab National Bank,Current,24480.53,Credit Card,Web Banking,Myntra,Bill Payment,Delhi,Android,192.168.206.198,2026-08-05 22:45:00,9985.91,3,No,Safe,15.8
+TXN000328,Karan Patel,27743171,ICICI Bank,Savings,9743.18,Debit Card,UPI App,Myntra,Bill Payment,Pune,MacBook,192.168.24.242,2026-08-02 21:00:00,18513.7,6,No,Safe,12.4
+TXN000329,Aditya Rao,23199639,HDFC Bank,Current,6673.83,UPI,Web Banking,BigBasket,Purchase,Hyderabad,Windows Laptop,192.168.185.49,2026-08-07 09:04:00,15628.86,4,No,Safe,14.2
+TXN000330,Vikas Malhotra,49247621,HDFC Bank,Savings,22735.82,UPI,UPI App,IRCTC,Recharge,Noida,Tablet,192.168.149.214,2026-08-13 12:51:00,7716.33,9,No,Safe,6.6
+TXN000331,Rohit Mishra,82318927,ICICI Bank,Savings,6628.61,Debit Card,Web Banking,Reliance Digital,Recharge,Gurugram,Windows Laptop,192.168.31.188,2026-08-08 08:30:00,19378.95,5,No,Safe,3.3
+TXN000332,Karan Patel,63899919,HDFC Bank,Current,12364.39,Wallet,ATM,Airtel,Transfer,Jaipur,Tablet,192.168.32.32,2026-08-11 04:08:00,7671.96,7,No,Safe,2.6
+TXN000333,Priya Singh,47267537,Punjab National Bank,Current,6906.56,Debit Card,Web Banking,BigBasket,Recharge,Pune,Tablet,192.168.189.172,2026-08-11 18:24:00,15089.05,2,No,Safe,4.0
+TXN000334,Sneha Agarwal,16185537,State Bank of India,Savings,17468.12,Credit Card,ATM,Amazon,Recharge,Lucknow,MacBook,192.168.34.196,2026-08-13 22:51:00,4727.68,2,No,Safe,8.5
+TXN000335,Amit Kumar,15561685,HDFC Bank,Savings,2314.16,Wallet,Web Banking,Walmart,Recharge,Lucknow,Windows Laptop,192.168.40.67,2026-08-05 15:49:00,14353.24,4,No,Safe,16.0
+TXN000336,Anjali Mehta,43507681,Axis Bank,Savings,6917.16,Wallet,ATM,Swiggy,Bill Payment,Bengaluru,iPhone,192.168.17.122,2026-08-11 14:20:00,18065.27,12,No,Safe,12.8
+TXN000337,Simran Kaur,89491980,State Bank of India,Savings,13328.58,Net Banking,ATM,Swiggy,Purchase,Bengaluru,iPhone,192.168.250.201,2026-08-04 21:24:00,14174.36,12,No,Safe,11.5
+TXN000338,Neha Joshi,11990815,Punjab National Bank,Current,7468.82,Credit Card,UPI App,BigBasket,Bill Payment,Jaipur,Windows Laptop,192.168.190.129,2026-08-14 03:27:00,18088.65,2,No,Safe,10.6
+TXN000339,Aditya Rao,76896650,State Bank of India,Current,12750.77,Wallet,POS,Myntra,Purchase,Hyderabad,MacBook,192.168.37.122,2026-08-15 08:09:00,15545.35,8,No,Safe,10.1
+TXN000340,Priya Singh,32147797,ICICI Bank,Savings,18802.79,Debit Card,Web Banking,IRCTC,Recharge,Noida,Windows Laptop,192.168.97.75,2026-08-12 03:45:00,14435.89,1,No,Safe,7.0
+TXN000341,Neha Joshi,86683992,State Bank of India,Current,10379.8,Wallet,UPI App,Swiggy,Purchase,Delhi,Windows Laptop,192.168.26.208,2026-08-01 16:35:00,14251.64,1,No,Safe,16.3
+TXN000342,Rohit Mishra,47559100,State Bank of India,Current,636.7,Wallet,UPI App,Swiggy,Bill Payment,Gurugram,Windows Laptop,192.168.212.163,2026-08-07 00:32:00,16861.76,11,No,Safe,4.9
+TXN000343,Simran Kaur,42123770,ICICI Bank,Current,11988.16,Debit Card,ATM,Swiggy,Purchase,Gurugram,MacBook,192.168.117.155,2026-08-04 05:54:00,1252.97,3,Yes,Safe,13.1
+TXN000344,Karan Patel,15249767,Axis Bank,Savings,12396.94,UPI,Web Banking,IRCTC,Recharge,Pune,Windows Laptop,192.168.94.245,2026-08-13 04:21:00,10842.82,1,No,Safe,17.2
+TXN000345,Arjun Kapoor,92185804,ICICI Bank,Savings,10528.1,Net Banking,Web Banking,Zomato,Purchase,Jaipur,Android,192.168.221.221,2026-08-10 23:55:00,6092.15,8,Yes,Safe,4.7
+TXN000346,Vikas Malhotra,80565549,Axis Bank,Current,577.13,Wallet,UPI App,Myntra,Transfer,Jaipur,Windows Laptop,192.168.189.178,2026-08-13 07:03:00,9019.36,4,No,Safe,13.9
+TXN000347,Rohit Mishra,74362883,State Bank of India,Savings,17320.58,UPI,UPI App,Zomato,Purchase,Mumbai,Tablet,192.168.31.13,2026-08-11 02:51:00,12584.93,6,No,Safe,16.8
+TXN000348,Nikhil Verma,43336034,Punjab National Bank,Savings,17534.92,Debit Card,POS,Reliance Digital,Transfer,Gurugram,Android,192.168.106.199,2026-08-10 11:45:00,16064.49,8,No,Safe,1.4
+TXN000349,Sneha Agarwal,40298694,Kotak Mahindra Bank,Current,19428.78,Net Banking,Mobile Banking,Reliance Digital,Bill Payment,Bengaluru,Tablet,192.168.118.115,2026-08-07 11:21:00,13366.8,6,No,Safe,2.2
+TXN000350,Arjun Kapoor,72341487,ICICI Bank,Savings,5990.17,UPI,Mobile Banking,Swiggy,Transfer,Mumbai,Android,192.168.63.57,2026-08-01 13:02:00,9888.52,1,No,Safe,2.3
+TXN000351,Amit Kumar,86374002,ICICI Bank,Savings,4333.24,UPI,Mobile Banking,Airtel,Transfer,Lucknow,iPhone,192.168.66.215,2026-08-10 17:32:00,10104.3,2,No,Safe,1.0
+TXN000352,Aditya Rao,48229625,State Bank of India,Current,20525.98,Net Banking,Web Banking,Swiggy,Purchase,Mumbai,Windows Laptop,192.168.203.189,2026-08-06 06:13:00,12298.75,12,No,Safe,1.9
+TXN000353,Priya Singh,17076716,Kotak Mahindra Bank,Current,14660.62,Debit Card,Web Banking,Walmart,Bill Payment,Bengaluru,Android,192.168.33.97,2026-08-03 14:06:00,818.09,10,No,Safe,4.1
+TXN000354,Simran Kaur,64883255,Axis Bank,Current,10418.39,UPI,UPI App,Reliance Digital,Recharge,Delhi,Android,192.168.26.42,2026-08-06 15:51:00,12199.76,3,No,Safe,7.2
+TXN000355,Rohit Mishra,82446158,Kotak Mahindra Bank,Current,297.24,UPI,UPI App,Amazon,Purchase,Bengaluru,Android,192.168.167.44,2026-08-02 20:28:00,17355.46,5,No,Safe,1.3
+TXN000356,Sneha Agarwal,63563017,Punjab National Bank,Current,487.56,Net Banking,Web Banking,IRCTC,Purchase,Lucknow,Tablet,192.168.26.2,2026-08-07 02:16:00,14518.8,9,No,Safe,2.6
+TXN000357,Vikas Malhotra,21364328,HDFC Bank,Current,6502.46,Credit Card,POS,Zomato,Recharge,Gurugram,MacBook,192.168.254.254,2026-08-11 22:38:00,243.19,9,No,Safe,13.3
+TXN000358,Karan Patel,81414299,ICICI Bank,Current,5327.83,Net Banking,Mobile Banking,Walmart,Purchase,Delhi,Android,192.168.128.213,2026-08-15 00:55:00,5449.99,12,No,Safe,10.4
+TXN000359,Aditya Rao,95136269,HDFC Bank,Current,13742.43,Debit Card,Mobile Banking,BigBasket,Purchase,Gurugram,Windows Laptop,192.168.235.244,2026-08-10 19:47:00,1133.99,10,No,Safe,5.2
+TXN000360,Karan Patel,74080067,HDFC Bank,Current,9880.93,Wallet,ATM,IRCTC,Recharge,Noida,Tablet,192.168.214.78,2026-08-08 16:33:00,6221.71,2,No,Safe,17.2
+TXN000361,Vikas Malhotra,50389076,Kotak Mahindra Bank,Savings,11981.31,Wallet,POS,Swiggy,Recharge,Mumbai,MacBook,192.168.239.197,2026-08-04 05:59:00,18327.12,11,No,Safe,10.1
+TXN000362,Amit Kumar,12196133,Kotak Mahindra Bank,Savings,18948.2,Debit Card,Web Banking,Zomato,Bill Payment,Gurugram,MacBook,192.168.59.173,2026-08-09 10:56:00,11847.54,7,No,Safe,1.2
+TXN000363,Aditya Rao,60127194,State Bank of India,Current,19580.28,Debit Card,ATM,Swiggy,Bill Payment,Mumbai,Windows Laptop,192.168.230.147,2026-08-12 20:09:00,5443.53,5,No,Safe,6.0
+TXN000364,Rohit Mishra,86518115,Punjab National Bank,Current,22284.64,UPI,UPI App,Reliance Digital,Transfer,Noida,Android,192.168.145.29,2026-08-06 07:09:00,743.62,1,No,Safe,11.2
+TXN000365,Amit Kumar,22096988,Punjab National Bank,Current,22499.43,Wallet,UPI App,IRCTC,Recharge,Noida,Tablet,192.168.47.190,2026-08-03 09:51:00,3286.66,1,No,Safe,3.4
+TXN000366,Arjun Kapoor,43678477,Kotak Mahindra Bank,Current,20087.14,Debit Card,UPI App,Flipkart,Bill Payment,Gurugram,Android,192.168.174.21,2026-08-04 23:49:00,1595.34,8,No,Safe,9.0
+TXN000367,Anjali Mehta,52068683,State Bank of India,Current,2491.47,Net Banking,Web Banking,Swiggy,Bill Payment,Gurugram,iPhone,192.168.170.219,2026-08-10 11:05:00,14809.95,7,No,Safe,2.4
+TXN000368,Arjun Kapoor,43320931,Axis Bank,Current,2452.96,Net Banking,Web Banking,Airtel,Bill Payment,Lucknow,Tablet,192.168.148.41,2026-08-11 04:51:00,2657.53,2,No,Safe,15.1
+TXN000369,Aditya Rao,57151281,State Bank of India,Savings,5105.51,Wallet,Mobile Banking,IRCTC,Transfer,Noida,Windows Laptop,192.168.67.182,2026-08-08 16:48:00,16945.97,5,No,Safe,13.9
+TXN000370,Neha Joshi,16238514,Kotak Mahindra Bank,Current,3391.7,Wallet,UPI App,Flipkart,Recharge,Delhi,MacBook,192.168.123.149,2026-08-04 01:13:00,4895.36,4,No,Safe,15.2
+TXN000371,Simran Kaur,51146007,Axis Bank,Current,22516.46,Wallet,UPI App,IRCTC,Bill Payment,Noida,Android,192.168.165.65,2026-08-10 19:19:00,10117.85,1,No,Safe,3.0
+TXN000372,Simran Kaur,66459026,State Bank of India,Current,616.59,Credit Card,UPI App,IRCTC,Bill Payment,Jaipur,Windows Laptop,192.168.183.139,2026-08-07 11:36:00,5327.43,2,No,Safe,2.7
+TXN000373,Riya Gupta,59329581,Punjab National Bank,Current,12768.15,Credit Card,ATM,Reliance Digital,Transfer,Mumbai,Windows Laptop,192.168.5.89,2026-08-06 00:19:00,12135.24,3,Yes,Safe,16.8
+TXN000374,Riya Gupta,96542680,ICICI Bank,Current,6061.29,Credit Card,ATM,Myntra,Bill Payment,Lucknow,Android,192.168.65.61,2026-08-04 14:41:00,271.23,12,No,Safe,15.4
+TXN000375,Rohit Mishra,61361879,State Bank of India,Current,18578.06,UPI,POS,Walmart,Purchase,Hyderabad,MacBook,192.168.125.239,2026-08-04 18:42:00,5183.6,10,No,Safe,17.7
+TXN000376,Rohit Mishra,95329271,ICICI Bank,Current,12616.2,Debit Card,Web Banking,Reliance Digital,Bill Payment,Lucknow,MacBook,192.168.42.57,2026-08-09 14:26:00,5365.12,8,No,Safe,17.0
+TXN000377,Neha Joshi,33367482,Kotak Mahindra Bank,Savings,7777.89,Debit Card,ATM,Zomato,Transfer,Mumbai,Android,192.168.28.210,2026-08-06 16:46:00,8749.22,4,No,Safe,9.7
+TXN000378,Amit Kumar,65340595,Axis Bank,Savings,23538.03,Net Banking,Mobile Banking,BigBasket,Transfer,Mumbai,iPhone,192.168.57.161,2026-08-05 02:30:00,16576.04,4,No,Safe,2.4
+TXN000379,Aditya Rao,55257199,HDFC Bank,Savings,21026.5,Credit Card,Mobile Banking,Airtel,Bill Payment,Mumbai,Tablet,192.168.117.240,2026-08-07 03:58:00,12374.96,10,No,Safe,14.1
+TXN000380,Aditya Rao,18465548,State Bank of India,Savings,19148.66,Debit Card,Mobile Banking,Walmart,Bill Payment,Gurugram,MacBook,192.168.197.196,2026-08-05 19:38:00,19935.13,10,No,Safe,0.7
+TXN000381,Amit Kumar,88515970,ICICI Bank,Savings,1426.23,Net Banking,ATM,Myntra,Recharge,Lucknow,Android,192.168.140.65,2026-08-09 11:22:00,12349.28,11,No,Safe,8.3
+TXN000382,Rahul Sharma,89444278,State Bank of India,Current,11519.71,Debit Card,UPI App,BigBasket,Recharge,Hyderabad,MacBook,192.168.202.54,2026-08-06 08:07:00,14730.81,11,No,Safe,17.4
+TXN000383,Neha Joshi,58500782,HDFC Bank,Savings,22602.77,UPI,POS,Flipkart,Transfer,Jaipur,iPhone,192.168.21.250,2026-08-08 06:35:00,10760.22,9,No,Safe,15.3
+TXN000384,Pooja Yadav,47836737,Kotak Mahindra Bank,Current,13405.52,Wallet,Mobile Banking,Flipkart,Purchase,Pune,Android,192.168.93.201,2026-08-14 20:48:00,4189.68,4,No,Safe,17.5
+TXN000385,Amit Kumar,97442955,Kotak Mahindra Bank,Savings,19160.78,Net Banking,Web Banking,Swiggy,Recharge,Jaipur,Windows Laptop,192.168.172.163,2026-08-10 09:36:00,4509.29,11,No,Fraud,81.9
+TXN000386,Arjun Kapoor,31069546,Punjab National Bank,Current,12246.62,Debit Card,Web Banking,Airtel,Purchase,Noida,MacBook,192.168.71.200,2026-08-01 11:04:00,6150.15,12,No,Safe,11.0
+TXN000387,Nikhil Verma,64451460,Punjab National Bank,Current,13037.3,Net Banking,Web Banking,Airtel,Bill Payment,Jaipur,Android,192.168.211.213,2026-08-08 14:24:00,9240.83,4,No,Safe,13.9
+TXN000388,Pooja Yadav,88302682,State Bank of India,Savings,4345.55,Wallet,Mobile Banking,Myntra,Recharge,Bengaluru,iPhone,192.168.84.110,2026-08-03 01:26:00,19445.51,1,No,Safe,8.5
+TXN000389,Aditya Rao,44015441,Kotak Mahindra Bank,Current,21462.43,Net Banking,Web Banking,Zomato,Recharge,Bengaluru,Android,192.168.29.237,2026-08-02 15:04:00,18474.26,3,No,Safe,3.3
+TXN000390,Rohit Mishra,50827761,Punjab National Bank,Savings,18642.0,UPI,Web Banking,Walmart,Bill Payment,Lucknow,Tablet,192.168.184.47,2026-08-01 16:34:00,6604.33,7,No,Safe,11.1
+TXN000391,Nikhil Verma,55698051,Kotak Mahindra Bank,Savings,8205.48,Debit Card,UPI App,Myntra,Recharge,Lucknow,iPhone,192.168.20.28,2026-08-09 10:30:00,16667.64,11,No,Safe,14.6
+TXN000392,Riya Gupta,76062106,Axis Bank,Current,12260.09,Credit Card,POS,Swiggy,Bill Payment,Lucknow,Android,192.168.96.177,2026-08-02 12:57:00,10011.57,11,No,Safe,8.5
+TXN000393,Amit Kumar,46384172,Punjab National Bank,Savings,13301.24,Wallet,Web Banking,BigBasket,Bill Payment,Gurugram,iPhone,192.168.5.190,2026-08-04 20:40:00,8920.53,10,No,Safe,10.5
+TXN000394,Rahul Sharma,27346792,State Bank of India,Savings,24625.85,Wallet,Mobile Banking,IRCTC,Bill Payment,Bengaluru,MacBook,192.168.124.81,2026-08-10 08:57:00,16437.22,10,No,Safe,4.1
+TXN000395,Anjali Mehta,90392547,Kotak Mahindra Bank,Current,21855.05,UPI,UPI App,IRCTC,Recharge,Gurugram,iPhone,192.168.75.19,2026-08-07 12:12:00,5180.77,9,No,Safe,0.8
+TXN000396,Arjun Kapoor,31187292,ICICI Bank,Current,21495.4,UPI,Web Banking,Amazon,Purchase,Hyderabad,Windows Laptop,192.168.210.139,2026-08-02 21:50:00,18016.72,9,No,Safe,5.9
+TXN000397,Karan Patel,99492479,Punjab National Bank,Current,17373.69,UPI,ATM,Reliance Digital,Bill Payment,Lucknow,MacBook,192.168.138.81,2026-08-02 18:36:00,10053.11,6,No,Safe,1.7
+TXN000398,Karan Patel,81652741,HDFC Bank,Current,20472.69,Net Banking,Mobile Banking,Amazon,Purchase,Lucknow,Windows Laptop,192.168.214.254,2026-08-09 20:54:00,19410.56,7,No,Safe,1.8
+TXN000399,Nikhil Verma,64876034,HDFC Bank,Current,17634.86,UPI,UPI App,Reliance Digital,Recharge,Jaipur,Android,192.168.13.199,2026-08-09 20:29:00,7882.2,12,No,Safe,11.2
+TXN000400,Pooja Yadav,27792456,State Bank of India,Current,20305.1,Net Banking,UPI App,Zomato,Purchase,Mumbai,Tablet,192.168.118.32,2026-08-13 20:12:00,19064.28,6,No,Safe,12.7
+TXN000401,Riya Gupta,28097091,Kotak Mahindra Bank,Savings,4758.95,Wallet,Mobile Banking,Flipkart,Bill Payment,Noida,Tablet,192.168.99.56,2026-08-11 22:49:00,19721.4,5,No,Fraud,75.5
+TXN000402,Rohit Mishra,95741634,ICICI Bank,Savings,23382.83,Debit Card,Web Banking,IRCTC,Purchase,Gurugram,MacBook,192.168.150.169,2026-08-03 00:05:00,6034.77,9,No,Safe,2.4
+TXN000403,Neha Joshi,61273273,State Bank of India,Current,603.89,UPI,Web Banking,Zomato,Recharge,Lucknow,Android,192.168.59.115,2026-08-12 04:41:00,6635.13,10,No,Fraud,78.2
+TXN000404,Rohit Mishra,37709290,HDFC Bank,Savings,4956.56,Debit Card,Mobile Banking,Airtel,Bill Payment,Bengaluru,Android,192.168.115.215,2026-08-09 00:44:00,8852.54,11,No,Safe,6.4
+TXN000405,Vikas Malhotra,15210750,Axis Bank,Current,8275.97,UPI,ATM,Swiggy,Bill Payment,Bengaluru,Windows Laptop,192.168.172.235,2026-08-11 02:56:00,16225.24,8,No,Safe,4.3
+TXN000406,Neha Joshi,70265323,ICICI Bank,Current,23233.5,Net Banking,Mobile Banking,Airtel,Transfer,Noida,Android,192.168.180.196,2026-08-05 15:08:00,14646.49,11,No,Safe,11.0
+TXN000407,Anjali Mehta,37020753,ICICI Bank,Current,14201.37,UPI,ATM,Flipkart,Transfer,Lucknow,Windows Laptop,192.168.148.223,2026-08-13 11:12:00,1984.26,7,No,Safe,11.4
+TXN000408,Karan Patel,87474227,Axis Bank,Current,2754.21,Net Banking,Web Banking,Swiggy,Bill Payment,Lucknow,Android,192.168.109.72,2026-08-08 13:27:00,16927.56,8,No,Safe,16.2
+TXN000409,Rahul Sharma,72911848,HDFC Bank,Savings,14978.07,Wallet,UPI App,Airtel,Recharge,Jaipur,iPhone,192.168.118.104,2026-08-14 10:08:00,8686.02,2,No,Safe,9.9
+TXN000410,Karan Patel,28411951,Axis Bank,Current,3757.12,UPI,Web Banking,Walmart,Purchase,Mumbai,Android,192.168.4.95,2026-08-11 03:34:00,8885.54,4,No,Safe,1.9
+TXN000411,Arjun Kapoor,64777110,ICICI Bank,Savings,6244.71,Wallet,Mobile Banking,Airtel,Recharge,Bengaluru,Windows Laptop,192.168.18.19,2026-08-14 19:18:00,5833.75,1,No,Safe,10.6
+TXN000412,Simran Kaur,74092937,HDFC Bank,Savings,8978.57,Credit Card,UPI App,Zomato,Recharge,Hyderabad,MacBook,192.168.116.33,2026-08-05 02:53:00,14889.08,5,No,Safe,9.7
+TXN000413,Pooja Yadav,81377662,HDFC Bank,Current,19633.75,Credit Card,POS,Walmart,Bill Payment,Gurugram,iPhone,192.168.162.209,2026-08-05 04:57:00,14813.27,2,No,Safe,16.8
+TXN000414,Simran Kaur,36398439,ICICI Bank,Current,9395.08,Net Banking,Web Banking,Flipkart,Bill Payment,Gurugram,Android,192.168.139.3,2026-08-04 11:11:00,6735.51,8,No,Safe,5.6
+TXN000415,Sneha Agarwal,48916017,Kotak Mahindra Bank,Current,18449.39,UPI,POS,Reliance Digital,Recharge,Gurugram,Windows Laptop,192.168.170.218,2026-08-14 05:45:00,3367.38,10,No,Safe,11.1
+TXN000416,Aditya Rao,89856738,HDFC Bank,Current,24400.99,Credit Card,Web Banking,Airtel,Recharge,Mumbai,Windows Laptop,192.168.150.149,2026-08-08 12:21:00,5514.23,4,No,Safe,2.3
+TXN000417,Riya Gupta,47118893,ICICI Bank,Current,12681.06,UPI,UPI App,BigBasket,Recharge,Delhi,MacBook,192.168.97.254,2026-08-02 16:33:00,7604.68,10,No,Safe,4.2
+TXN000418,Amit Kumar,27547320,ICICI Bank,Current,8320.89,Wallet,UPI App,Zomato,Bill Payment,Noida,Windows Laptop,192.168.119.5,2026-08-02 07:37:00,9262.23,1,No,Safe,16.1
+TXN000419,Amit Kumar,57341249,ICICI Bank,Current,19903.58,UPI,UPI App,BigBasket,Transfer,Mumbai,Android,192.168.98.183,2026-08-02 19:41:00,15066.07,2,No,Safe,3.3
+TXN000420,Neha Joshi,18848947,State Bank of India,Current,17570.76,Wallet,ATM,Walmart,Purchase,Delhi,MacBook,192.168.210.226,2026-08-03 19:43:00,18168.09,6,No,Safe,15.0
+TXN000421,Priya Singh,14185231,HDFC Bank,Savings,22282.91,UPI,POS,Myntra,Transfer,Mumbai,Windows Laptop,192.168.62.187,2026-08-04 08:59:00,19943.95,9,Yes,Safe,6.1
+TXN000422,Aditya Rao,17510747,State Bank of India,Savings,11769.67,Debit Card,ATM,Zomato,Bill Payment,Delhi,iPhone,192.168.2.71,2026-08-04 16:45:00,14786.37,12,No,Safe,9.7
+TXN000423,Rahul Sharma,84697631,Kotak Mahindra Bank,Current,12189.15,Net Banking,Mobile Banking,Myntra,Purchase,Pune,Windows Laptop,192.168.107.249,2026-08-07 17:26:00,18712.97,8,No,Safe,15.8
+TXN000424,Arjun Kapoor,20331357,Axis Bank,Savings,11610.24,Net Banking,Mobile Banking,BigBasket,Recharge,Jaipur,Tablet,192.168.243.175,2026-08-02 06:34:00,12905.25,8,No,Safe,3.4
+TXN000425,Amit Kumar,95378828,ICICI Bank,Savings,21600.37,UPI,Web Banking,Reliance Digital,Bill Payment,Delhi,Android,192.168.30.135,2026-08-02 04:04:00,10515.17,2,No,Safe,2.7
+TXN000426,Nikhil Verma,30879427,Axis Bank,Savings,9484.72,Net Banking,UPI App,Amazon,Purchase,Bengaluru,Tablet,192.168.151.253,2026-08-05 12:26:00,15428.18,3,No,Safe,7.7
+TXN000427,Arjun Kapoor,71851718,State Bank of India,Savings,1461.57,Net Banking,Web Banking,Amazon,Transfer,Bengaluru,Android,192.168.191.10,2026-08-03 01:14:00,16017.12,11,No,Safe,17.6
+TXN000428,Anjali Mehta,22792516,State Bank of India,Savings,21943.5,UPI,Web Banking,Reliance Digital,Bill Payment,Gurugram,MacBook,192.168.240.41,2026-08-08 02:57:00,305.61,6,No,Safe,11.8
+TXN000429,Rahul Sharma,91112805,State Bank of India,Current,8073.89,UPI,ATM,Amazon,Recharge,Lucknow,iPhone,192.168.90.208,2026-08-07 23:35:00,18210.82,10,No,Safe,2.5
+TXN000430,Priya Singh,44489382,Kotak Mahindra Bank,Current,19446.35,Credit Card,Mobile Banking,Flipkart,Bill Payment,Gurugram,Tablet,192.168.196.123,2026-08-11 02:31:00,11123.99,11,No,Safe,11.4
+TXN000431,Pooja Yadav,70925598,State Bank of India,Current,14443.28,Credit Card,ATM,Airtel,Recharge,Hyderabad,iPhone,192.168.80.155,2026-08-10 16:58:00,13010.99,1,Yes,Safe,13.9
+TXN000432,Karan Patel,39366880,ICICI Bank,Current,4768.95,Wallet,Mobile Banking,Airtel,Recharge,Delhi,Android,192.168.13.93,2026-08-13 20:13:00,11073.96,8,No,Safe,7.7
+TXN000433,Aditya Rao,82356537,ICICI Bank,Current,5822.71,Net Banking,POS,Flipkart,Bill Payment,Delhi,Windows Laptop,192.168.143.202,2026-08-13 03:40:00,12564.3,10,No,Safe,13.8
+TXN000434,Arjun Kapoor,27216010,State Bank of India,Current,14149.82,Credit Card,UPI App,Zomato,Transfer,Jaipur,iPhone,192.168.37.25,2026-08-13 17:02:00,7770.29,1,No,Safe,5.1
+TXN000435,Pooja Yadav,83540866,Kotak Mahindra Bank,Current,6507.02,Credit Card,Mobile Banking,Zomato,Transfer,Jaipur,Windows Laptop,192.168.145.53,2026-08-14 11:09:00,17955.89,8,No,Safe,2.7
+TXN000436,Rohit Mishra,15272383,Axis Bank,Current,9425.19,Wallet,UPI App,BigBasket,Purchase,Pune,iPhone,192.168.102.139,2026-08-02 16:26:00,18044.72,2,No,Safe,17.6
+TXN000437,Rahul Sharma,95686023,Axis Bank,Savings,15191.22,UPI,Mobile Banking,Airtel,Transfer,Lucknow,Android,192.168.244.148,2026-08-07 00:01:00,5743.44,6,No,Safe,10.5
+TXN000438,Pooja Yadav,99619736,Punjab National Bank,Savings,13924.68,Net Banking,UPI App,Walmart,Bill Payment,Gurugram,Tablet,192.168.144.25,2026-08-04 14:57:00,9205.68,12,No,Safe,10.6
+TXN000439,Rahul Sharma,99723602,Punjab National Bank,Current,19112.66,Debit Card,POS,Reliance Digital,Purchase,Noida,Android,192.168.88.71,2026-08-10 13:25:00,7033.65,12,Yes,Safe,15.2
+TXN000440,Rohit Mishra,81968544,Punjab National Bank,Current,18792.36,Wallet,UPI App,BigBasket,Bill Payment,Mumbai,iPhone,192.168.62.213,2026-08-14 13:44:00,8453.82,7,No,Safe,17.9
+TXN000441,Amit Kumar,65114118,Axis Bank,Current,16736.32,Credit Card,POS,IRCTC,Bill Payment,Pune,Windows Laptop,192.168.234.72,2026-08-09 19:51:00,11784.28,12,No,Safe,1.5
+TXN000442,Anjali Mehta,78025746,ICICI Bank,Current,22547.31,Wallet,POS,Flipkart,Bill Payment,Lucknow,MacBook,192.168.119.158,2026-08-09 14:04:00,16125.72,6,No,Fraud,77.4
+TXN000443,Priya Singh,99576247,HDFC Bank,Current,1527.78,UPI,Web Banking,Flipkart,Bill Payment,Jaipur,Tablet,192.168.246.86,2026-08-10 10:04:00,14504.75,2,No,Safe,17.2
+TXN000444,Vikas Malhotra,97075878,ICICI Bank,Savings,7401.13,Net Banking,ATM,Walmart,Bill Payment,Gurugram,MacBook,192.168.202.247,2026-08-09 00:20:00,8013.32,2,No,Safe,14.9
+TXN000445,Neha Joshi,12590534,ICICI Bank,Current,13863.27,Wallet,ATM,Reliance Digital,Transfer,Jaipur,Windows Laptop,192.168.229.33,2026-08-13 21:30:00,7796.98,4,No,Safe,2.9
+TXN000446,Aditya Rao,66373538,Axis Bank,Savings,20715.13,Credit Card,ATM,Flipkart,Transfer,Delhi,Tablet,192.168.88.2,2026-08-13 21:04:00,9749.79,11,No,Safe,2.7
+TXN000447,Rahul Sharma,14916929,Punjab National Bank,Savings,5136.05,Net Banking,ATM,BigBasket,Transfer,Delhi,Android,192.168.127.183,2026-08-06 01:36:00,3599.09,1,No,Safe,17.0
+TXN000448,Karan Patel,34312977,Kotak Mahindra Bank,Savings,21590.51,Wallet,POS,Reliance Digital,Purchase,Noida,Windows Laptop,192.168.186.24,2026-08-14 23:11:00,15048.8,1,No,Safe,6.1
+TXN000449,Riya Gupta,79637007,Kotak Mahindra Bank,Current,13054.12,Debit Card,UPI App,Zomato,Recharge,Jaipur,Windows Laptop,192.168.174.175,2026-08-13 01:08:00,8475.19,6,No,Safe,1.8
+TXN000450,Aditya Rao,48773564,ICICI Bank,Savings,4488.77,Net Banking,Web Banking,Flipkart,Transfer,Mumbai,MacBook,192.168.163.113,2026-08-11 01:22:00,7972.67,6,No,Safe,12.8
+TXN000451,Arjun Kapoor,73247045,Punjab National Bank,Savings,274.69,Debit Card,Web Banking,Airtel,Transfer,Hyderabad,Windows Laptop,192.168.64.243,2026-08-08 15:06:00,15330.61,2,No,Safe,11.3
+TXN000452,Nikhil Verma,62512648,State Bank of India,Savings,13073.78,Debit Card,Mobile Banking,Myntra,Transfer,Delhi,Android,192.168.87.52,2026-08-14 15:28:00,3647.53,6,No,Safe,1.4
+TXN000453,Vikas Malhotra,66224930,State Bank of India,Current,24152.51,Wallet,ATM,BigBasket,Bill Payment,Lucknow,Android,192.168.102.23,2026-08-02 20:25:00,16970.96,2,No,Safe,0.5
+TXN000454,Anjali Mehta,56113481,HDFC Bank,Current,10972.72,UPI,UPI App,Walmart,Purchase,Delhi,iPhone,192.168.234.174,2026-08-02 21:31:00,18975.07,6,No,Safe,2.2
+TXN000455,Nikhil Verma,40902035,Kotak Mahindra Bank,Current,17328.5,Debit Card,UPI App,Airtel,Bill Payment,Mumbai,Windows Laptop,192.168.97.35,2026-08-09 18:15:00,11796.5,4,No,Safe,16.1
+TXN000456,Rahul Sharma,75031407,State Bank of India,Savings,12616.67,UPI,POS,Swiggy,Transfer,Mumbai,MacBook,192.168.81.84,2026-08-06 07:12:00,12472.12,4,No,Safe,15.2
+TXN000457,Aditya Rao,14412090,State Bank of India,Current,22159.03,Debit Card,Web Banking,BigBasket,Recharge,Noida,Android,192.168.177.248,2026-08-02 02:13:00,17371.52,5,No,Safe,17.7
+TXN000458,Simran Kaur,52900333,State Bank of India,Savings,4654.12,Credit Card,POS,Walmart,Purchase,Delhi,Android,192.168.162.75,2026-08-04 10:20:00,6084.97,6,No,Safe,10.7
+TXN000459,Simran Kaur,79433729,State Bank of India,Savings,879.22,Debit Card,Mobile Banking,IRCTC,Bill Payment,Noida,Tablet,192.168.128.110,2026-08-10 18:05:00,17641.43,5,No,Safe,13.8
+TXN000460,Karan Patel,16852108,ICICI Bank,Savings,6138.03,Net Banking,ATM,Myntra,Purchase,Lucknow,Android,192.168.13.104,2026-08-11 14:22:00,8045.59,9,No,Safe,5.9
+TXN000461,Vikas Malhotra,77613254,Axis Bank,Savings,13746.59,Net Banking,UPI App,IRCTC,Transfer,Jaipur,Windows Laptop,192.168.54.106,2026-08-12 10:42:00,10953.75,5,No,Safe,16.6
+TXN000462,Arjun Kapoor,40743718,ICICI Bank,Current,5483.9,Debit Card,Mobile Banking,Zomato,Transfer,Jaipur,MacBook,192.168.191.74,2026-08-11 22:13:00,2846.1,8,No,Safe,9.8
+TXN000463,Riya Gupta,73626100,Punjab National Bank,Savings,1743.12,Wallet,Mobile Banking,Reliance Digital,Recharge,Noida,Tablet,192.168.206.46,2026-08-10 01:53:00,16574.71,5,No,Safe,2.5
+TXN000464,Karan Patel,63624102,Kotak Mahindra Bank,Savings,3470.25,Net Banking,POS,BigBasket,Bill Payment,Hyderabad,Windows Laptop,192.168.136.196,2026-08-15 03:51:00,10350.27,6,No,Safe,9.3
+TXN000465,Pooja Yadav,66087996,State Bank of India,Savings,14752.13,UPI,Web Banking,Myntra,Transfer,Noida,MacBook,192.168.19.25,2026-08-05 08:54:00,18135.21,11,No,Safe,8.9
+TXN000466,Vikas Malhotra,19453430,Axis Bank,Savings,522.44,Net Banking,POS,Amazon,Recharge,Pune,Tablet,192.168.168.75,2026-08-14 01:03:00,7081.74,4,No,Safe,17.1
+TXN000467,Rohit Mishra,55882669,HDFC Bank,Current,20682.1,Net Banking,Mobile Banking,Walmart,Transfer,Hyderabad,MacBook,192.168.57.114,2026-08-14 20:53:00,8123.56,4,No,Safe,12.9
+TXN000468,Nikhil Verma,93095350,Punjab National Bank,Savings,4370.2,Credit Card,POS,Airtel,Transfer,Pune,Windows Laptop,192.168.75.155,2026-08-11 05:28:00,6754.1,8,No,Safe,16.9
+TXN000469,Karan Patel,22618913,Kotak Mahindra Bank,Savings,16065.05,Wallet,ATM,Walmart,Bill Payment,Noida,MacBook,192.168.110.152,2026-08-11 11:12:00,4873.5,2,No,Safe,10.2
+TXN000470,Neha Joshi,71186594,State Bank of India,Current,7013.44,Debit Card,UPI App,Flipkart,Bill Payment,Bengaluru,Windows Laptop,192.168.41.230,2026-08-10 23:51:00,10093.0,9,No,Safe,10.2
+TXN000471,Vikas Malhotra,98595720,Axis Bank,Savings,4668.09,Net Banking,UPI App,Walmart,Transfer,Pune,Android,192.168.200.235,2026-08-04 02:39:00,8298.48,1,No,Safe,5.5
+TXN000472,Rahul Sharma,35559381,State Bank of India,Current,24578.36,Debit Card,Web Banking,Flipkart,Transfer,Delhi,Windows Laptop,192.168.17.153,2026-08-15 06:40:00,6848.37,3,No,Safe,10.8
+TXN000473,Karan Patel,70385266,HDFC Bank,Current,4674.46,Net Banking,UPI App,BigBasket,Recharge,Jaipur,Android,192.168.26.212,2026-08-01 19:03:00,2187.4,11,No,Safe,7.5
+TXN000474,Arjun Kapoor,21703945,Punjab National Bank,Current,21823.7,Wallet,UPI App,Airtel,Recharge,Noida,MacBook,192.168.105.86,2026-08-03 00:54:00,2373.38,10,No,Safe,7.0
+TXN000475,Riya Gupta,21644233,Kotak Mahindra Bank,Current,16369.97,Credit Card,Web Banking,Reliance Digital,Recharge,Mumbai,Tablet,192.168.8.125,2026-08-11 19:56:00,13533.5,9,No,Safe,4.4
+TXN000476,Karan Patel,74607529,Kotak Mahindra Bank,Savings,17122.24,Credit Card,UPI App,Swiggy,Recharge,Mumbai,Tablet,192.168.250.233,2026-08-05 09:09:00,2780.27,4,No,Safe,10.7
+TXN000477,Anjali Mehta,68104896,State Bank of India,Savings,11974.41,UPI,Mobile Banking,IRCTC,Purchase,Bengaluru,Tablet,192.168.128.28,2026-08-13 03:32:00,10112.66,10,No,Safe,9.8
+TXN000478,Nikhil Verma,87354567,Axis Bank,Current,16258.77,Net Banking,Web Banking,Flipkart,Purchase,Noida,Tablet,192.168.141.14,2026-08-07 22:59:00,8833.08,6,No,Safe,8.6
+TXN000479,Simran Kaur,61791484,State Bank of India,Current,14145.96,Wallet,Web Banking,Walmart,Transfer,Jaipur,Tablet,192.168.1.122,2026-08-11 20:08:00,19677.8,2,No,Safe,12.7
+TXN000480,Rohit Mishra,53508913,State Bank of India,Savings,19163.19,Debit Card,Mobile Banking,Amazon,Bill Payment,Mumbai,Windows Laptop,192.168.135.26,2026-08-12 10:32:00,1451.72,8,No,Safe,7.0
+TXN000481,Nikhil Verma,14482604,State Bank of India,Current,1230.88,Credit Card,POS,Reliance Digital,Transfer,Mumbai,iPhone,192.168.221.24,2026-08-03 05:33:00,9418.35,1,No,Safe,17.7
+TXN000482,Simran Kaur,98436987,Axis Bank,Current,10766.66,Wallet,ATM,IRCTC,Bill Payment,Pune,Tablet,192.168.205.35,2026-08-13 05:21:00,14099.49,3,No,Safe,11.0
+TXN000483,Rohit Mishra,48371964,Axis Bank,Savings,21578.06,Wallet,ATM,Reliance Digital,Transfer,Jaipur,Tablet,192.168.83.205,2026-08-09 18:45:00,13203.9,4,No,Safe,1.1
+TXN000484,Nikhil Verma,82735340,HDFC Bank,Current,17954.11,Wallet,ATM,Walmart,Purchase,Noida,iPhone,192.168.77.100,2026-08-09 18:11:00,4221.63,2,No,Safe,3.5
+TXN000485,Vikas Malhotra,98329148,Kotak Mahindra Bank,Current,10494.4,Wallet,Mobile Banking,Zomato,Bill Payment,Hyderabad,iPhone,192.168.7.11,2026-08-02 05:00:00,8959.05,7,No,Safe,9.5
+TXN000486,Anjali Mehta,19418396,HDFC Bank,Current,23590.18,Credit Card,POS,Amazon,Bill Payment,Noida,Tablet,192.168.102.170,2026-08-10 22:03:00,16353.79,4,No,Safe,4.3
+TXN000487,Amit Kumar,70084828,Punjab National Bank,Current,5268.82,Credit Card,Mobile Banking,Reliance Digital,Transfer,Lucknow,Android,192.168.249.79,2026-08-13 05:01:00,4798.21,9,No,Safe,13.4
+TXN000488,Sneha Agarwal,51669782,Kotak Mahindra Bank,Savings,24804.52,UPI,POS,Zomato,Bill Payment,Gurugram,MacBook,192.168.45.246,2026-08-05 13:58:00,17239.92,12,No,Safe,12.2
+TXN000489,Nikhil Verma,58073936,Punjab National Bank,Current,6006.68,Debit Card,ATM,BigBasket,Bill Payment,Bengaluru,Windows Laptop,192.168.64.8,2026-08-11 12:59:00,3246.63,2,No,Safe,4.9
+TXN000490,Anjali Mehta,53312923,ICICI Bank,Savings,8424.78,Credit Card,Mobile Banking,IRCTC,Recharge,Hyderabad,iPhone,192.168.22.110,2026-08-14 00:53:00,1244.37,9,No,Safe,15.4
+TXN000491,Anjali Mehta,80511692,Punjab National Bank,Savings,6430.52,Credit Card,POS,Amazon,Recharge,Mumbai,MacBook,192.168.129.112,2026-08-08 08:40:00,15567.37,1,No,Safe,6.7
+TXN000492,Karan Patel,76575160,Punjab National Bank,Savings,15900.32,Net Banking,UPI App,Reliance Digital,Transfer,Lucknow,Android,192.168.176.213,2026-08-09 08:44:00,13989.77,5,No,Safe,8.6
+TXN000493,Simran Kaur,10955613,State Bank of India,Savings,15895.38,Debit Card,ATM,Swiggy,Bill Payment,Delhi,iPhone,192.168.82.23,2026-08-09 19:57:00,10904.78,5,No,Safe,3.1
+TXN000494,Simran Kaur,77049907,Punjab National Bank,Current,8013.97,Net Banking,ATM,Airtel,Bill Payment,Hyderabad,Windows Laptop,192.168.91.219,2026-08-03 21:10:00,11620.15,7,No,Safe,13.6
+TXN000495,Vikas Malhotra,50095538,Axis Bank,Current,19965.12,Debit Card,Web Banking,Amazon,Bill Payment,Hyderabad,Android,192.168.22.33,2026-08-01 19:39:00,1820.07,10,No,Safe,2.2
+TXN000496,Anjali Mehta,97012285,ICICI Bank,Savings,23897.23,Net Banking,ATM,Walmart,Transfer,Bengaluru,iPhone,192.168.23.223,2026-08-13 06:30:00,11848.26,10,No,Safe,11.4
+TXN000497,Pooja Yadav,74163467,Punjab National Bank,Savings,21532.64,Net Banking,Mobile Banking,Airtel,Purchase,Mumbai,Tablet,192.168.227.65,2026-08-14 13:17:00,9467.56,1,No,Safe,17.5
+TXN000498,Rahul Sharma,21304037,HDFC Bank,Current,22760.35,Debit Card,ATM,BigBasket,Purchase,Pune,iPhone,192.168.38.183,2026-08-01 21:21:00,6352.24,10,No,Safe,3.8
+TXN000499,Amit Kumar,25680363,ICICI Bank,Savings,2367.75,Credit Card,Mobile Banking,Swiggy,Purchase,Pune,iPhone,192.168.65.31,2026-08-10 11:38:00,3430.08,5,No,Safe,8.3
+TXN000500,Vikas Malhotra,36098792,Kotak Mahindra Bank,Savings,8111.17,UPI,POS,Myntra,Transfer,Noida,MacBook,192.168.120.14,2026-08-10 12:53:00,6047.66,4,No,Safe,14.8

@@ -1,0 +1,1172 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | AI Fraud Detection{% endblock %}
+
+{% block content %}
+
+<style>
+
+.dashboard-page {
+    min-height: 100vh;
+}
+
+.dashboard-stat-card {
+    border: 0;
+    border-radius: 18px;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08) !important;
+}
+
+.fraud-overview-card {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fraud-chart-container {
+    position: relative;
+    width: 100%;
+    height: 330px;
+}
+
+.fraud-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    min-width: 120px;
+}
+
+.fraud-chart-center-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #6c757d;
+}
+
+.fraud-chart-center-number {
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.fraud-mini-card {
+    border-radius: 16px;
+    transition: transform .2s ease;
+}
+
+.fraud-mini-card:hover {
+    transform: translateY(-2px);
+}
+
+.recent-table-card {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+</style>
+
+
+<div class="container-fluid py-4 dashboard-page">
+
+
+    <!-- ====================================================== -->
+    <!-- WELCOME -->
+    <!-- ====================================================== -->
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-1">
+            Welcome, {{ username }} 👋
+        </h2>
+
+        <p class="text-muted mb-0">
+            AI-powered financial fraud detection and transaction monitoring.
+        </p>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- MAIN FEATURE CARDS -->
+    <!-- ====================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- BULK -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <span class="badge bg-primary-subtle text-primary mb-3">
+                                DATA ANALYSIS
+                            </span>
+
+                            <h4 class="fw-bold">
+                                Bulk Analysis
+                            </h4>
+
+                            <p class="text-muted">
+                                Analyze large transaction datasets and identify
+                                suspicious financial activity.
+                            </p>
+
+                        </div>
+
+                        <i class="bi bi-database-fill text-primary fs-2"></i>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('bulk_analysis') }}"
+                        class="btn btn-primary w-100 mt-2"
+                    >
+
+                        <i class="bi bi-upload me-1"></i>
+
+                        Open Bulk Analysis
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LIVE -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <span class="badge bg-warning-subtle text-warning mb-3">
+                                LIVE MONITORING
+                            </span>
+
+                            <h4 class="fw-bold">
+                                Real-Time Risk
+                            </h4>
+
+                            <p class="text-muted">
+                                Check the fraud risk of an individual
+                                banking transaction instantly.
+                            </p>
+
+                        </div>
+
+                        <i class="bi bi-lightning-charge-fill text-warning fs-2"></i>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('live_prediction') }}"
+                        class="btn btn-primary w-100 mt-2"
+                    >
+
+                        <i class="bi bi-shield-check me-1"></i>
+
+                        Check Transaction
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ANALYTICS -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <span class="badge bg-success-subtle text-success mb-3">
+                                INSIGHTS
+                            </span>
+
+                            <h4 class="fw-bold">
+                                Analytics
+                            </h4>
+
+                            <p class="text-muted">
+                                View fraud statistics, transaction analysis
+                                and AI-generated insights.
+                            </p>
+
+                        </div>
+
+                        <i class="bi bi-bar-chart-fill text-success fs-2"></i>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('analytics') }}"
+                        class="btn btn-primary w-100 mt-2"
+                    >
+
+                        <i class="bi bi-bar-chart-line me-1"></i>
+
+                        View Analytics
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- STATISTICS -->
+    <!-- ====================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- TOTAL -->
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <small class="text-muted fw-semibold">
+                        TOTAL TRANSACTIONS
+                    </small>
+
+                    <h2 class="fw-bold mt-2 mb-1">
+                        {{ "{:,}".format(total|default(0)|int) }}
+                    </h2>
+
+                    <small class="text-muted">
+                        Transactions analyzed
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAFE -->
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <small class="text-muted fw-semibold">
+                        SAFE TRANSACTIONS
+                    </small>
+
+                    <h2 class="fw-bold text-success mt-2 mb-1">
+                        {{ "{:,}".format(safe|default(0)|int) }}
+                    </h2>
+
+                    <small class="text-success">
+                        <i class="bi bi-shield-check"></i>
+                        Low risk activity
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RISKY -->
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <small class="text-muted fw-semibold">
+                        RISKY TRANSACTIONS
+                    </small>
+
+                    <h2 class="fw-bold text-warning mt-2 mb-1">
+                        {{ "{:,}".format(risky|default(0)|int) }}
+                    </h2>
+
+                    <small class="text-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Requires attention
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FRAUD -->
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <small class="text-muted fw-semibold">
+                        FRAUD DETECTED
+                    </small>
+
+                    <h2 class="fw-bold text-danger mt-2 mb-1">
+                        {{ "{:,}".format(fraud|default(0)|int) }}
+                    </h2>
+
+                    <small class="text-danger">
+                        <i class="bi bi-shield-x"></i>
+                        High risk activity
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- FRAUD OVERVIEW -->
+    <!-- ====================================================== -->
+
+    <div class="card fraud-overview-card shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div>
+
+                    <h4 class="fw-bold mb-1">
+                        Fraud Overview
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Visual summary of safe, risky and fraudulent transactions.
+                    </p>
+
+                </div>
+
+
+                {% if has_analysis %}
+
+                    <span class="badge bg-primary-subtle text-primary">
+                        <i class="bi bi-stars me-1"></i>
+                        AI ANALYSIS
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary-subtle text-secondary">
+                        <i class="bi bi-hourglass-split me-1"></i>
+                        AWAITING ANALYSIS
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- CHART -->
+
+            <div class="fraud-chart-container">
+
+                <canvas id="fraudChart"></canvas>
+
+
+                <div class="fraud-chart-center">
+
+                    <div class="fraud-chart-center-label">
+                        TOTAL
+                    </div>
+
+                    <div class="fraud-chart-center-number">
+                        {{ "{:,}".format(total|default(0)|int) }}
+                    </div>
+
+                    <div class="text-muted small">
+                        Transactions
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MINI STATS -->
+
+            <div class="row g-3 mt-2">
+
+
+                <!-- SAFE -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="fraud-mini-card p-3"
+                        style="
+                            background:rgba(25,135,84,.08);
+                            border:1px solid rgba(25,135,84,.14);
+                        "
+                    >
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="text-muted">
+                                Safe
+                            </span>
+
+                            <i class="bi bi-shield-check text-success"></i>
+
+                        </div>
+
+                        <div class="fw-bold fs-4 mt-1">
+                            {{ "{:,}".format(safe|default(0)|int) }}
+                        </div>
+
+                        <small class="text-success">
+
+                            {% if total|int > 0 %}
+
+                                {{ "%.2f"|format(
+                                    (safe|int / total|int) * 100
+                                ) }}%
+
+                            {% else %}
+
+                                0.00%
+
+                            {% endif %}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RISKY -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="fraud-mini-card p-3"
+                        style="
+                            background:rgba(255,193,7,.10);
+                            border:1px solid rgba(255,193,7,.16);
+                        "
+                    >
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="text-muted">
+                                Risky
+                            </span>
+
+                            <i class="bi bi-exclamation-triangle text-warning"></i>
+
+                        </div>
+
+                        <div class="fw-bold fs-4 mt-1">
+                            {{ "{:,}".format(risky|default(0)|int) }}
+                        </div>
+
+                        <small class="text-warning">
+
+                            {% if total|int > 0 %}
+
+                                {{ "%.2f"|format(
+                                    (risky|int / total|int) * 100
+                                ) }}%
+
+                            {% else %}
+
+                                0.00%
+
+                            {% endif %}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FRAUD -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="fraud-mini-card p-3"
+                        style="
+                            background:rgba(220,53,69,.08);
+                            border:1px solid rgba(220,53,69,.14);
+                        "
+                    >
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="text-muted">
+                                Fraud
+                            </span>
+
+                            <i class="bi bi-shield-x text-danger"></i>
+
+                        </div>
+
+                        <div class="fw-bold fs-4 mt-1">
+                            {{ "{:,}".format(fraud|default(0)|int) }}
+                        </div>
+
+                        <small class="text-danger">
+
+                            {% if total|int > 0 %}
+
+                                {{ "%.2f"|format(
+                                    (fraud|int / total|int) * 100
+                                ) }}%
+
+                            {% else %}
+
+                                0.00%
+
+                            {% endif %}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- RECENT TRANSACTIONS -->
+    <!-- ====================================================== -->
+
+    <div class="card recent-table-card shadow-sm">
+
+        <div class="card-body p-4">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h4 class="fw-bold mb-1">
+                        Recent Transactions
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Monitor analyzed financial activity.
+                    </p>
+
+                </div>
+
+
+                {% if has_analysis %}
+
+                    <span class="badge bg-success-subtle text-success">
+                        <i class="bi bi-circle-fill me-1"
+                           style="font-size:7px;"></i>
+                        LIVE MONITORING
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary-subtle text-secondary">
+                        SAMPLE DATA
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Transaction ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Amount</th>
+
+                            <th>Merchant</th>
+
+                            <th>Type</th>
+
+                            <th>Risk</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    {% if transactions %}
+
+
+                        {% for transaction in transactions[-10:] %}
+
+
+                        <tr>
+
+
+                            <!-- ID -->
+
+                            <td>
+
+                                <strong class="text-primary">
+
+                                    {{ transaction.get(
+                                        "display_id",
+                                        transaction.get(
+                                            "id",
+                                            "N/A"
+                                        )
+                                    ) }}
+
+                                </strong>
+
+                            </td>
+
+
+                            <!-- CUSTOMER -->
+
+                            <td>
+
+                                {{ transaction.get(
+                                    "display_customer",
+                                    transaction.get(
+                                        "customer",
+                                        "Unknown Customer"
+                                    )
+                                ) }}
+
+                            </td>
+
+
+                            <!-- AMOUNT -->
+
+                            <td>
+
+                                <strong>
+
+                                    ₹{{ "{:,.2f}".format(
+                                        transaction.get(
+                                            "display_amount",
+                                            transaction.get(
+                                                "amount",
+                                                0
+                                            )
+                                        )|float
+                                    ) }}
+
+                                </strong>
+
+                            </td>
+
+
+                            <!-- MERCHANT -->
+
+                            <td>
+
+                                {{ transaction.get(
+                                    "display_merchant",
+                                    transaction.get(
+                                        "merchant",
+                                        "Unknown Merchant"
+                                    )
+                                ) }}
+
+                            </td>
+
+
+                            <!-- TYPE -->
+
+                            <td>
+
+                                <span class="badge bg-light text-dark">
+
+                                    {{ transaction.get(
+                                        "display_type",
+                                        transaction.get(
+                                            "type",
+                                            "Transaction"
+                                        )
+                                    ) }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- RISK -->
+
+                            <td>
+
+                                {% set prediction =
+                                    transaction.get(
+                                        "display_classification",
+                                        transaction.get(
+                                            "prediction",
+                                            "safe"
+                                        )
+                                    )|string|lower
+                                %}
+
+
+                                {% if prediction == "fraud" %}
+
+                                    <span class="badge bg-danger-subtle text-danger">
+
+                                        <i class="bi bi-shield-x me-1"></i>
+
+                                        Fraud Risk
+
+                                    </span>
+
+
+                                {% elif prediction == "risky" %}
+
+                                    <span class="badge bg-warning-subtle text-warning">
+
+                                        <i class="bi bi-exclamation-triangle me-1"></i>
+
+                                        Risky
+
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="badge bg-success-subtle text-success">
+
+                                        <i class="bi bi-shield-check me-1"></i>
+
+                                        Safe
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <a
+                                    href="{{ url_for(
+                                        'transaction_details',
+                                        transaction_id=transaction.get(
+                                            'display_id',
+                                            transaction.get(
+                                                'id'
+                                            )
+                                        )
+                                    ) }}"
+                                    class="btn btn-sm btn-outline-primary"
+                                >
+
+                                    <i class="bi bi-search me-1"></i>
+
+                                    Analyze
+
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="text-center py-5"
+                            >
+
+                                <i
+                                    class="bi bi-inbox text-muted"
+                                    style="font-size:3rem;"
+                                ></i>
+
+                                <h5 class="fw-bold mt-3">
+                                    No transactions available
+                                </h5>
+
+                                <p class="text-muted">
+                                    Upload a CSV dataset from Bulk Analysis
+                                    to view transaction results here.
+                                </p>
+
+                                <a
+                                    href="{{ url_for('bulk_analysis') }}"
+                                    class="btn btn-primary"
+                                >
+
+                                    <i class="bi bi-upload me-1"></i>
+
+                                    Upload Dataset
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endif %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- ======================================================== -->
+<!-- CHART.JS -->
+<!-- ======================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const canvas =
+            document.getElementById(
+                "fraudChart"
+            );
+
+
+        if (!canvas) {
+            return;
+        }
+
+
+        const total =
+            Number(
+                {{ total|default(0)|int }}
+            );
+
+
+        const safe =
+            Number(
+                {{ safe|default(0)|int }}
+            );
+
+
+        const risky =
+            Number(
+                {{ risky|default(0)|int }}
+            );
+
+
+        const fraud =
+            Number(
+                {{ fraud|default(0)|int }}
+            );
+
+
+        /*
+         * Never allow [0,0,0].
+         *
+         * Chart.js has nothing to draw
+         * when all values are zero.
+         *
+         * So before analysis we display
+         * a neutral ring instead.
+         */
+
+        const hasRealData =
+            total > 0 &&
+            (
+                safe > 0 ||
+                risky > 0 ||
+                fraud > 0
+            );
+
+
+        const labels =
+            hasRealData
+
+                ? [
+                    "Safe",
+                    "Risky",
+                    "Fraud"
+                ]
+
+                : [
+                    "Awaiting Analysis"
+                ];
+
+
+        const values =
+            hasRealData
+
+                ? [
+                    safe,
+                    risky,
+                    fraud
+                ]
+
+                : [
+                    1
+                ];
+
+
+        const background =
+            hasRealData
+
+                ? [
+                    "rgba(25,135,84,.88)",
+                    "rgba(255,193,7,.88)",
+                    "rgba(220,53,69,.88)"
+                ]
+
+                : [
+                    "rgba(108,117,125,.16)"
+                ];
+
+
+        new Chart(
+            canvas,
+            {
+
+                type: "doughnut",
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+
+                            data: values,
+
+                            backgroundColor: background,
+
+                            borderWidth: 0,
+
+                            spacing:
+                                hasRealData
+                                    ? 4
+                                    : 0,
+
+                            hoverOffset:
+                                hasRealData
+                                    ? 8
+                                    : 0
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: "68%",
+
+
+                    animation: {
+
+                        duration: 900,
+
+                        animateRotate: true,
+
+                        animateScale: true
+
+                    },
+
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom",
+
+                            labels: {
+
+                                usePointStyle: true,
+
+                                padding: 20,
+
+                                boxWidth: 10,
+
+                                font: {
+
+                                    size: 12,
+
+                                    weight: "600"
+
+                                }
+
+                            }
+
+                        },
+
+
+                        tooltip: {
+
+                            enabled:
+                                hasRealData,
+
+                            callbacks: {
+
+                                label:
+                                    function(context) {
+
+                                        if (
+                                            !hasRealData
+                                        ) {
+
+                                            return (
+                                                " Analysis pending"
+                                            );
+
+                                        }
+
+
+                                        const value =
+                                            Number(
+                                                context.raw || 0
+                                            );
+
+
+                                        const percentage =
+                                            total > 0
+
+                                                ? (
+                                                    value /
+                                                    total *
+                                                    100
+                                                ).toFixed(2)
+
+                                                : "0.00";
+
+
+                                        return (
+                                            " "
+                                            + context.label
+                                            + ": "
+                                            + value.toLocaleString()
+                                            + " ("
+                                            + percentage
+                                            + "%)"
+                                        );
+
+                                    }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}

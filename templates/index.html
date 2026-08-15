@@ -1,0 +1,785 @@
+{% extends "base.html" %}
+
+{% block title %}AI Fraud Detection System{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero-section py-5">
+
+    <div class="row align-items-center g-5">
+
+        <!-- LEFT CONTENT -->
+        <div class="col-lg-7">
+
+            <div class="hero-badge mb-4">
+                <i class="bi bi-shield-check me-2"></i>
+                AI Powered Security Platform
+            </div>
+
+            <h1 class="hero-title fw-bold mb-4">
+                Detect Financial Fraud
+                <span>With Artificial Intelligence</span>
+            </h1>
+
+            <p class="hero-description mb-4">
+                An intelligent financial security platform that uses
+                Machine Learning to analyze transactions, identify
+                suspicious activities, and provide fast and reliable
+                fraud predictions.
+            </p>
+
+            <!-- BUTTONS -->
+            <div class="d-flex flex-wrap gap-3">
+
+                <a href="{{ url_for('register') }}"
+                   class="btn btn-primary btn-lg px-4 py-3">
+
+                    <i class="bi bi-rocket-takeoff me-2"></i>
+                    Get Started
+
+                </a>
+
+                <a href="{{ url_for('login') }}"
+                   class="btn btn-outline-light btn-lg px-4 py-3">
+
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT VISUAL -->
+        <div class="col-lg-5">
+
+            <div class="hero-security-card">
+
+                <div class="security-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+
+                <h3 class="mt-4 mb-2">
+                    Intelligent Protection
+                </h3>
+
+                <p class="mb-4">
+                    Detect suspicious financial activity
+                    before it becomes a serious threat.
+                </p>
+
+
+                <!-- SECURITY STATUS -->
+                <div class="security-status">
+
+                    <div class="status-icon">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>System Protected</strong>
+                        <small>
+                            AI monitoring is active
+                        </small>
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+
+                <!-- AI STATUS -->
+                <div class="security-status">
+
+                    <div class="status-icon">
+                        <i class="bi bi-cpu-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>AI Analysis</strong>
+                        <small>
+                            Machine Learning enabled
+                        </small>
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+
+                <!-- TRANSACTION STATUS -->
+                <div class="security-status">
+
+                    <div class="status-icon">
+                        <i class="bi bi-activity"></i>
+                    </div>
+
+                    <div>
+                        <strong>Live Monitoring</strong>
+                        <small>
+                            Transactions being analyzed
+                        </small>
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES SECTION -->
+<section class="features-section py-5">
+
+    <div class="text-center mb-5">
+
+        <div class="section-label">
+            SMART SECURITY
+        </div>
+
+        <h2 class="fw-bold mt-2">
+            Powerful Fraud Detection Features
+        </h2>
+
+        <p class="section-description">
+            Everything you need to analyze financial transactions
+            and identify potential fraud.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- FEATURE 1 -->
+        <div class="col-md-4">
+
+            <div class="feature-card h-100">
+
+                <div class="feature-icon ai-icon">
+                    <i class="bi bi-cpu-fill"></i>
+                </div>
+
+                <h4 class="mt-4">
+                    AI Prediction
+                </h4>
+
+                <p>
+                    Machine Learning analyzes transaction
+                    patterns and identifies potentially
+                    fraudulent activities.
+                </p>
+
+                <div class="feature-link">
+                    Intelligent Analysis
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FEATURE 2 -->
+        <div class="col-md-4">
+
+            <div class="feature-card h-100">
+
+                <div class="feature-icon upload-icon">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                </div>
+
+                <h4 class="mt-4">
+                    Dataset Analysis
+                </h4>
+
+                <p>
+                    Upload transaction CSV datasets and
+                    receive automated fraud analysis
+                    with useful insights.
+                </p>
+
+                <div class="feature-link">
+                    Fast Processing
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FEATURE 3 -->
+        <div class="col-md-4">
+
+            <div class="feature-card h-100">
+
+                <div class="feature-icon analytics-icon">
+                    <i class="bi bi-bar-chart-fill"></i>
+                </div>
+
+                <h4 class="mt-4">
+                    Smart Analytics
+                </h4>
+
+                <p>
+                    View fraud statistics, transaction
+                    summaries, risk levels and analytical
+                    reports in one place.
+                </p>
+
+                <div class="feature-link">
+                    Clear Insights
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="how-section py-5">
+
+    <div class="text-center mb-5">
+
+        <div class="section-label">
+            SIMPLE PROCESS
+        </div>
+
+        <h2 class="fw-bold mt-2">
+            How Our System Works
+        </h2>
+
+        <p class="section-description">
+            A simple three-step process for intelligent
+            financial fraud detection.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- STEP 1 -->
+        <div class="col-md-4">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <div class="process-icon">
+                    <i class="bi bi-upload"></i>
+                </div>
+
+                <h4>
+                    Upload Data
+                </h4>
+
+                <p>
+                    Upload your transaction dataset
+                    in CSV format for analysis.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+        <div class="col-md-4">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <div class="process-icon">
+                    <i class="bi bi-cpu"></i>
+                </div>
+
+                <h4>
+                    AI Analysis
+                </h4>
+
+                <p>
+                    Our Machine Learning model analyzes
+                    transaction characteristics.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 3 -->
+        <div class="col-md-4">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <div class="process-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <h4>
+                    Get Results
+                </h4>
+
+                <p>
+                    View fraud predictions, probability
+                    scores and detailed results.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="cta-section text-center my-5">
+
+    <div class="cta-card">
+
+        <div class="cta-icon mb-3">
+            <i class="bi bi-shield-fill-check"></i>
+        </div>
+
+        <h2 class="fw-bold">
+            Ready to Detect Financial Fraud?
+        </h2>
+
+        <p class="mb-4">
+            Start analyzing transactions with
+            AI-powered fraud detection.
+        </p>
+
+        <a href="{{ url_for('register') }}"
+           class="btn btn-primary btn-lg px-5 py-3">
+
+            <i class="bi bi-rocket-takeoff me-2"></i>
+            Start Detection
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE-SPECIFIC HOME CSS -->
+<style>
+
+.hero-section {
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    background: rgba(77, 171, 247, 0.12);
+
+    border: 1px solid rgba(77, 171, 247, 0.25);
+
+    color: #a9dcff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.hero-title {
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+}
+
+.hero-title span {
+    display: block;
+
+    color: #63b8ff;
+}
+
+.hero-description {
+    max-width: 680px;
+
+    color: #dce5ee;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* HERO SECURITY CARD */
+
+.hero-security-card {
+    padding: 38px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #50677d,
+            #465d73
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    box-shadow:
+        0 18px 40px rgba(20, 35, 50, 0.18);
+}
+
+.security-icon {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: rgba(77, 171, 247, 0.16);
+
+    border: 1px solid rgba(125, 211, 252, 0.25);
+
+    color: #75c8ff;
+
+    font-size: 34px;
+}
+
+.hero-security-card h3 {
+    color: #ffffff;
+}
+
+.hero-security-card > p {
+    color: #cbd8e4;
+}
+
+
+/* SECURITY STATUS */
+
+.security-status {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 14px;
+
+    margin-top: 12px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(77, 171, 247, 0.13);
+
+    color: #70c5ff;
+}
+
+.security-status div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+.security-status strong {
+    color: #f5f8fb;
+
+    font-size: 14px;
+}
+
+.security-status small {
+    color: #b9c8d6;
+
+    margin-top: 2px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    margin-left: auto;
+
+    border-radius: 50%;
+
+    background: #4ade80;
+
+    box-shadow:
+        0 0 10px rgba(74, 222, 128, 0.45);
+}
+
+
+/* SECTION */
+
+.section-label {
+    color: #6ec3ff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.section-description {
+    color: #c5d2de;
+
+    max-width: 600px;
+
+    margin: 10px auto 0;
+}
+
+
+/* FEATURE CARDS */
+
+.feature-card {
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background:
+        #4b6278;
+
+    border: 1px solid rgba(255, 255, 255, 0.11);
+
+    box-shadow:
+        0 10px 25px rgba(20, 35, 50, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(125, 211, 252, 0.25);
+
+    box-shadow:
+        0 18px 35px rgba(20, 35, 50, 0.17);
+}
+
+.feature-card h4 {
+    color: #f8fafc;
+}
+
+.feature-card p {
+    color: #cbd7e2;
+
+    line-height: 1.7;
+}
+
+.feature-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 25px;
+}
+
+.ai-icon {
+    color: #6fc5ff;
+    background: rgba(77, 171, 247, 0.13);
+}
+
+.upload-icon {
+    color: #5ee0a7;
+    background: rgba(52, 211, 153, 0.12);
+}
+
+.analytics-icon {
+    color: #c4a7ff;
+    background: rgba(167, 139, 250, 0.12);
+}
+
+.feature-link {
+    color: #75c8ff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-top: 20px;
+}
+
+
+/* PROCESS */
+
+.process-card {
+    position: relative;
+
+    padding: 30px;
+
+    min-height: 250px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background: #465d73;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow:
+        0 10px 25px rgba(20, 35, 50, 0.10);
+}
+
+.process-number {
+    position: absolute;
+
+    top: 18px;
+    right: 22px;
+
+    color: rgba(255, 255, 255, 0.12);
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+.process-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px auto 20px;
+
+    border-radius: 17px;
+
+    background: rgba(77, 171, 247, 0.13);
+
+    color: #70c5ff;
+
+    font-size: 26px;
+}
+
+.process-card h4 {
+    color: #ffffff;
+}
+
+.process-card p {
+    color: #c6d3df;
+
+    line-height: 1.7;
+}
+
+
+/* CTA */
+
+.cta-card {
+    padding: 55px 30px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4c6680,
+            #536d85
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    box-shadow:
+        0 15px 35px rgba(20, 35, 50, 0.15);
+}
+
+.cta-icon {
+    font-size: 42px;
+
+    color: #72c8ff;
+}
+
+.cta-card h2 {
+    color: #ffffff;
+}
+
+.cta-card p {
+    color: #d0dce7;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        min-height: auto;
+        padding-top: 30px !important;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .hero-security-card {
+        padding: 25px;
+    }
+
+}
+
+</style>
+
+{% endblock %}

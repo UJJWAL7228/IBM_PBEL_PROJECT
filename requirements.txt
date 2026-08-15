@@ -1,0 +1,8 @@
+Flask
+pandas
+numpy
+scikit-learn
+joblib
+openpyxl
+reportlab
+google-generativeai

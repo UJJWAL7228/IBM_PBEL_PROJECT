@@ -1,0 +1,1326 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics | AI Fraud Detection{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* ============================================================
+   ANALYTICS PAGE
+   ============================================================ */
+
+.analytics-page {
+    min-height: 100vh;
+}
+
+
+/* ============================================================
+   STAT CARDS
+============================================================ */
+
+.analytics-stat-card {
+    border: 0;
+    border-radius: 18px;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.analytics-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08) !important;
+}
+
+
+/* ============================================================
+   MAIN CARDS
+============================================================ */
+
+.analytics-card {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   INSIGHT CARDS
+============================================================ */
+
+.analytics-insight-card {
+    border-radius: 16px;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.analytics-insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,.07);
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+.analytics-table-card {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.analytics-table th {
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.analytics-table td {
+    vertical-align: middle;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.analytics-empty-icon {
+    font-size: 3rem;
+}
+
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+
+.analytics-progress {
+    height: 8px;
+    border-radius: 20px;
+}
+
+</style>
+
+
+<div class="container-fluid py-4 analytics-page">
+
+
+    <!-- ====================================================== -->
+    <!-- HEADER -->
+    <!-- ====================================================== -->
+
+    <div class="mb-4">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    Analytics
+                </h2>
+
+                <p class="text-muted mb-0">
+                    View fraud statistics, transaction analysis
+                    and AI-generated insights.
+                </p>
+
+            </div>
+
+
+            {% if total|int > 0 %}
+
+                <span class="badge bg-success-subtle text-success px-3 py-2">
+
+                    <i class="bi bi-activity me-1"></i>
+
+                    ANALYSIS AVAILABLE
+
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-secondary-subtle text-secondary px-3 py-2">
+
+                    <i class="bi bi-hourglass-split me-1"></i>
+
+                    AWAITING ANALYSIS
+
+                </span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- STATISTICS -->
+    <!-- ====================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- TOTAL -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card analytics-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <small class="text-muted fw-semibold">
+                                TOTAL TRANSACTIONS
+                            </small>
+
+                            <h2 class="fw-bold mt-2 mb-1">
+
+                                {{ "{:,}".format(
+                                    total|default(0)|int
+                                ) }}
+
+                            </h2>
+
+                            <small class="text-muted">
+                                Transactions analyzed
+                            </small>
+
+                        </div>
+
+                        <div class="fs-2 text-primary">
+                            <i class="bi bi-database-fill"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAFE -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card analytics-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <small class="text-muted fw-semibold">
+                                SAFE
+                            </small>
+
+                            <h2 class="fw-bold text-success mt-2 mb-1">
+
+                                {{ "{:,}".format(
+                                    safe|default(0)|int
+                                ) }}
+
+                            </h2>
+
+                            <small class="text-success">
+
+                                <i class="bi bi-shield-check me-1"></i>
+
+                                Low risk activity
+
+                            </small>
+
+                        </div>
+
+                        <div class="fs-2 text-success">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RISKY -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card analytics-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <small class="text-muted fw-semibold">
+                                RISKY
+                            </small>
+
+                            <h2 class="fw-bold text-warning mt-2 mb-1">
+
+                                {{ "{:,}".format(
+                                    risky|default(0)|int
+                                ) }}
+
+                            </h2>
+
+                            <small class="text-warning">
+
+                                <i class="bi bi-exclamation-triangle me-1"></i>
+
+                                Requires attention
+
+                            </small>
+
+                        </div>
+
+                        <div class="fs-2 text-warning">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FRAUD -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <div class="card analytics-stat-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <small class="text-muted fw-semibold">
+                                FRAUD DETECTED
+                            </small>
+
+                            <h2 class="fw-bold text-danger mt-2 mb-1">
+
+                                {{ "{:,}".format(
+                                    fraud|default(0)|int
+                                ) }}
+
+                            </h2>
+
+                            <small class="text-danger">
+
+                                <i class="bi bi-shield-x me-1"></i>
+
+                                High risk activity
+
+                            </small>
+
+                        </div>
+
+                        <div class="fs-2 text-danger">
+                            <i class="bi bi-shield-x"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- FRAUD RISK OVERVIEW -->
+    <!-- ====================================================== -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- FRAUD RATE -->
+
+        <div class="col-lg-4">
+
+            <div class="card analytics-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+
+                            <h5 class="fw-bold mb-1">
+                                Fraud Rate
+                            </h5>
+
+                            <small class="text-muted">
+                                Percentage of detected fraud
+                            </small>
+
+                        </div>
+
+                        <i class="bi bi-pie-chart-fill text-danger fs-3"></i>
+
+                    </div>
+
+
+                    <div class="d-flex align-items-end gap-2">
+
+                        <h1 class="fw-bold text-danger mb-0">
+
+                            {{ fraud_percentage|default(0) }}%
+
+                        </h1>
+
+                    </div>
+
+
+                    <div class="progress analytics-progress mt-3">
+
+                        <div
+                            class="progress-bar bg-danger"
+                            role="progressbar"
+                            style="width: {{ fraud_percentage|default(0) }}%;"
+                            aria-valuenow="{{ fraud_percentage|default(0) }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                        ></div>
+
+                    </div>
+
+
+                    <small class="text-muted d-block mt-2">
+
+                        {{ "{:,}".format(
+                            fraud|default(0)|int
+                        ) }}
+
+                        fraudulent transactions detected.
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAFE RATE -->
+
+        <div class="col-lg-4">
+
+            <div class="card analytics-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+
+                            <h5 class="fw-bold mb-1">
+                                Safe Transactions
+                            </h5>
+
+                            <small class="text-muted">
+                                Low-risk transaction activity
+                            </small>
+
+                        </div>
+
+                        <i class="bi bi-shield-check text-success fs-3"></i>
+
+                    </div>
+
+
+                    <h1 class="fw-bold text-success mb-0">
+
+                        {% if total|int > 0 %}
+
+                            {{ "%.1f"|format(
+                                (safe|int / total|int) * 100
+                            ) }}%
+
+                        {% else %}
+
+                            0.0%
+
+                        {% endif %}
+
+                    </h1>
+
+
+                    <div class="progress analytics-progress mt-3">
+
+                        <div
+                            class="progress-bar bg-success"
+                            role="progressbar"
+                            style="
+                                width:
+                                {% if total|int > 0 %}
+                                    {{ (safe|int / total|int) * 100 }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            "
+                        ></div>
+
+                    </div>
+
+
+                    <small class="text-muted d-block mt-2">
+
+                        {{ "{:,}".format(
+                            safe|default(0)|int
+                        ) }}
+
+                        safe transactions.
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RISKY RATE -->
+
+        <div class="col-lg-4">
+
+            <div class="card analytics-card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+
+                            <h5 class="fw-bold mb-1">
+                                Risky Transactions
+                            </h5>
+
+                            <small class="text-muted">
+                                Transactions requiring attention
+                            </small>
+
+                        </div>
+
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-3"></i>
+
+                    </div>
+
+
+                    <h1 class="fw-bold text-warning mb-0">
+
+                        {% if total|int > 0 %}
+
+                            {{ "%.1f"|format(
+                                (risky|int / total|int) * 100
+                            ) }}%
+
+                        {% else %}
+
+                            0.0%
+
+                        {% endif %}
+
+                    </h1>
+
+
+                    <div class="progress analytics-progress mt-3">
+
+                        <div
+                            class="progress-bar bg-warning"
+                            role="progressbar"
+                            style="
+                                width:
+                                {% if total|int > 0 %}
+                                    {{ (risky|int / total|int) * 100 }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            "
+                        ></div>
+
+                    </div>
+
+
+                    <small class="text-muted d-block mt-2">
+
+                        {{ "{:,}".format(
+                            risky|default(0)|int
+                        ) }}
+
+                        risky transactions.
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- AI INSIGHTS -->
+    <!-- ====================================================== -->
+
+    <div class="card analytics-card shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h4 class="fw-bold mb-1">
+                        AI Risk Insights
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Summary generated from the analyzed transactions.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-stars text-primary fs-2"></i>
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+                <!-- SAFE INSIGHT -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="analytics-insight-card p-4 h-100"
+                        style="
+                            background:rgba(25,135,84,.08);
+                            border:1px solid rgba(25,135,84,.14);
+                        "
+                    >
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+
+                            <i class="bi bi-shield-check text-success fs-4"></i>
+
+                            <h6 class="fw-bold mb-0">
+                                Safe Activity
+                            </h6>
+
+                        </div>
+
+
+                        <h4 class="fw-bold text-success mb-1">
+
+                            {{ "{:,}".format(
+                                safe|default(0)|int
+                            ) }}
+
+                        </h4>
+
+
+                        <p class="text-muted small mb-0">
+
+                            Transactions classified as
+                            low-risk or legitimate activity.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RISKY INSIGHT -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="analytics-insight-card p-4 h-100"
+                        style="
+                            background:rgba(255,193,7,.10);
+                            border:1px solid rgba(255,193,7,.16);
+                        "
+                    >
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+
+                            <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
+
+                            <h6 class="fw-bold mb-0">
+                                Risky Activity
+                            </h6>
+
+                        </div>
+
+
+                        <h4 class="fw-bold text-warning mb-1">
+
+                            {{ "{:,}".format(
+                                risky|default(0)|int
+                            ) }}
+
+                        </h4>
+
+
+                        <p class="text-muted small mb-0">
+
+                            Transactions that require
+                            additional attention or review.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FRAUD INSIGHT -->
+
+                <div class="col-md-4">
+
+                    <div
+                        class="analytics-insight-card p-4 h-100"
+                        style="
+                            background:rgba(220,53,69,.08);
+                            border:1px solid rgba(220,53,69,.14);
+                        "
+                    >
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+
+                            <i class="bi bi-shield-x text-danger fs-4"></i>
+
+                            <h6 class="fw-bold mb-0">
+                                Fraud Activity
+                            </h6>
+
+                        </div>
+
+
+                        <h4 class="fw-bold text-danger mb-1">
+
+                            {{ "{:,}".format(
+                                fraud|default(0)|int
+                            ) }}
+
+                        </h4>
+
+
+                        <p class="text-muted small mb-0">
+
+                            Transactions identified as
+                            potentially fraudulent.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- HIGH VALUE TRANSACTIONS -->
+    <!-- ====================================================== -->
+
+    <div class="card analytics-table-card shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h4 class="fw-bold mb-1">
+                        High-Value Transactions
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Transactions with an amount of ₹50,000 or more.
+                    </p>
+
+                </div>
+
+
+                <span class="badge bg-danger-subtle text-danger">
+
+                    <i class="bi bi-currency-rupee me-1"></i>
+
+                    HIGH VALUE
+
+                </span>
+
+            </div>
+
+
+            {% if high_value %}
+
+
+                <div class="table-responsive">
+
+                    <table class="table analytics-table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Transaction ID
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Merchant
+                                </th>
+
+                                <th>
+                                    Risk
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for transaction in high_value[:10] %}
+
+                                <tr>
+
+
+                                    <!-- ID -->
+
+                                    <td>
+
+                                        <strong class="text-primary">
+
+                                            {{ transaction.get(
+                                                "display_id",
+                                                transaction.get(
+                                                    "id",
+                                                    transaction.get(
+                                                        "transaction_id",
+                                                        "N/A"
+                                                    )
+                                                )
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- CUSTOMER -->
+
+                                    <td>
+
+                                        {{ transaction.get(
+                                            "display_customer",
+                                            transaction.get(
+                                                "customer_name",
+                                                transaction.get(
+                                                    "customer",
+                                                    "Unknown Customer"
+                                                )
+                                            )
+                                        ) }}
+
+                                    </td>
+
+
+                                    <!-- AMOUNT -->
+
+                                    <td>
+
+                                        <strong>
+
+                                            ₹{{ "{:,.2f}".format(
+
+                                                transaction.get(
+                                                    "display_amount",
+                                                    transaction.get(
+                                                        "amount",
+                                                        transaction.get(
+                                                            "Amount",
+                                                            0
+                                                        )
+                                                    )
+                                                )|float
+
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- MERCHANT -->
+
+                                    <td>
+
+                                        {{ transaction.get(
+                                            "display_merchant",
+                                            transaction.get(
+                                                "merchant",
+                                                transaction.get(
+                                                    "Merchant",
+                                                    "Unknown Merchant"
+                                                )
+                                            )
+                                        ) }}
+
+                                    </td>
+
+
+                                    <!-- RISK -->
+
+                                    <td>
+
+                                        {% set prediction = (
+
+                                            transaction.get(
+                                                "display_classification",
+                                                transaction.get(
+                                                    "prediction",
+                                                    transaction.get(
+                                                        "classification",
+                                                        "safe"
+                                                    )
+                                                )
+                                            )
+
+                                            |string
+                                            |lower
+
+                                        ) %}
+
+
+                                        {% if "fraud" in prediction %}
+
+                                            <span class="badge bg-danger-subtle text-danger">
+
+                                                <i class="bi bi-shield-x me-1"></i>
+
+                                                Fraud Risk
+
+                                            </span>
+
+
+                                        {% elif "risky" in prediction
+                                            or "risk" in prediction
+                                            or "suspicious" in prediction %}
+
+                                            <span class="badge bg-warning-subtle text-warning">
+
+                                                <i class="bi bi-exclamation-triangle me-1"></i>
+
+                                                Risky
+
+                                            </span>
+
+
+                                        {% else %}
+
+                                            <span class="badge bg-success-subtle text-success">
+
+                                                <i class="bi bi-shield-check me-1"></i>
+
+                                                Safe
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="text-center py-5">
+
+                    <i class="bi bi-check-circle text-success analytics-empty-icon"></i>
+
+                    <h5 class="fw-bold mt-3">
+                        No High-Value Transactions
+                    </h5>
+
+                    <p class="text-muted mb-0">
+
+                        No analyzed transaction with an amount
+                        of ₹50,000 or more was found.
+
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- ALL ANALYZED TRANSACTIONS -->
+    <!-- ====================================================== -->
+
+    <div class="card analytics-table-card shadow-sm">
+
+        <div class="card-body p-4">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h4 class="fw-bold mb-1">
+                        Analyzed Transactions
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Review transactions processed by the AI fraud detection system.
+                    </p>
+
+                </div>
+
+
+                <span class="badge bg-primary-subtle text-primary">
+
+                    <i class="bi bi-bar-chart-fill me-1"></i>
+
+                    {{ "{:,}".format(
+                        total|default(0)|int
+                    ) }}
+
+                    RECORDS
+
+                </span>
+
+            </div>
+
+
+            {% if transactions %}
+
+
+                <div class="table-responsive">
+
+                    <table class="table analytics-table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Transaction ID
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Merchant
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Risk
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for transaction in transactions[-20:] %}
+
+                                <tr>
+
+
+                                    <!-- ID -->
+
+                                    <td>
+
+                                        <strong class="text-primary">
+
+                                            {{ transaction.get(
+                                                "display_id",
+                                                transaction.get(
+                                                    "id",
+                                                    transaction.get(
+                                                        "transaction_id",
+                                                        "N/A"
+                                                    )
+                                                )
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- CUSTOMER -->
+
+                                    <td>
+
+                                        {{ transaction.get(
+                                            "display_customer",
+                                            transaction.get(
+                                                "customer_name",
+                                                transaction.get(
+                                                    "customer",
+                                                    "Unknown Customer"
+                                                )
+                                            )
+                                        ) }}
+
+                                    </td>
+
+
+                                    <!-- AMOUNT -->
+
+                                    <td>
+
+                                        <strong>
+
+                                            ₹{{ "{:,.2f}".format(
+
+                                                transaction.get(
+                                                    "display_amount",
+                                                    transaction.get(
+                                                        "amount",
+                                                        transaction.get(
+                                                            "Amount",
+                                                            0
+                                                        )
+                                                    )
+                                                )|float
+
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- MERCHANT -->
+
+                                    <td>
+
+                                        {{ transaction.get(
+                                            "display_merchant",
+                                            transaction.get(
+                                                "merchant",
+                                                transaction.get(
+                                                    "Merchant",
+                                                    "Unknown Merchant"
+                                                )
+                                            )
+                                        ) }}
+
+                                    </td>
+
+
+                                    <!-- TYPE -->
+
+                                    <td>
+
+                                        <span class="badge bg-light text-dark">
+
+                                            {{ transaction.get(
+                                                "display_type",
+                                                transaction.get(
+                                                    "type",
+                                                    transaction.get(
+                                                        "TransactionType",
+                                                        "Transaction"
+                                                    )
+                                                )
+                                            ) }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- RISK -->
+
+                                    <td>
+
+                                        {% set prediction = (
+
+                                            transaction.get(
+                                                "display_classification",
+                                                transaction.get(
+                                                    "prediction",
+                                                    transaction.get(
+                                                        "classification",
+                                                        "safe"
+                                                    )
+                                                )
+                                            )
+
+                                            |string
+                                            |lower
+
+                                        ) %}
+
+
+                                        {% if "fraud" in prediction %}
+
+                                            <span class="badge bg-danger-subtle text-danger">
+
+                                                <i class="bi bi-shield-x me-1"></i>
+
+                                                Fraud Risk
+
+                                            </span>
+
+
+                                        {% elif "risky" in prediction
+                                            or "risk" in prediction
+                                            or "suspicious" in prediction %}
+
+                                            <span class="badge bg-warning-subtle text-warning">
+
+                                                <i class="bi bi-exclamation-triangle me-1"></i>
+
+                                                Risky
+
+                                            </span>
+
+
+                                        {% else %}
+
+                                            <span class="badge bg-success-subtle text-success">
+
+                                                <i class="bi bi-shield-check me-1"></i>
+
+                                                Safe
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="text-center py-5">
+
+                    <i class="bi bi-bar-chart text-muted analytics-empty-icon"></i>
+
+                    <h5 class="fw-bold mt-3">
+                        No Transactions Available
+                    </h5>
+
+                    <p class="text-muted mb-3">
+
+                        Upload a CSV dataset from Bulk Analysis
+                        to generate analytics.
+
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('bulk_analysis') }}"
+                        class="btn btn-primary"
+                    >
+
+                        <i class="bi bi-upload me-1"></i>
+
+                        Open Bulk Analysis
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
