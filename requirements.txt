@@ -7,3 +7,5 @@ openpyxl
 reportlab
 google-generativeai
 python-dotenv
+psycopg[binary]
+psycopg2-binary
