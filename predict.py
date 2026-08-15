@@ -1377,184 +1377,116 @@ def safe_progress_callback(
 # ============================================================
 
 def process_csv(
-
     filepath,
-
     progress_callback=None
-
 ):
 
     if not filepath:
+        raise ValueError("No CSV file was provided.")
 
-        raise ValueError(
-            "No CSV file was provided."
-        )
+    filepath = os.fspath(filepath)
 
-
-    if not os.path.isfile(
-        filepath
-    ):
-
+    if not os.path.isfile(filepath):
         raise FileNotFoundError(
             f"CSV file not found: {filepath}"
         )
 
-
     # ========================================================
-    # DETERMINE TOTAL ROWS
+    # FAST FILE SIZE / ROW ESTIMATE
     #
-    # This is only used for progress.
-    # We count physical lines without loading the file.
+    # We avoid Python's:
+    #     sum(1 for _ in csv_file)
+    #
+    # because it becomes noticeably slower on large files.
     # ========================================================
 
     total_rows = 0
 
-
     try:
+        file_size = os.path.getsize(filepath)
 
-        with open(
+        # Fast binary newline counting
+        with open(filepath, "rb") as csv_file:
+            while True:
+                data = csv_file.read(1024 * 1024)
 
-            filepath,
+                if not data:
+                    break
 
-            "rb"
+                total_rows += data.count(b"\n")
 
-        ) as csv_file:
-
-            total_rows = sum(
-
-                1
-
-                for _ in csv_file
-
-            )
-
-
-        # Remove header line
         if total_rows > 0:
-
             total_rows -= 1
 
-
     except Exception:
-
         total_rows = 0
 
-
-    # ========================================================
-    # EMPTY FILE
-    # ========================================================
-
     if total_rows <= 0:
-
-        raise ValueError(
-            "CSV file is empty."
-        )
-
+        raise ValueError("CSV file is empty.")
 
     safe_progress_callback(
-
         progress_callback,
-
         3,
-
         0,
-
         total_rows,
-
         "Opening transaction dataset..."
-
     )
 
-
     # ========================================================
-    # CHUNK SIZE
+    # LARGER CHUNKS
     #
-    # 5,000 rows per chunk gives a good balance between:
-    #
-    # speed
-    # memory
-    # progress
+    # 10,000 gives much better performance for 30k/50k files
+    # while still keeping memory reasonable.
     # ========================================================
 
-    CHUNK_SIZE = 5000
-
+    CHUNK_SIZE = 10000
 
     transactions = []
-
-    append_transaction = (
-        transactions.append
-    )
-
+    append_transaction = transactions.append
 
     processed_total = 0
 
     resolved = None
-
     lookup = None
 
-
     # ========================================================
-    # READ CSV CHUNKS
+    # READ CSV
     # ========================================================
 
     try:
 
         chunk_iterator = pd.read_csv(
-
             filepath,
-
             chunksize=CHUNK_SIZE,
-
             low_memory=False,
-
             encoding="utf-8-sig"
-
         )
 
     except UnicodeDecodeError:
 
         chunk_iterator = pd.read_csv(
-
             filepath,
-
             chunksize=CHUNK_SIZE,
-
             low_memory=False,
-
             encoding="latin-1"
-
         )
 
     except Exception as error:
 
         raise ValueError(
-
             f"Unable to read CSV: {error}"
-
         )
 
-
     first_chunk = True
-
 
     # ========================================================
     # CHUNK LOOP
     # ========================================================
 
-    for chunk_number, df_chunk in enumerate(
-        chunk_iterator,
-        start=1
-    ):
+    for df_chunk in chunk_iterator:
 
-        if df_chunk is None:
-
+        if df_chunk is None or df_chunk.empty:
             continue
-
-
-        if df_chunk.empty:
-
-            continue
-
 
         # ====================================================
         # RESOLVE COLUMNS ONLY ONCE
@@ -1562,208 +1494,180 @@ def process_csv(
 
         if first_chunk:
 
-            lookup, resolved = (
-                build_resolved_lookup(
-                    df_chunk.columns
-                )
+            lookup, resolved = build_resolved_lookup(
+                df_chunk.columns
             )
 
-
-            if resolved.get(
-                "amount"
-            ) is None:
+            if resolved.get("amount") is None:
 
                 raise ValueError(
-
                     "CSV must contain an Amount, "
                     "Amount_INR or TransactionAmount column."
-
                 )
-
 
             first_chunk = False
 
-
             safe_progress_callback(
-
                 progress_callback,
-
                 7,
-
                 0,
-
                 total_rows,
-
                 "CSV loaded. Preparing transaction columns..."
-
             )
 
+        # ====================================================
+        # LOCAL REFERENCES
+        #
+        # Avoid repeatedly looking up dictionary keys inside
+        # the 50,000-row loop.
+        # ====================================================
+
+        amount_col = resolved["amount"]
+        previous_col = resolved["previous_amount"]
+        frequency_col = resolved["transactions_last_24h"]
+        unusual_col = resolved["unusual_location"]
+        device_col = resolved["device_type"]
+        location_col = resolved["location"]
+        payment_col = resolved["payment_method"]
+        channel_col = resolved["app_channel"]
+
+        fraud_columns = resolved["fraud_label_columns"]
 
         # ====================================================
-        # CONVERT CURRENT CHUNK ONLY
+        # CONVERT CHUNK
         # ====================================================
 
         records = df_chunk.to_dict(
             orient="records"
         )
 
-
-        # Release DataFrame immediately.
+        # Release DataFrame as early as possible
         del df_chunk
 
-
         # ====================================================
-        # PROCESS CHUNK
+        # PROCESS ROWS
         # ====================================================
 
         for row in records:
 
             transaction = normalize_transaction(
-
                 row,
-
                 lookup,
-
                 resolved,
-
                 processed_total
-
             )
 
+            # =================================================
+            # EXISTING FRAUD LABEL
+            #
+            # Keep EXACT existing mapping.
+            # =================================================
 
-            # -----------------------------------------------
-            # Existing label?
-            # -----------------------------------------------
+            existing_label = None
 
-            existing_label = (
-                get_existing_fraud_label(
-                    row,
-                    resolved
-                )
-            )
+            if fraud_columns:
 
+                for column in fraud_columns:
 
-            # -----------------------------------------------
-            # Explicit fraud
-            # -----------------------------------------------
+                    value = row.get(column)
+
+                    if value is None:
+                        continue
+
+                    try:
+                        if pd.isna(value):
+                            continue
+                    except (
+                        TypeError,
+                        ValueError
+                    ):
+                        pass
+
+                    text = str(value).strip().lower()
+
+                    if text in FRAUD_VALUES:
+
+                        existing_label = "fraud"
+                        break
+
+                    if text in SAFE_VALUES:
+
+                        existing_label = "safe"
+                        break
+
+            # =================================================
+            # EXPLICIT FRAUD
+            # =================================================
 
             if existing_label == "fraud":
 
                 details = (
-
                     "CSV fraud label indicates "
                     "this transaction is fraudulent."
-
                 )
 
-
                 analysis = {
-
-                    "prediction":
-                        "Fraud",
-
-                    "risk_level":
-                        "High",
-
-                    "status":
-                        "Fraud Detected",
-
-                    "fraud_probability":
-                        0.95,
-
-                    "fraud_probability_percent":
-                        95.0,
-
-                    "details":
-                        details,
-
-                    "fraud_reason":
-                        details,
-
-                    "risk_reason":
-                        details
-
+                    "prediction": "Fraud",
+                    "risk_level": "High",
+                    "status": "Fraud Detected",
+                    "fraud_probability": 0.95,
+                    "fraud_probability_percent": 95.0,
+                    "details": details,
+                    "fraud_reason": details,
+                    "risk_reason": details
                 }
 
-
-            # -----------------------------------------------
-            # Explicit safe
-            # -----------------------------------------------
+            # =================================================
+            # EXPLICIT SAFE
+            # =================================================
 
             elif existing_label == "safe":
 
                 details = (
-
                     "CSV fraud label indicates "
                     "this transaction is legitimate."
-
                 )
 
-
                 analysis = {
-
-                    "prediction":
-                        "Safe",
-
-                    "risk_level":
-                        "Low",
-
-                    "status":
-                        "Legitimate",
-
-                    "fraud_probability":
-                        0.05,
-
-                    "fraud_probability_percent":
-                        5.0,
-
-                    "details":
-                        details,
-
-                    "fraud_reason":
-                        details,
-
-                    "risk_reason":
-                        details
-
+                    "prediction": "Safe",
+                    "risk_level": "Low",
+                    "status": "Legitimate",
+                    "fraud_probability": 0.05,
+                    "fraud_probability_percent": 5.0,
+                    "details": details,
+                    "fraud_reason": details,
+                    "risk_reason": details
                 }
 
-
-            # -----------------------------------------------
-            # AI/RISK ENGINE
-            # -----------------------------------------------
+            # =================================================
+            # EXISTING RISK ENGINE
+            #
+            # IMPORTANT:
+            # We intentionally keep your current
+            # calculate_risk() untouched.
+            # =================================================
 
             else:
 
                 analysis = calculate_risk(
-
                     row,
-
                     resolved
-
                 )
 
-
-            # -----------------------------------------------
-            # Apply
-            # -----------------------------------------------
+            # =================================================
+            # APPLY ANALYSIS
+            # =================================================
 
             _apply_analysis(
-
                 transaction,
-
                 analysis
-
             )
-
 
             append_transaction(
                 transaction
             )
 
-
             processed_total += 1
-
 
         # ====================================================
         # CHUNK COMPLETE
@@ -1771,48 +1675,25 @@ def process_csv(
 
         if total_rows > 0:
 
-            ratio = (
-
-                processed_total
-                / total_rows
-
-            )
+            ratio = processed_total / total_rows
 
         else:
 
             ratio = 0
 
-
-        # 7 -> 92 processing range
-        progress = (
-
-            7
-
-            + int(
-                ratio * 85
-            )
-
-        )
-
+        progress = 7 + int(ratio * 85)
 
         safe_progress_callback(
-
             progress_callback,
-
             progress,
-
             processed_total,
-
             total_rows,
-
             (
                 f"Analyzing transactions... "
                 f"{processed_total:,} / "
                 f"{total_rows:,}"
             )
-
         )
-
 
     # ========================================================
     # NO DATA
@@ -1824,38 +1705,25 @@ def process_csv(
             "CSV file contains no transaction records."
         )
 
-
     # ========================================================
     # FINAL PROGRESS
     # ========================================================
 
     safe_progress_callback(
-
         progress_callback,
-
         94,
-
         processed_total,
-
         total_rows,
-
         "Transaction analysis completed. Preparing results..."
-
     )
-
 
     # ========================================================
     # RETURN
     # ========================================================
 
     return {
-
-        "transactions":
-            transactions,
-
-        "total":
-            len(transactions)
-
+        "transactions": transactions,
+        "total": len(transactions)
     }
 
 
