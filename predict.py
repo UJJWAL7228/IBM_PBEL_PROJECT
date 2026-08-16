@@ -10,30 +10,15 @@ import numpy as np
 def clean_number(value, default=0.0):
 
     try:
-
         if value is None:
             return default
 
-        try:
+        if isinstance(value, (int, float, np.number)):
             if pd.isna(value):
                 return default
-        except (TypeError, ValueError):
-            pass
-
-        if isinstance(
-            value,
-            (
-                int,
-                float,
-                np.number
-            )
-        ):
-
             return float(value)
 
-        text = str(
-            value
-        ).strip()
+        text = str(value).strip()
 
         if not text:
             return default
@@ -50,11 +35,7 @@ def clean_number(value, default=0.0):
 
         return float(text)
 
-    except (
-        ValueError,
-        TypeError
-    ):
-
+    except (ValueError, TypeError):
         return default
 
 
@@ -73,19 +54,11 @@ def normalize_column_name(name):
     )
 
 
-# ============================================================
-# BUILD LOOKUP
-# ============================================================
-
 def build_lookup(columns):
 
     return {
-
-        normalize_column_name(column):
-            column
-
+        normalize_column_name(column): column
         for column in columns
-
     }
 
 
@@ -95,34 +68,20 @@ def build_lookup(columns):
 
 def build_resolved_lookup(columns):
 
-    lookup = build_lookup(
-        columns
-    )
+    lookup = build_lookup(columns)
 
-
-    def resolve(
-        names,
-        default=None
-    ):
+    def resolve(names, default=None):
 
         for name in names:
 
-            normalized = (
-                normalize_column_name(
-                    name
-                )
-            )
+            normalized = normalize_column_name(name)
 
-            column = lookup.get(
-                normalized
-            )
+            column = lookup.get(normalized)
 
             if column is not None:
-
                 return column
 
         return default
-
 
     resolved = {
 
@@ -131,7 +90,6 @@ def build_resolved_lookup(columns):
         # ----------------------------------------------------
 
         "id": resolve([
-
             "transaction_id",
             "TransactionID",
             "Transaction_ID",
@@ -141,12 +99,9 @@ def build_resolved_lookup(columns):
             "TxnID",
             "id",
             "ID"
-
         ]),
 
-
         "customer_name": resolve([
-
             "customer_name",
             "CustomerName",
             "Customer_Name",
@@ -154,16 +109,13 @@ def build_resolved_lookup(columns):
             "customer",
             "name",
             "Name"
-
         ]),
-
 
         # ----------------------------------------------------
         # AMOUNT
         # ----------------------------------------------------
 
         "amount": resolve([
-
             "amount",
             "Amount",
             "Amount_INR",
@@ -175,16 +127,13 @@ def build_resolved_lookup(columns):
             "transaction amount",
             "value",
             "Value"
-
         ]),
-
 
         # ----------------------------------------------------
         # PAYMENT
         # ----------------------------------------------------
 
         "payment_method": resolve([
-
             "payment_method",
             "PaymentMethod",
             "Payment_Method",
@@ -194,16 +143,13 @@ def build_resolved_lookup(columns):
             "Payment Type",
             "payment",
             "Payment"
-
         ]),
-
 
         # ----------------------------------------------------
         # CHANNEL
         # ----------------------------------------------------
 
         "app_channel": resolve([
-
             "app_channel",
             "AppChannel",
             "App_Channel",
@@ -213,16 +159,13 @@ def build_resolved_lookup(columns):
             "App",
             "payment_app",
             "PaymentApp"
-
         ]),
-
 
         # ----------------------------------------------------
         # MERCHANT
         # ----------------------------------------------------
 
         "merchant": resolve([
-
             "merchant",
             "Merchant",
             "company_merchant",
@@ -235,16 +178,13 @@ def build_resolved_lookup(columns):
             "Shop",
             "store",
             "Store"
-
         ]),
-
 
         # ----------------------------------------------------
         # TRANSACTION TYPE
         # ----------------------------------------------------
 
         "transaction_type": resolve([
-
             "transaction_type",
             "TransactionType",
             "Transaction_Type",
@@ -253,32 +193,26 @@ def build_resolved_lookup(columns):
             "Type",
             "payment_type",
             "PaymentType"
-
         ]),
-
 
         # ----------------------------------------------------
         # LOCATION
         # ----------------------------------------------------
 
         "location": resolve([
-
             "location",
             "Location",
             "city",
             "City",
             "transaction_location",
             "TransactionLocation"
-
         ]),
-
 
         # ----------------------------------------------------
         # DATE / TIME
         # ----------------------------------------------------
 
         "time": resolve([
-
             "datetime",
             "DateTime",
             "date_time",
@@ -292,125 +226,98 @@ def build_resolved_lookup(columns):
             "Time",
             "transaction_time",
             "TransactionTime"
-
         ]),
-
 
         # ----------------------------------------------------
         # BANK
         # ----------------------------------------------------
 
         "bank_name": resolve([
-
             "BankName",
             "Bank_Name",
             "bank_name",
             "Bank"
-
         ]),
-
 
         # ----------------------------------------------------
         # ACCOUNT TYPE
         # ----------------------------------------------------
 
         "account_type": resolve([
-
             "AccountType",
             "Account_Type",
             "account_type"
-
         ]),
-
 
         # ----------------------------------------------------
         # ACCOUNT NUMBER
         # ----------------------------------------------------
 
         "account_number": resolve([
-
             "AccountNumber",
             "Account_Number",
             "account_number",
             "Account No",
             "AccountNo"
-
         ]),
-
 
         # ----------------------------------------------------
         # DEVICE
         # ----------------------------------------------------
 
         "device_type": resolve([
-
             "DeviceType",
             "Device_Type",
             "device_type",
             "Device"
-
         ]),
-
 
         # ----------------------------------------------------
         # IP
         # ----------------------------------------------------
 
         "ip_address": resolve([
-
             "IPAddress",
             "IP_Address",
             "ip_address",
             "IP"
-
         ]),
-
 
         # ----------------------------------------------------
         # PREVIOUS AMOUNT
         # ----------------------------------------------------
 
         "previous_amount": resolve([
-
             "PreviousAmount",
             "Previous_Amount",
             "previous_amount",
             "previous amount"
-
         ]),
-
 
         # ----------------------------------------------------
         # TRANSACTION FREQUENCY
         # ----------------------------------------------------
 
         "transactions_last_24h": resolve([
-
             "TransactionsLast24Hours",
             "Transactions_Last_24h",
             "transactions_last_24h",
             "TransactionFrequency",
             "transaction_frequency",
             "TransactionsLast24h"
-
         ]),
-
 
         # ----------------------------------------------------
         # UNUSUAL LOCATION
         # ----------------------------------------------------
 
         "unusual_location": resolve([
-
             "UnusualLocation",
             "Unusual_Location",
             "unusual_location",
             "unusual location"
-
         ])
-
     }
-
 
     # --------------------------------------------------------
     # FRAUD LABEL COLUMNS
@@ -419,40 +326,23 @@ def build_resolved_lookup(columns):
     fraud_columns = [
 
         resolve(["fraud"]),
-
         resolve(["is_fraud"]),
-
         resolve(["fraud_flag"]),
-
         resolve(["fraudulent"]),
-
         resolve(["label"]),
-
         resolve(["class"]),
-
         resolve(["target"]),
-
         resolve(["isfraud"]),
-
         resolve(["fraud_label"]),
-
         resolve(["fraud_status"]),
-
         resolve(["FraudStatus"])
-
     ]
-
 
     resolved["fraud_label_columns"] = [
-
         column
-
         for column in fraud_columns
-
         if column is not None
-
     ]
-
 
     return lookup, resolved
 
@@ -461,57 +351,27 @@ def build_resolved_lookup(columns):
 # FAST ROW VALUE
 # ============================================================
 
-def fast_value(
-    row,
-    column,
-    default=None
-):
+def fast_value(row, column, default=None):
 
     if column is None:
-
         return default
-
 
     try:
-
-        value = row.get(
-            column,
-            default
-        )
-
+        value = row.get(column, default)
     except AttributeError:
-
         return default
-
 
     if value is None:
-
         return default
 
-
     try:
-
         if pd.isna(value):
-
             return default
-
-    except (
-        TypeError,
-        ValueError
-    ):
-
+    except (TypeError, ValueError):
         pass
 
-
-    if isinstance(
-        value,
-        str
-    ):
-
-        if not value.strip():
-
-            return default
-
+    if isinstance(value, str) and not value.strip():
+        return default
 
     return value
 
@@ -521,7 +381,6 @@ def fast_value(
 # ============================================================
 
 FRAUD_VALUES = {
-
     "1",
     "true",
     "yes",
@@ -531,12 +390,9 @@ FRAUD_VALUES = {
     "fraud detected",
     "fraudulent transaction",
     "high risk"
-
 }
 
-
 SAFE_VALUES = {
-
     "0",
     "false",
     "no",
@@ -546,7 +402,6 @@ SAFE_VALUES = {
     "normal",
     "legitimate transaction",
     "low risk"
-
 }
 
 
@@ -554,42 +409,33 @@ SAFE_VALUES = {
 # EXISTING FRAUD LABEL
 # ============================================================
 
-def get_existing_fraud_label(
-    row,
-    resolved
-):
+def get_existing_fraud_label(row, resolved):
 
-    for column in resolved[
-        "fraud_label_columns"
-    ]:
+    fraud_columns = resolved.get(
+        "fraud_label_columns",
+        []
+    )
 
-        value = fast_value(
-            row,
-            column
-        )
+    for column in fraud_columns:
 
+        value = row.get(column)
 
         if value is None:
-
             continue
 
+        try:
+            if pd.isna(value):
+                continue
+        except (TypeError, ValueError):
+            pass
 
-        text = (
-            str(value)
-            .strip()
-            .lower()
-        )
-
+        text = str(value).strip().lower()
 
         if text in FRAUD_VALUES:
-
             return "fraud"
 
-
         if text in SAFE_VALUES:
-
             return "safe"
-
 
     return None
 
@@ -598,38 +444,22 @@ def get_existing_fraud_label(
 # FRAUD / RISK ENGINE
 # ============================================================
 
-def calculate_risk(
-    row,
-    resolved
-):
+def calculate_risk(row, resolved):
 
     score = 0
-
     reasons = []
-
 
     # ========================================================
     # AMOUNT
     # ========================================================
 
     amount = clean_number(
-
         fast_value(
-
             row,
-
-            resolved["amount"],
-
+            resolved.get("amount"),
             0
-
         )
-
     )
-
-
-    # --------------------------------------------------------
-    # VERY HIGH
-    # --------------------------------------------------------
 
     if amount >= 100000:
 
@@ -639,11 +469,6 @@ def calculate_risk(
             "Very high transaction amount"
         )
 
-
-    # --------------------------------------------------------
-    # HIGH
-    # --------------------------------------------------------
-
     elif amount >= 50000:
 
         score += 30
@@ -651,11 +476,6 @@ def calculate_risk(
         reasons.append(
             "High transaction amount"
         )
-
-
-    # --------------------------------------------------------
-    # ELEVATED
-    # --------------------------------------------------------
 
     elif amount >= 25000:
 
@@ -665,33 +485,19 @@ def calculate_risk(
             "Elevated transaction amount"
         )
 
-
     # ========================================================
     # PREVIOUS AMOUNT
     # ========================================================
 
     previous = clean_number(
-
         fast_value(
-
             row,
-
-            resolved["previous_amount"],
-
+            resolved.get("previous_amount"),
             0
-
         )
-
     )
 
-
-    if (
-
-        previous > 0
-
-        and amount >= previous * 5
-
-    ):
+    if previous > 0 and amount >= previous * 5:
 
         score += 20
 
@@ -699,25 +505,17 @@ def calculate_risk(
             "Transaction much larger than previous amount"
         )
 
-
     # ========================================================
     # TRANSACTION FREQUENCY
     # ========================================================
 
     frequency = clean_number(
-
         fast_value(
-
             row,
-
-            resolved["transactions_last_24h"],
-
+            resolved.get("transactions_last_24h"),
             0
-
         )
-
     )
-
 
     if frequency >= 20:
 
@@ -727,7 +525,6 @@ def calculate_risk(
             "Unusually high transaction frequency"
         )
 
-
     elif frequency >= 10:
 
         score += 15
@@ -736,34 +533,19 @@ def calculate_risk(
             "High transaction frequency"
         )
 
-
     # ========================================================
     # UNUSUAL LOCATION
     # ========================================================
 
     unusual = str(
-
         fast_value(
-
             row,
-
-            resolved["unusual_location"],
-
+            resolved.get("unusual_location"),
             ""
-
         )
-
     ).strip().lower()
 
-
-    if unusual in {
-
-        "yes",
-        "true",
-        "1",
-        "y"
-
-    }:
+    if unusual in {"yes", "true", "1", "y"}:
 
         score += 30
 
@@ -771,38 +553,25 @@ def calculate_risk(
             "Unusual transaction location"
         )
 
-
     # ========================================================
     # DEVICE
     # ========================================================
 
     device = str(
-
         fast_value(
-
             row,
-
-            resolved["device_type"],
-
+            resolved.get("device_type"),
             ""
-
         )
-
     ).strip().lower()
 
-
     if any(
-
         value in device
-
         for value in (
-
             "unknown",
             "new",
             "unrecognized"
-
         )
-
     ):
 
         score += 15
@@ -811,38 +580,25 @@ def calculate_risk(
             "Unrecognized device"
         )
 
-
     # ========================================================
     # LOCATION
     # ========================================================
 
     location = str(
-
         fast_value(
-
             row,
-
-            resolved["location"],
-
+            resolved.get("location"),
             ""
-
         )
-
     ).strip().lower()
 
-
     if any(
-
         value in location
-
         for value in (
-
             "unknown",
             "foreign",
             "international"
-
         )
-
     ):
 
         score += 10
@@ -851,37 +607,24 @@ def calculate_risk(
             "Unusual location information"
         )
 
-
     # ========================================================
     # PAYMENT
     # ========================================================
 
     payment = str(
-
         fast_value(
-
             row,
-
-            resolved["payment_method"],
-
+            resolved.get("payment_method"),
             ""
-
         )
-
     ).strip().lower()
 
-
     if any(
-
         value in payment
-
         for value in (
-
             "unknown",
             "unrecognized"
-
         )
-
     ):
 
         score += 10
@@ -890,37 +633,24 @@ def calculate_risk(
             "Unrecognized payment method"
         )
 
-
     # ========================================================
     # CHANNEL
     # ========================================================
 
     channel = str(
-
         fast_value(
-
             row,
-
-            resolved["app_channel"],
-
+            resolved.get("app_channel"),
             ""
-
         )
-
     ).strip().lower()
 
-
     if any(
-
         value in channel
-
         for value in (
-
             "unknown",
             "unrecognized"
-
         )
-
     ):
 
         score += 10
@@ -929,7 +659,6 @@ def calculate_risk(
             "Unrecognized transaction channel"
         )
 
-
     # ========================================================
     # FINAL CLASSIFICATION
     # ========================================================
@@ -937,71 +666,44 @@ def calculate_risk(
     if score >= 60:
 
         prediction = "Fraud"
-
         risk = "High"
-
         status = "Fraud Detected"
 
         probability = max(
-
             70,
-
             min(
-
                 99,
-
                 10 + score
-
             )
-
         )
-
 
     elif score >= 30:
 
         prediction = "Risky"
-
         risk = "Medium"
-
         status = "Requires Attention"
 
         probability = max(
-
             40,
-
             min(
-
                 69,
-
                 10 + score
-
             )
-
         )
-
 
     else:
 
         prediction = "Safe"
-
         risk = "Low"
-
         status = "Legitimate"
 
         probability = min(
-
             39,
-
             max(
-
                 2,
-
                 10 + score
-
             )
-
         )
-
 
     if not reasons:
 
@@ -1009,38 +711,17 @@ def calculate_risk(
             "No significant fraud indicators detected"
         )
 
-
-    details = "; ".join(
-        reasons
-    )
-
+    details = "; ".join(reasons)
 
     return {
-
-        "prediction":
-            prediction,
-
-        "risk_level":
-            risk,
-
-        "status":
-            status,
-
-        "fraud_probability":
-            probability / 100,
-
-        "fraud_probability_percent":
-            float(probability),
-
-        "details":
-            details,
-
-        "fraud_reason":
-            details,
-
-        "risk_reason":
-            details
-
+        "prediction": prediction,
+        "risk_level": risk,
+        "status": status,
+        "fraud_probability": probability / 100,
+        "fraud_probability_percent": float(probability),
+        "details": details,
+        "fraud_reason": details,
+        "risk_reason": details
     }
 
 
@@ -1048,37 +729,25 @@ def calculate_risk(
 # APPLY ANALYSIS
 # ============================================================
 
-def _apply_analysis(
-    transaction,
-    analysis
-):
+def _apply_analysis(transaction, analysis):
 
-    transaction.update(
-        analysis
-    )
-
+    transaction.update(analysis)
 
     transaction["Prediction"] = (
         transaction["prediction"]
     )
 
-
     transaction["FraudProbability"] = (
-        transaction[
-            "fraud_probability_percent"
-        ]
+        transaction["fraud_probability_percent"]
     )
-
 
     transaction["RiskLevel"] = (
         transaction["risk_level"]
     )
 
-
     transaction["Status"] = (
         transaction["status"]
     )
-
 
     return transaction
 
@@ -1094,194 +763,134 @@ def normalize_transaction(
     index
 ):
 
-    transaction = dict(
-        row
-    )
+    # IMPORTANT:
+    # Keep original CSV fields so existing UI/details pages
+    # continue to work.
 
+    transaction = dict(row)
 
     # ========================================================
     # ID
     # ========================================================
 
     transaction_id = fast_value(
-
         row,
-
-        resolved["id"],
-
+        resolved.get("id"),
         f"TXN{index + 1:08d}"
-
     )
-
 
     transaction_id = str(
         transaction_id
     ).strip()
 
-
     if not transaction_id:
-
         transaction_id = (
             f"TXN{index + 1:08d}"
         )
 
-
-    transaction["transaction_id"] = (
-        transaction_id
-    )
-
-
-    transaction["id"] = (
-        transaction_id
-    )
-
+    transaction["transaction_id"] = transaction_id
+    transaction["id"] = transaction_id
 
     # ========================================================
     # CUSTOMER
     # ========================================================
 
     customer = fast_value(
-
         row,
-
-        resolved["customer_name"],
-
+        resolved.get("customer_name"),
         "Unknown"
-
     )
 
+    customer_text = str(customer).strip()
 
-    transaction["customer_name"] = (
-        str(customer)
-    )
+    if not customer_text:
+        customer_text = "Unknown"
 
+    transaction["customer_name"] = customer_text
 
     # ========================================================
     # AMOUNT
-    #
-    # IMPORTANT:
-    # No integer conversion here.
-    # 50000, 25000, 30000, 1000, 500
-    # all remain valid numeric amounts.
     # ========================================================
 
     transaction["amount"] = clean_number(
-
         fast_value(
-
             row,
-
-            resolved["amount"],
-
+            resolved.get("amount"),
             0
-
         )
-
     )
-
 
     # ========================================================
     # TEXT FIELDS
     # ========================================================
 
     text_fields = {
-
         "payment_method":
-            resolved["payment_method"],
+            resolved.get("payment_method"),
 
         "app_channel":
-            resolved["app_channel"],
+            resolved.get("app_channel"),
 
         "merchant":
-            resolved["merchant"],
+            resolved.get("merchant"),
 
         "transaction_type":
-            resolved["transaction_type"],
+            resolved.get("transaction_type"),
 
         "location":
-            resolved["location"],
+            resolved.get("location"),
 
         "time":
-            resolved["time"],
+            resolved.get("time"),
 
         "bank_name":
-            resolved["bank_name"],
+            resolved.get("bank_name"),
 
         "account_type":
-            resolved["account_type"],
+            resolved.get("account_type"),
 
         "account_number":
-            resolved["account_number"],
+            resolved.get("account_number"),
 
         "device_type":
-            resolved["device_type"],
+            resolved.get("device_type"),
 
         "ip_address":
-            resolved["ip_address"],
+            resolved.get("ip_address"),
 
         "unusual_location":
-            resolved["unusual_location"]
-
+            resolved.get("unusual_location")
     }
 
-
-    for output_name, column in (
-        text_fields.items()
-    ):
+    for output_name, column in text_fields.items():
 
         value = fast_value(
-
             row,
-
             column,
-
             "-"
-
         )
 
-
-        transaction[output_name] = (
-            str(value)
-        )
-
+        transaction[output_name] = str(value)
 
     # ========================================================
     # NUMERIC FIELDS
     # ========================================================
 
-    numeric_fields = {
-
-        "previous_amount":
-            resolved["previous_amount"],
-
-        "transactions_last_24h":
-            resolved[
-                "transactions_last_24h"
-            ]
-
-    }
-
-
-    for output_name, column in (
-        numeric_fields.items()
-    ):
-
-        transaction[output_name] = (
-            clean_number(
-
-                fast_value(
-
-                    row,
-
-                    column,
-
-                    0
-
-                )
-
-            )
+    transaction["previous_amount"] = clean_number(
+        fast_value(
+            row,
+            resolved.get("previous_amount"),
+            0
         )
+    )
 
+    transaction["transactions_last_24h"] = clean_number(
+        fast_value(
+            row,
+            resolved.get("transactions_last_24h"),
+            0
+        )
+    )
 
     # ========================================================
     # COMPATIBILITY ALIASES
@@ -1291,31 +900,25 @@ def normalize_transaction(
         transaction["payment_method"]
     )
 
-
     transaction["channel"] = (
         transaction["app_channel"]
     )
-
 
     transaction["type"] = (
         transaction["transaction_type"]
     )
 
-
     transaction["city"] = (
         transaction["location"]
     )
-
 
     transaction["transaction_datetime"] = (
         transaction["time"]
     )
 
-
     transaction["company_merchant"] = (
         transaction["merchant"]
     )
-
 
     return transaction
 
@@ -1333,14 +936,11 @@ def safe_progress_callback(
 ):
 
     if callback is None:
-
         return
-
 
     try:
 
         callback(
-
             int(
                 max(
                     0,
@@ -1350,18 +950,13 @@ def safe_progress_callback(
                     )
                 )
             ),
-
             int(processed),
-
             int(total),
-
             str(stage)
-
         )
 
     except Exception as error:
 
-        # Progress UI must NEVER stop analysis.
         print(
             "Progress callback warning:",
             repr(error)
@@ -1370,10 +965,6 @@ def safe_progress_callback(
 
 # ============================================================
 # LARGE CSV PROCESSOR
-#
-# IMPORTANT:
-# Processes CSV in chunks instead of loading the complete
-# dataset into one giant DataFrame + records list.
 # ============================================================
 
 def process_csv(
@@ -1382,47 +973,50 @@ def process_csv(
 ):
 
     if not filepath:
-        raise ValueError("No CSV file was provided.")
+        raise ValueError(
+            "No CSV file was provided."
+        )
 
     filepath = os.fspath(filepath)
 
     if not os.path.isfile(filepath):
+
         raise FileNotFoundError(
             f"CSV file not found: {filepath}"
         )
 
     # ========================================================
-    # FAST FILE SIZE / ROW ESTIMATE
-    #
-    # We avoid Python's:
-    #     sum(1 for _ in csv_file)
-    #
-    # because it becomes noticeably slower on large files.
+    # FILE SIZE / ROW COUNT
     # ========================================================
 
     total_rows = 0
 
     try:
-        file_size = os.path.getsize(filepath)
 
-        # Fast binary newline counting
-        with open(filepath, "rb") as csv_file:
-            while True:
-                data = csv_file.read(1024 * 1024)
+        with open(
+            filepath,
+            "rb"
+        ) as csv_file:
 
-                if not data:
-                    break
+            for block in iter(
+                lambda: csv_file.read(4 * 1024 * 1024),
+                b""
+            ):
 
-                total_rows += data.count(b"\n")
+                total_rows += block.count(b"\n")
 
         if total_rows > 0:
             total_rows -= 1
 
     except Exception:
+
         total_rows = 0
 
     if total_rows <= 0:
-        raise ValueError("CSV file is empty.")
+
+        raise ValueError(
+            "CSV file is empty."
+        )
 
     safe_progress_callback(
         progress_callback,
@@ -1433,15 +1027,16 @@ def process_csv(
     )
 
     # ========================================================
-    # LARGER CHUNKS
+    # CHUNK SIZE
     #
-    # 10,000 gives much better performance for 30k/50k files
-    # while still keeping memory reasonable.
+    # 10k is good for 30k/50k files without creating huge
+    # temporary objects.
     # ========================================================
 
     CHUNK_SIZE = 10000
 
     transactions = []
+
     append_transaction = transactions.append
 
     processed_total = 0
@@ -1483,217 +1078,283 @@ def process_csv(
     # CHUNK LOOP
     # ========================================================
 
-    for df_chunk in chunk_iterator:
+    try:
 
-        if df_chunk is None or df_chunk.empty:
-            continue
+        for df_chunk in chunk_iterator:
 
-        # ====================================================
-        # RESOLVE COLUMNS ONLY ONCE
-        # ====================================================
+            if df_chunk is None or df_chunk.empty:
+                continue
 
-        if first_chunk:
+            # =================================================
+            # RESOLVE COLUMNS ONLY ONCE
+            # =================================================
 
-            lookup, resolved = build_resolved_lookup(
+            if first_chunk:
+
+                lookup, resolved = (
+                    build_resolved_lookup(
+                        df_chunk.columns
+                    )
+                )
+
+                if resolved.get("amount") is None:
+
+                    raise ValueError(
+                        "CSV must contain an Amount, "
+                        "Amount_INR or TransactionAmount "
+                        "column."
+                    )
+
+                first_chunk = False
+
+                safe_progress_callback(
+                    progress_callback,
+                    7,
+                    0,
+                    total_rows,
+                    "CSV loaded. Preparing transaction columns..."
+                )
+
+            # =================================================
+            # LOCAL REFERENCES
+            # =================================================
+
+            fraud_columns = (
+                resolved.get(
+                    "fraud_label_columns",
+                    []
+                )
+            )
+
+            # =================================================
+            # USE ITertuples FOR LOWER OVERHEAD
+            #
+            # Convert column names once and create dictionaries
+            # only for transactions that are actually returned.
+            # =================================================
+
+            columns = list(
                 df_chunk.columns
             )
 
-            if resolved.get("amount") is None:
+            # =================================================
+            # ROW PROCESSING
+            # =================================================
 
-                raise ValueError(
-                    "CSV must contain an Amount, "
-                    "Amount_INR or TransactionAmount column."
+            for values in df_chunk.itertuples(
+                index=False,
+                name=None
+            ):
+
+                row = dict(
+                    zip(
+                        columns,
+                        values
+                    )
                 )
 
-            first_chunk = False
+                transaction = normalize_transaction(
+                    row,
+                    lookup,
+                    resolved,
+                    processed_total
+                )
+
+                # =================================================
+                # EXISTING FRAUD LABEL
+                # =================================================
+
+                existing_label = None
+
+                if fraud_columns:
+
+                    for column in fraud_columns:
+
+                        value = row.get(
+                            column
+                        )
+
+                        if value is None:
+                            continue
+
+                        try:
+
+                            if pd.isna(value):
+                                continue
+
+                        except (
+                            TypeError,
+                            ValueError
+                        ):
+                            pass
+
+                        text = (
+                            str(value)
+                            .strip()
+                            .lower()
+                        )
+
+                        if text in FRAUD_VALUES:
+
+                            existing_label = "fraud"
+                            break
+
+                        if text in SAFE_VALUES:
+
+                            existing_label = "safe"
+                            break
+
+                # =================================================
+                # EXPLICIT FRAUD
+                # =================================================
+
+                if existing_label == "fraud":
+
+                    details = (
+                        "CSV fraud label indicates "
+                        "this transaction is fraudulent."
+                    )
+
+                    analysis = {
+
+                        "prediction":
+                            "Fraud",
+
+                        "risk_level":
+                            "High",
+
+                        "status":
+                            "Fraud Detected",
+
+                        "fraud_probability":
+                            0.95,
+
+                        "fraud_probability_percent":
+                            95.0,
+
+                        "details":
+                            details,
+
+                        "fraud_reason":
+                            details,
+
+                        "risk_reason":
+                            details
+
+                    }
+
+                # =================================================
+                # EXPLICIT SAFE
+                # =================================================
+
+                elif existing_label == "safe":
+
+                    details = (
+                        "CSV fraud label indicates "
+                        "this transaction is legitimate."
+                    )
+
+                    analysis = {
+
+                        "prediction":
+                            "Safe",
+
+                        "risk_level":
+                            "Low",
+
+                        "status":
+                            "Legitimate",
+
+                        "fraud_probability":
+                            0.05,
+
+                        "fraud_probability_percent":
+                            5.0,
+
+                        "details":
+                            details,
+
+                        "fraud_reason":
+                            details,
+
+                        "risk_reason":
+                            details
+
+                    }
+
+                # =================================================
+                # RISK ENGINE
+                # =================================================
+
+                else:
+
+                    analysis = calculate_risk(
+                        row,
+                        resolved
+                    )
+
+                # =================================================
+                # APPLY
+                # =================================================
+
+                _apply_analysis(
+                    transaction,
+                    analysis
+                )
+
+                append_transaction(
+                    transaction
+                )
+
+                processed_total += 1
+
+            # =================================================
+            # RELEASE CHUNK MEMORY
+            # =================================================
+
+            del df_chunk
+
+            # =================================================
+            # PROGRESS
+            # =================================================
+
+            ratio = (
+                processed_total / total_rows
+                if total_rows > 0
+                else 0
+            )
+
+            progress = (
+                7 +
+                int(
+                    min(
+                        0.85,
+                        ratio * 0.85
+                    ) * 100
+                )
+            )
 
             safe_progress_callback(
                 progress_callback,
-                7,
-                0,
+                progress,
+                processed_total,
                 total_rows,
-                "CSV loaded. Preparing transaction columns..."
-            )
-
-        # ====================================================
-        # LOCAL REFERENCES
-        #
-        # Avoid repeatedly looking up dictionary keys inside
-        # the 50,000-row loop.
-        # ====================================================
-
-        amount_col = resolved["amount"]
-        previous_col = resolved["previous_amount"]
-        frequency_col = resolved["transactions_last_24h"]
-        unusual_col = resolved["unusual_location"]
-        device_col = resolved["device_type"]
-        location_col = resolved["location"]
-        payment_col = resolved["payment_method"]
-        channel_col = resolved["app_channel"]
-
-        fraud_columns = resolved["fraud_label_columns"]
-
-        # ====================================================
-        # CONVERT CHUNK
-        # ====================================================
-
-        records = df_chunk.to_dict(
-            orient="records"
-        )
-
-        # Release DataFrame as early as possible
-        del df_chunk
-
-        # ====================================================
-        # PROCESS ROWS
-        # ====================================================
-
-        for row in records:
-
-            transaction = normalize_transaction(
-                row,
-                lookup,
-                resolved,
-                processed_total
-            )
-
-            # =================================================
-            # EXISTING FRAUD LABEL
-            #
-            # Keep EXACT existing mapping.
-            # =================================================
-
-            existing_label = None
-
-            if fraud_columns:
-
-                for column in fraud_columns:
-
-                    value = row.get(column)
-
-                    if value is None:
-                        continue
-
-                    try:
-                        if pd.isna(value):
-                            continue
-                    except (
-                        TypeError,
-                        ValueError
-                    ):
-                        pass
-
-                    text = str(value).strip().lower()
-
-                    if text in FRAUD_VALUES:
-
-                        existing_label = "fraud"
-                        break
-
-                    if text in SAFE_VALUES:
-
-                        existing_label = "safe"
-                        break
-
-            # =================================================
-            # EXPLICIT FRAUD
-            # =================================================
-
-            if existing_label == "fraud":
-
-                details = (
-                    "CSV fraud label indicates "
-                    "this transaction is fraudulent."
+                (
+                    "Analyzing transactions... "
+                    f"{processed_total:,} / "
+                    f"{total_rows:,}"
                 )
-
-                analysis = {
-                    "prediction": "Fraud",
-                    "risk_level": "High",
-                    "status": "Fraud Detected",
-                    "fraud_probability": 0.95,
-                    "fraud_probability_percent": 95.0,
-                    "details": details,
-                    "fraud_reason": details,
-                    "risk_reason": details
-                }
-
-            # =================================================
-            # EXPLICIT SAFE
-            # =================================================
-
-            elif existing_label == "safe":
-
-                details = (
-                    "CSV fraud label indicates "
-                    "this transaction is legitimate."
-                )
-
-                analysis = {
-                    "prediction": "Safe",
-                    "risk_level": "Low",
-                    "status": "Legitimate",
-                    "fraud_probability": 0.05,
-                    "fraud_probability_percent": 5.0,
-                    "details": details,
-                    "fraud_reason": details,
-                    "risk_reason": details
-                }
-
-            # =================================================
-            # EXISTING RISK ENGINE
-            #
-            # IMPORTANT:
-            # We intentionally keep your current
-            # calculate_risk() untouched.
-            # =================================================
-
-            else:
-
-                analysis = calculate_risk(
-                    row,
-                    resolved
-                )
-
-            # =================================================
-            # APPLY ANALYSIS
-            # =================================================
-
-            _apply_analysis(
-                transaction,
-                analysis
             )
 
-            append_transaction(
-                transaction
-            )
+    except Exception:
 
-            processed_total += 1
+        # Do not leave large temporary objects alive.
+        try:
+            del chunk_iterator
+        except Exception:
+            pass
 
-        # ====================================================
-        # CHUNK COMPLETE
-        # ====================================================
-
-        if total_rows > 0:
-
-            ratio = processed_total / total_rows
-
-        else:
-
-            ratio = 0
-
-        progress = 7 + int(ratio * 85)
-
-        safe_progress_callback(
-            progress_callback,
-            progress,
-            processed_total,
-            total_rows,
-            (
-                f"Analyzing transactions... "
-                f"{processed_total:,} / "
-                f"{total_rows:,}"
-            )
-        )
+        raise
 
     # ========================================================
     # NO DATA
@@ -1731,22 +1392,13 @@ def process_csv(
 # SINGLE TRANSACTION
 # ============================================================
 
-def predict_single_transaction(
-    amount
-):
+def predict_single_transaction(amount):
 
-    amount = clean_number(
-        amount
-    )
-
+    amount = clean_number(amount)
 
     row = {
-
-        "Amount":
-            amount
-
+        "Amount": amount
     }
-
 
     resolved = {
 
@@ -1803,34 +1455,21 @@ def predict_single_transaction(
 
         "ip_address":
             None
-
     }
 
-
     return calculate_risk(
-
         row,
-
         resolved
-
     )
 
 
 # ============================================================
 # MAIN PREDICTION ENTRY POINT
-#
-# Supports:
-#
-# 1. CSV filepath
-# 2. Direct numeric amount
 # ============================================================
 
 def predict_transaction(
-
     amount_or_file,
-
     progress_callback=None
-
 ):
 
     # ========================================================
@@ -1838,7 +1477,6 @@ def predict_transaction(
     # ========================================================
 
     if (
-
         isinstance(
             amount_or_file,
             (
@@ -1846,32 +1484,22 @@ def predict_transaction(
                 os.PathLike
             )
         )
-
         and os.path.isfile(
             amount_or_file
         )
-
     ):
 
         return process_csv(
-
             os.fspath(
                 amount_or_file
             ),
-
-            progress_callback=(
-                progress_callback
-            )
-
+            progress_callback=progress_callback
         )
-
 
     # ========================================================
     # SINGLE AMOUNT MODE
     # ========================================================
 
     return predict_single_transaction(
-
         amount_or_file
-
     )
