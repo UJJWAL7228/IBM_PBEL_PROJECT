@@ -31,7 +31,7 @@ from database import (
     initialize_database
 )
 
-from vercel.blob import put, BlobClient
+from vercel.blob import put, get
 
 
 # ============================================================
@@ -2128,6 +2128,7 @@ def save_uploaded_csv(file, filename):
 def prepare_analysis_file(storage_location):
     """
     Downloads a private Vercel Blob into /tmp for analysis.
+    Uses the official Vercel Blob get() API for private storage.
     """
 
     if not os.environ.get("VERCEL"):
@@ -2140,28 +2141,28 @@ def prepare_analysis_file(storage_location):
             "BLOB_READ_WRITE_TOKEN is not configured."
         )
 
-    # Get blob URL/path
+    # Get pathname or URL
     if isinstance(storage_location, dict):
-        blob_url = (
-            storage_location.get("url")
-            or storage_location.get("pathname")
+        blob_path = (
+            storage_location.get("pathname")
+            or storage_location.get("url")
         )
     else:
-        blob_url = storage_location
+        blob_path = storage_location
 
-    if not blob_url:
+    if not blob_path:
         raise RuntimeError(
-            "Private Blob URL/path is missing."
+            "Private Blob pathname is missing."
         )
 
     print(
         "Reading private Blob:",
-        blob_url
+        blob_path
     )
 
-    # Temporary file inside Vercel writable /tmp
+    # Extract filename
     filename = os.path.basename(
-        str(blob_url).split("?")[0]
+        str(blob_path).split("?")[0]
     )
 
     if not filename.lower().endswith(".csv"):
@@ -2175,20 +2176,49 @@ def prepare_analysis_file(storage_location):
     try:
 
         print(
-            "Downloading private Blob..."
+            "Fetching private Blob with SDK get()..."
         )
 
-        with BlobClient(token=token) as client:
+        result = get(
+            blob_path,
+            access="private",
+            token=token
+        )
 
-            client.download_file(
-                blob_url,
-                temp_filepath
+        if result is None:
+            raise RuntimeError(
+                "Private Blob was not found."
             )
 
-        # Verify file exists
-        if not os.path.exists(temp_filepath):
+        if result.status_code != 200:
             raise RuntimeError(
-                "Private Blob download did not create a file."
+                f"Private Blob returned status "
+                f"{result.status_code}."
+            )
+
+        if result.stream is None:
+            raise RuntimeError(
+                "Private Blob returned no file stream."
+            )
+
+        # Write streamed Blob data to /tmp
+        with open(
+            temp_filepath,
+            "wb"
+        ) as output_file:
+
+            for chunk in result.stream:
+
+                if chunk:
+                    output_file.write(chunk)
+
+        # Verify downloaded file
+        if not os.path.exists(
+            temp_filepath
+        ):
+            raise RuntimeError(
+                "Private Blob download did not "
+                "create a file."
             )
 
         file_size = os.path.getsize(
@@ -2216,6 +2246,10 @@ def prepare_analysis_file(storage_location):
             repr(e)
         )
 
+        raise RuntimeError(
+            f"Unable to download private Blob "
+            f"for analysis: {e}"
+        )
         raise RuntimeError(
             f"Unable to download private Blob for analysis: {e}"
         )
