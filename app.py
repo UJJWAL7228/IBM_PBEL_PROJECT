@@ -2125,15 +2125,6 @@ def prepare_analysis_file(
     original_filename
 ):
 
-    """
-    LOCAL:
-        Returns local CSV path.
-
-    VERCEL:
-        Reads private Blob using Vercel Blob SDK
-        and writes it to /tmp for prediction.
-    """
-
     # --------------------------------------------------------
     # LOCAL
     # --------------------------------------------------------
@@ -2144,7 +2135,7 @@ def prepare_analysis_file(
 
 
     # --------------------------------------------------------
-    # VERCEL
+    # VERCEL PRIVATE BLOB
     # --------------------------------------------------------
 
     token = os.environ.get(
@@ -2157,9 +2148,6 @@ def prepare_analysis_file(
             "BLOB_READ_WRITE_TOKEN is not configured."
         )
 
-
-    # storage_location is now a dictionary
-    # containing pathname + url
 
     if isinstance(storage_location, dict):
 
@@ -2185,18 +2173,10 @@ def prepare_analysis_file(
     )
 
 
-    # --------------------------------------------------------
-    # GET PRIVATE BLOB
-    # --------------------------------------------------------
-
     result = get(
-
         blob_path,
-
         access="private",
-
         token=token
-
     )
 
 
@@ -2207,61 +2187,62 @@ def prepare_analysis_file(
         )
 
 
-    if result.status_code != 200:
+    # --------------------------------------------------------
+    # EXTRACT BLOB DATA
+    # --------------------------------------------------------
+
+    if isinstance(result, bytes):
+
+        file_data = result
+
+    elif hasattr(result, "body"):
+
+        file_data = result.body
+
+    elif isinstance(result, dict):
+
+        file_data = (
+            result.get("body")
+            or result.get("data")
+            or result.get("content")
+        )
+
+    else:
+
+        file_data = None
+
+
+    if file_data is None:
 
         raise RuntimeError(
-            "Private Blob returned status "
-            f"{result.status_code}."
+            "Private Blob returned no file data."
         )
 
 
     # --------------------------------------------------------
-    # SAVE STREAM TO /tmp
+    # SAVE TO /tmp
     # --------------------------------------------------------
 
     temp_filename = (
-
         f"fraud_analysis_"
-
         f"{uuid.uuid4().hex}_"
-
         f"{secure_filename(original_filename)}"
-
     )
 
-
     temp_filepath = os.path.join(
-
         "/tmp",
-
         temp_filename
-
     )
 
 
     with open(
-
         temp_filepath,
-
         "wb"
-
     ) as output_file:
 
-        stream = result.stream
-
-        while True:
-
-            chunk = stream.read(
-                1024 * 1024
-            )
-
-            if not chunk:
-
-                break
-
-            output_file.write(
-                chunk
-            )
+        output_file.write(
+            file_data
+        )
 
 
     if not os.path.isfile(
@@ -2280,7 +2261,6 @@ def prepare_analysis_file(
 
 
     return temp_filepath
-
 # ============================================================
 # UPLOAD CSV
 #
