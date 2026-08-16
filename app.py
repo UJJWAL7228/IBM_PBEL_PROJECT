@@ -31,7 +31,7 @@ from database import (
     initialize_database
 )
 
-from vercel.blob import put
+from vercel import blob
 
 
 # ============================================================
