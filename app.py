@@ -31,7 +31,7 @@ from database import (
     initialize_database
 )
 
-from vercel.blob import put, get
+from vercel.blob import put, BlobClient
 
 
 # ============================================================
@@ -2120,145 +2120,101 @@ def save_uploaded_csv(file, filename):
 # PREPARE ANALYSIS FILE
 # ============================================================
 
-def prepare_analysis_file(
-    storage_location,
-    original_filename
-):
-
-    # --------------------------------------------------------
-    # LOCAL
-    # --------------------------------------------------------
-
-    if not os.environ.get("VERCEL"):
-
-        return storage_location
-
-
-    # --------------------------------------------------------
-    # VERCEL PRIVATE BLOB
-    # --------------------------------------------------------
-
-    token = os.environ.get(
-        "BLOB_READ_WRITE_TOKEN"
-    )
-
-    if not token:
-
-        raise RuntimeError(
-            "BLOB_READ_WRITE_TOKEN is not configured."
-        )
-
-
-    if isinstance(storage_location, dict):
-
-        blob_path = storage_location.get(
-            "pathname"
-        )
-
-    else:
-
-        blob_path = storage_location
-
-
-    if not blob_path:
-
-        raise RuntimeError(
-            "Private Blob pathname is missing."
-        )
-
-
-    print(
-        "Reading private Blob:",
-        blob_path
-    )
-
-
-    result = get(
-        blob_path,
-        access="private",
-        token=token
-    )
-
-
-    if result is None:
-
-        raise RuntimeError(
-            "Unable to read uploaded private Blob."
-        )
-
-
-    # --------------------------------------------------------
-    # EXTRACT BLOB DATA
-    # --------------------------------------------------------
-
-    if isinstance(result, bytes):
-
-        file_data = result
-
-    elif hasattr(result, "body"):
-
-        file_data = result.body
-
-    elif isinstance(result, dict):
-
-        file_data = (
-            result.get("body")
-            or result.get("data")
-            or result.get("content")
-        )
-
-    else:
-
-        file_data = None
-
-
-    if file_data is None:
-
-        raise RuntimeError(
-            "Private Blob returned no file data."
-        )
-
-
-    # --------------------------------------------------------
-    # SAVE TO /tmp
-    # --------------------------------------------------------
-
-    temp_filename = (
-        f"fraud_analysis_"
-        f"{uuid.uuid4().hex}_"
-        f"{secure_filename(original_filename)}"
-    )
-
-    temp_filepath = os.path.join(
-        "/tmp",
-        temp_filename
-    )
-
-
-    with open(
-        temp_filepath,
-        "wb"
-    ) as output_file:
-
-        output_file.write(
-            file_data
-        )
-
-
-    if not os.path.isfile(
-        temp_filepath
-    ):
-
-        raise RuntimeError(
-            "Unable to prepare Blob file for analysis."
-        )
-
 
     print(
         "Temporary analysis file:",
         temp_filepath
     )
+def prepare_analysis_file(storage_location):
+    """
+    Downloads a private Vercel Blob into /tmp for analysis.
+    Works with the current Vercel Python Blob SDK.
+    """
 
+    if not os.environ.get("VERCEL"):
+        return storage_location
+
+    token = os.environ.get("BLOB_READ_WRITE_TOKEN")
+
+    if not token:
+        raise RuntimeError(
+            "BLOB_READ_WRITE_TOKEN is not configured."
+        )
+
+    # Get blob URL/path
+    if isinstance(storage_location, dict):
+        blob_url = (
+            storage_location.get("url")
+            or storage_location.get("pathname")
+        )
+    else:
+        blob_url = storage_location
+
+    if not blob_url:
+        raise RuntimeError(
+            "Private Blob URL/path is missing."
+        )
+
+    print("Reading private Blob:", blob_url)
+
+    # Temporary file inside Vercel's writable /tmp directory
+    filename = os.path.basename(
+        str(blob_url).split("?")[0]
+    )
+
+    if not filename.lower().endswith(".csv"):
+        filename = "uploaded_dataset.csv"
+
+    temp_filepath = os.path.join(
+        "/tmp",
+        f"analysis_{filename}"
+    )
+
+    try:
+
+        # Current Vercel Python SDK
+        with BlobClient(token=token) as client:
+
+            client.download_file(
+                blob_url,
+                temp_filepath,
+                overwrite=True
+            )
+
+        # Verify file actually downloaded
+        if not os.path.exists(temp_filepath):
+            raise RuntimeError(
+                "Private Blob download did not create a file."
+            )
+
+        file_size = os.path.getsize(
+            temp_filepath
+        )
+
+        print(
+            "Private Blob downloaded successfully:",
+            temp_filepath,
+            file_size,
+            "bytes"
+        )
+
+        if file_size <= 0:
+            raise RuntimeError(
+                "Private Blob downloaded an empty file."
+            )
+
+        return temp_filepath
+
+    except Exception as e:
+
+        print(
+            "PRIVATE BLOB DOWNLOAD ERROR:",
+            repr(e)
+        )
+
+        raise RuntimeError(
+            f"Unable to download private Blob for analysis: {e}"
+        )
 
     return temp_filepath
 # ============================================================
