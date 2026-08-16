@@ -32,7 +32,7 @@ from database import (
     initialize_database
 )
 
-from vercel.blob import put, get
+from vercel.blob import put, get, BlobClient
 
 
 # ============================================================
@@ -2206,12 +2206,11 @@ def prepare_analysis_file(storage_location):
             "Downloading private Blob..."
         )
 
-        with BlobClient(token=token) as client:
-
-            result = client.get(
-                blob_path,
-                access="private"
-            )
+        result = get(
+    blob_path,
+    access="private",
+    token=token
+)
 
         if result is None:
 
