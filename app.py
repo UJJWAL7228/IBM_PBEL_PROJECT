@@ -2344,14 +2344,10 @@ def upload():
         # ----------------------------------------------------
 
         analysis_filepath = (
-            prepare_analysis_file(
-
-                storage_location,
-
-                original_filename
-
-            )
-        )
+    prepare_analysis_file(
+        storage_location
+    )
+)
 
 
     except Exception as error:
