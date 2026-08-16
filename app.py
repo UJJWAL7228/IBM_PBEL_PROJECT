@@ -2064,15 +2064,14 @@ def save_uploaded_csv(
             f"{filename}"
 
         )
-
-
-        blob = put(
+    
+        uploaded_blob = blob.put(
 
             blob_path,
 
             file_data,
 
-            access="private",
+            access="public",
 
             content_type="text/csv",
 
@@ -2088,13 +2087,18 @@ def save_uploaded_csv(
 
         print(
             "Blob pathname:",
-            blob.pathname
+            uploaded_blob.pathname
         )
 
         print(
             "Blob URL:",
-            blob.url
+            uploaded_blob.url
         )
+
+        print("=" * 70)
+
+
+        return uploaded_blob.url
 
         print("=" * 70)
 
@@ -2476,6 +2480,169 @@ def upload():
             "AI fraud analysis started."
 
     })
+# ============================================================
+# ANALYZE SERVER-SIDE SAMPLE DATASET
+#
+# Used for official sample CSVs so large samples such as
+# 30K / 50K do NOT pass through the Vercel upload request.
+# ============================================================
+
+@app.route(
+    "/analyze-sample/<path:filename>",
+    methods=["POST"]
+)
+def analyze_sample(filename):
+
+    if "user_id" not in session:
+
+        return jsonify({
+
+            "success":
+                False,
+
+            "error":
+                "Please login first."
+
+        }), 401
+
+
+    # --------------------------------------------------------
+    # SECURITY: only allow files from SAMPLE_FOLDER
+    # --------------------------------------------------------
+
+    safe_name = os.path.basename(
+        filename
+    )
+
+
+    if not safe_name.lower().endswith(".csv"):
+
+        return jsonify({
+
+            "success":
+                False,
+
+            "error":
+                "Only CSV sample files are supported."
+
+        }), 400
+
+
+    # --------------------------------------------------------
+    # Make sure this is an official sample
+    # --------------------------------------------------------
+
+    allowed_samples = {
+        os.path.basename(
+            sample
+        )
+        for sample in OFFICIAL_SAMPLE_FILES
+    }
+
+
+    if safe_name not in allowed_samples:
+
+        return jsonify({
+
+            "success":
+                False,
+
+            "error":
+                "Invalid sample dataset."
+
+        }), 400
+
+
+    sample_path = os.path.join(
+        SAMPLE_FOLDER,
+        safe_name
+    )
+
+
+    if not os.path.isfile(sample_path):
+
+        return jsonify({
+
+            "success":
+                False,
+
+            "error":
+                "Sample dataset not found."
+
+        }), 404
+
+
+    try:
+
+        # ----------------------------------------------------
+        # CREATE ANALYSIS JOB
+        # ----------------------------------------------------
+
+        job_id = (
+            create_analysis_job()
+        )
+
+
+        # ----------------------------------------------------
+        # START EXISTING ANALYSIS WORKER
+        # ----------------------------------------------------
+
+        worker = threading.Thread(
+
+            target=run_bulk_analysis,
+
+            args=(
+
+                job_id,
+
+                sample_path,
+
+                safe_name
+
+            ),
+
+            daemon=True
+
+        )
+
+
+        worker.start()
+
+
+        return jsonify({
+
+            "success":
+                True,
+
+            "job_id":
+                job_id,
+
+            "message":
+                "Sample dataset analysis started."
+
+        })
+
+
+    except Exception as error:
+
+        print(
+            "Sample analysis error:",
+            repr(error)
+        )
+
+
+        return jsonify({
+
+            "success":
+                False,
+
+            "error":
+                (
+                    "Unable to start sample analysis: "
+                    f"{error}"
+                )
+
+        }), 500
 
 
 # ============================================================

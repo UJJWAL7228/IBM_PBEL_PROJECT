@@ -1326,6 +1326,14 @@
                                         ) }}"
                                         class="btn btn-outline-primary w-100"
                                     >
+                                    <button
+    type="button"
+    class="btn btn-primary w-100 mt-2 analyze-sample-btn"
+    data-filename="{{ filename }}"
+>
+    <i class="bi bi-shield-check me-2"></i>
+    Analyze Dataset
+</button>
 
                                         <i
                                             class="bi bi-download me-2"
@@ -3560,6 +3568,181 @@ document.addEventListener(
             );
 
         }
+        /* ========================================================
+   SERVER-SIDE SAMPLE ANALYSIS
+======================================================== */
+
+document.querySelectorAll(
+    ".analyze-sample-btn"
+).forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            async function () {
+
+                const filename =
+                    button.dataset.filename;
+
+                if (!filename) {
+                    return;
+                }
+
+                stopPolling();
+                stopVisualProgress();
+
+                currentJobId = null;
+                pageReloading = false;
+
+                if (analysisError) {
+                    analysisError.classList.add(
+                        "d-none"
+                    );
+                }
+
+                if (analysisLoaderCard) {
+                    analysisLoaderCard.classList.remove(
+                        "analysis-error",
+                        "analysis-complete"
+                    );
+                }
+
+                if (analysisIcon) {
+                    analysisIcon.className =
+                        "bi bi-shield-check";
+                }
+
+                if (analysisProgress) {
+                    analysisProgress.classList.add(
+                        "show"
+                    );
+                }
+
+                if (analyzeButton) {
+                    analyzeButton.disabled = true;
+                }
+
+                document
+                    .querySelectorAll(
+                        ".analyze-sample-btn"
+                    )
+                    .forEach(
+                        function (btn) {
+                            btn.disabled = true;
+                        }
+                    );
+
+                setStatus(
+                    "Preparing sample dataset..."
+                );
+
+                setProgress(5);
+
+                startVisualProgress();
+
+                if (analysisCount) {
+                    analysisCount.innerHTML =
+                        '<i class="bi bi-database me-1"></i>' +
+                        "Preparing " +
+                        escapeHtml(filename) +
+                        "...";
+                }
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/analyze-sample/" +
+                            encodeURIComponent(filename),
+                            {
+                                method: "POST",
+
+                                credentials:
+                                    "same-origin",
+
+                                cache: "no-store",
+
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                }
+                            }
+                        );
+
+                    const data =
+                        await response.json();
+
+                    if (
+                        !response.ok ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.error ||
+                            "Unable to start sample analysis."
+                        );
+
+                    }
+
+                    currentJobId =
+                        data.job_id;
+
+                    if (!currentJobId) {
+
+                        throw new Error(
+                            "Server did not return an analysis job ID."
+                        );
+
+                    }
+
+                    setStatus(
+                        "AI fraud analysis started..."
+                    );
+
+                    if (analysisBottomText) {
+                        analysisBottomText.textContent =
+                            "Analyzing transactions...";
+                    }
+
+                    if (analysisCount) {
+                        analysisCount.innerHTML =
+                            '<i class="bi bi-database me-1"></i>' +
+                            "AI engine is processing the dataset...";
+                    }
+
+                    pollAnalysisStatus();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Sample analysis error:",
+                        error
+                    );
+
+                    showAnalysisError(
+                        error.message ||
+                        "Unable to start sample analysis."
+                    );
+
+                    document
+                        .querySelectorAll(
+                            ".analyze-sample-btn"
+                        )
+                        .forEach(
+                            function (btn) {
+                                btn.disabled = false;
+                            }
+                        );
+
+                }
+
+            }
+        );
+
+    }
+)
 
 
         /* ========================================================
