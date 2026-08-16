@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}Bulk Fraud Analysis{% endblock %}
 
@@ -2013,15 +2013,15 @@
      The only analysis workflow is:
      
      File Selection
-          ↓
+          â†“
      /upload
-          ↓
+          â†“
      Job ID
-          ↓
+          â†“
      /analysis-status/<job_id>
-          ↓
+          â†“
      Completed
-          ↓
+          â†“
      Page Reload
 ============================================================ -->
 
@@ -2047,6 +2047,15 @@ document.addEventListener(
             document.getElementById(
                 "datasetFile"
             );
+        /* ============================================================
+   MOBILE FILE SELECTION DISPLAY
+   Shows the selected file name after Android/iOS file picker
+   returns to the webpage.
+   Does NOT start analysis automatically.
+============================================================ */
+
+if (datasetFile) {
+    
 
         const analyzeButton =
             document.getElementById(
@@ -2873,6 +2882,8 @@ document.addEventListener(
         ======================================================== */
 
         async function startAnalysis() {
+            console.log("START ANALYSIS CALLED");
+
 
             if (
                 !datasetFile ||
@@ -3009,7 +3020,7 @@ document.addEventListener(
                 analysisCount.innerHTML =
                     '<i class="bi bi-file-earmark-spreadsheet me-1"></i>' +
                     file.name +
-                    " • " +
+                    " â€¢ " +
                     sizeMB +
                     " MB";
 
@@ -3249,7 +3260,7 @@ document.addEventListener(
                             ""
                         )
                         .replace(
-                            /₹/g,
+                            /â‚¹/g,
                             ""
                         )
                 );
@@ -3261,7 +3272,7 @@ document.addEventListener(
                 )
             ) {
 
-                return "₹" +
+                return "â‚¹" +
                     number.toLocaleString(
                         "en-IN",
                         {
@@ -3273,7 +3284,7 @@ document.addEventListener(
             }
 
 
-            return "₹" +
+            return "â‚¹" +
                 escapeHtml(
                     value || "0"
                 );
@@ -3894,7 +3905,7 @@ document.addEventListener(
                         1,
                         currentPage - 1
                     ),
-                    "‹",
+                    "â€¹",
                     false,
                     currentPage === 1
                 )
@@ -3961,7 +3972,7 @@ document.addEventListener(
 
 
                         dots.textContent =
-                            "…";
+                            "â€¦";
 
 
                         paginationButtons.appendChild(
@@ -3994,7 +4005,7 @@ document.addEventListener(
                         totalPages,
                         currentPage + 1
                     ),
-                    "›",
+                    "â€º",
                     false,
                     currentPage === totalPages
                 )
@@ -4443,3 +4454,5 @@ document.addEventListener(
 </script>
 
 {% endblock %}
+
+
