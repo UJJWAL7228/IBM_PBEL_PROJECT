@@ -2128,10 +2128,7 @@ def save_uploaded_csv(file, filename):
 def prepare_analysis_file(storage_location):
     """
     Download a private Vercel Blob into /tmp for analysis.
-
-    IMPORTANT:
-    Uses BlobClient.get(..., access="private") instead of
-    downloading the private blob URL directly.
+    Compatible with the installed Vercel Python SDK.
     """
 
     if not os.environ.get("VERCEL"):
@@ -2145,10 +2142,8 @@ def prepare_analysis_file(storage_location):
         )
 
     # ---------------------------------------------------------
-    # Extract blob pathname
+    # Get pathname
     # ---------------------------------------------------------
-
-    blob_path = None
 
     if isinstance(storage_location, dict):
 
@@ -2168,34 +2163,25 @@ def prepare_analysis_file(storage_location):
 
     blob_path = str(blob_path)
 
-    # If a full URL was supplied, extract pathname.
+    # Full URL -> pathname
     if "://" in blob_path:
 
-        try:
+        from urllib.parse import urlparse
 
-            from urllib.parse import urlparse
+        parsed = urlparse(blob_path)
 
-            parsed = urlparse(blob_path)
+        blob_path = parsed.path.lstrip("/")
 
-            blob_path = parsed.path.lstrip("/")
-
-        except Exception:
-
-            blob_path = blob_path.split(
-                ".com/",
-                1
-            )[-1]
-
-    # Remove query string if present
+    # Remove query parameters
     blob_path = blob_path.split("?", 1)[0]
 
     print(
-        "Reading private Blob pathname:",
+        "PRIVATE BLOB PATH:",
         blob_path
     )
 
     # ---------------------------------------------------------
-    # Temporary file
+    # Temporary analysis file
     # ---------------------------------------------------------
 
     filename = os.path.basename(blob_path)
@@ -2210,13 +2196,13 @@ def prepare_analysis_file(storage_location):
     )
 
     # ---------------------------------------------------------
-    # Download using authenticated Blob SDK
+    # Download private blob
     # ---------------------------------------------------------
 
     try:
 
         print(
-            "Downloading private Blob using BlobClient..."
+            "Downloading private Blob..."
         )
 
         with BlobClient(token=token) as client:
@@ -2226,55 +2212,179 @@ def prepare_analysis_file(storage_location):
                 access="private"
             )
 
-            if result is None:
-
-                raise RuntimeError(
-                    "Private Blob was not found."
-                )
-
-            if result.status_code != 200:
-
-                raise RuntimeError(
-                    "Private Blob returned HTTP "
-                    f"{result.status_code}"
-                )
-
-            if result.stream is None:
-
-                raise RuntimeError(
-                    "Private Blob returned no file stream."
-                )
-
-            with open(
-                temp_filepath,
-                "wb"
-            ) as output_file:
-
-                for chunk in result.stream:
-
-                    if chunk:
-
-                        output_file.write(chunk)
-
-        # -----------------------------------------------------
-        # Verify downloaded file
-        # -----------------------------------------------------
-
-        if not os.path.exists(
-            temp_filepath
-        ):
+        if result is None:
 
             raise RuntimeError(
-                "Private Blob download did not "
-                "create a file."
+                "Private Blob was not found."
             )
+
+        status_code = getattr(
+            result,
+            "status_code",
+            None
+        )
+
+        print(
+            "PRIVATE BLOB STATUS:",
+            status_code
+        )
+
+        if status_code != 200:
+
+            raise RuntimeError(
+                f"Private Blob returned HTTP "
+                f"{status_code}"
+            )
+
+        # -----------------------------------------------------
+        # Get response content.
+        #
+        # Different versions of the Python SDK expose the
+        # downloaded data differently, so handle the common
+        # forms safely.
+        # -----------------------------------------------------
+
+        data = None
+
+        # New SDK style
+        stream = getattr(
+            result,
+            "stream",
+            None
+        )
+
+        if stream is not None:
+
+            try:
+
+                chunks = []
+
+                for chunk in stream:
+
+                    if chunk:
+                        chunks.append(chunk)
+
+                data = b"".join(chunks)
+
+            except TypeError:
+
+                # Some SDK versions return bytes directly
+                if isinstance(
+                    stream,
+                    (bytes, bytearray)
+                ):
+
+                    data = bytes(stream)
+
+        # Alternative response attributes
+        if data is None:
+
+            for attr in (
+                "data",
+                "content",
+                "body"
+            ):
+
+                value = getattr(
+                    result,
+                    attr,
+                    None
+                )
+
+                if value is not None:
+
+                    if isinstance(
+                        value,
+                        bytes
+                    ):
+
+                        data = value
+                        break
+
+                    if isinstance(
+                        value,
+                        bytearray
+                    ):
+
+                        data = bytes(value)
+                        break
+
+        # -----------------------------------------------------
+        # Last fallback: authenticated HTTP request
+        # -----------------------------------------------------
+
+        if data is None:
+
+            blob_url = None
+
+            blob_info = getattr(
+                result,
+                "blob",
+                None
+            )
+
+            if blob_info is not None:
+
+                blob_url = getattr(
+                    blob_info,
+                    "download_url",
+                    None
+                )
+
+                if not blob_url:
+
+                    blob_url = getattr(
+                        blob_info,
+                        "url",
+                        None
+                    )
+
+            if not blob_url:
+
+                blob_url = blob_path
+
+            print(
+                "Using authenticated Blob HTTP fallback..."
+            )
+
+            import requests
+
+            response = requests.get(
+                blob_url,
+                headers={
+                    "Authorization":
+                        f"Bearer {token}"
+                },
+                timeout=120
+            )
+
+            response.raise_for_status()
+
+            data = response.content
+
+        # -----------------------------------------------------
+        # Save downloaded CSV
+        # -----------------------------------------------------
+
+        if not data:
+
+            raise RuntimeError(
+                "Private Blob returned no file data."
+            )
+
+        with open(
+            temp_filepath,
+            "wb"
+        ) as output_file:
+
+            output_file.write(data)
 
         file_size = os.path.getsize(
             temp_filepath
         )
 
         print(
-            "Private Blob downloaded successfully:",
+            "PRIVATE BLOB DOWNLOAD SUCCESS:",
             temp_filepath,
             file_size,
             "bytes"
