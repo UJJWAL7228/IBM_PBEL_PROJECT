@@ -4,66 +4,86 @@
 
 {% block content %}
 
-<!-- ============================================================
-     BOOTSTRAP ICONS
-     Multiple CDN fallbacks so icons load reliably.
-     No JavaScript/functionality is changed.
-============================================================ -->
-
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 >
 
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
->
-
 <style>
-    /* ============================================================
-   COLORFUL ICONS — FINAL FIX
-   ICONS ONLY — NO FUNCTIONALITY CHANGES
+
+/* ============================================================
+   BULK ANALYSIS PAGE
 ============================================================ */
+
+.bulk-analysis-page {
+    position: relative;
+}
+
+
+/* ============================================================
+   ICONS
+============================================================ */
+
+.sample-dataset-icon-box {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(99, 102, 241, .10);
+    border: 1px solid rgba(99, 102, 241, .22);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, .12),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+}
 
 .sample-dataset-icon-box i {
     font-size: 25px;
+
     transition:
         transform .2s ease,
         filter .2s ease;
 }
 
-/* Dataset icons */
+
+/* Dataset icon colors */
 
 .sample-dataset-card:nth-child(1)
 .sample-dataset-icon-box i {
     color: #22c55e !important;
-    filter: drop-shadow(0 0 7px rgba(34,197,94,.40));
+    filter: drop-shadow(0 0 7px rgba(34, 197, 94, .40));
 }
 
 .sample-dataset-card:nth-child(2)
 .sample-dataset-icon-box i {
     color: #38bdf8 !important;
-    filter: drop-shadow(0 0 7px rgba(56,189,248,.40));
+    filter: drop-shadow(0 0 7px rgba(56, 189, 248, .40));
 }
 
 .sample-dataset-card:nth-child(3)
 .sample-dataset-icon-box i {
     color: #a855f7 !important;
-    filter: drop-shadow(0 0 7px rgba(168,85,247,.40));
+    filter: drop-shadow(0 0 7px rgba(168, 85, 247, .40));
 }
 
 .sample-dataset-card:nth-child(4)
 .sample-dataset-icon-box i {
     color: #f59e0b !important;
-    filter: drop-shadow(0 0 7px rgba(245,158,11,.40));
+    filter: drop-shadow(0 0 7px rgba(245, 158, 11, .40));
 }
 
 .sample-dataset-card:nth-child(5)
 .sample-dataset-icon-box i {
     color: #06b6d4 !important;
-    filter: drop-shadow(0 0 7px rgba(6,182,212,.40));
+    filter: drop-shadow(0 0 7px rgba(6, 182, 212, .40));
 }
+
 
 /* General icons */
 
@@ -143,66 +163,10 @@
     color: #f59e0b !important;
 }
 
-/* Header */
+
+/* Header icon */
 
 .page-header h1 > i {
-    color: #38bdf8 !important;
-    filter: drop-shadow(0 0 8px rgba(56,189,248,.40));
-}
-
-/* Statistics */
-
-.bi-database.fs-2 {
-    color: #38bdf8 !important;
-    filter: drop-shadow(0 0 8px rgba(56,189,248,.40));
-}
-
-.bi-check-circle.fs-2 {
-    color: #22c55e !important;
-    filter: drop-shadow(0 0 8px rgba(34,197,94,.40));
-}
-
-.bi-exclamation-triangle.fs-2 {
-    color: #f59e0b !important;
-    filter: drop-shadow(0 0 8px rgba(245,158,11,.40));
-}
-
-.bi-shield-x.fs-2 {
-    color: #ef4444 !important;
-    filter: drop-shadow(0 0 8px rgba(239,68,68,.40));
-}
-
-/* ============================================================
-   COLORFUL ICONS
-   ICONS ONLY — NO FUNCTIONALITY CHANGES
-============================================================ */
-
-/* Sample dataset icon box */
-.sample-dataset-icon-box {
-    width: 52px;
-    height: 52px;
-
-    min-width: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background: rgba(99,102,241,.10);
-
-    border: 1px solid rgba(99,102,241,.22);
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-/* Main sample icons */
-.sample-dataset-icon-box i {
-    font-size: 25px;
-
     background: linear-gradient(
         135deg,
         #38bdf8,
@@ -216,289 +180,36 @@
     background-clip: text;
 
     filter:
-        drop-shadow(0 0 7px rgba(99,102,241,.35));
-
-    transition:
-        transform .2s ease,
-        filter .2s ease;
+        drop-shadow(0 0 8px rgba(99, 102, 241, .35));
 }
 
-/* Hover */
+
+/* ============================================================
+   SAMPLE DATASET CARDS
+============================================================ */
+
+.sample-dataset-card {
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.sample-dataset-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .15) !important;
+
+    border-color:
+        rgba(99, 102, 241, .35) !important;
+}
+
 .sample-dataset-card:hover
 .sample-dataset-icon-box i {
     transform: scale(1.12);
-
-    filter:
-        drop-shadow(0 0 10px rgba(99,102,241,.55));
 }
 
-
-/* ============================================================
-   DIFFERENT COLORS FOR DIFFERENT DATASET ICONS
-============================================================ */
-
-.sample-dataset-card:nth-child(1)
-.sample-dataset-icon-box i {
-    background: linear-gradient(
-        135deg,
-        #22c55e,
-        #06b6d4
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 7px rgba(34,197,94,.40));
-}
-
-
-.sample-dataset-card:nth-child(2)
-.sample-dataset-icon-box i {
-    background: linear-gradient(
-        135deg,
-        #38bdf8,
-        #2563eb
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 7px rgba(56,189,248,.40));
-}
-
-
-.sample-dataset-card:nth-child(3)
-.sample-dataset-icon-box i {
-    background: linear-gradient(
-        135deg,
-        #a855f7,
-        #ec4899
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 7px rgba(168,85,247,.40));
-}
-
-
-.sample-dataset-card:nth-child(4)
-.sample-dataset-icon-box i {
-    background: linear-gradient(
-        135deg,
-        #f59e0b,
-        #ef4444
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 7px rgba(245,158,11,.40));
-}
-
-
-.sample-dataset-card:nth-child(5)
-.sample-dataset-icon-box i {
-    background: linear-gradient(
-        135deg,
-        #06b6d4,
-        #3b82f6
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 7px rgba(6,182,212,.40));
-}
-
-
-/* ============================================================
-   AMOUNT / TRANSACTION RELATED SMALL ICONS
-============================================================ */
-
-#transactionsTable td i {
-    transition:
-        transform .15s ease,
-        filter .15s ease;
-}
-
-#transactionsTable td:hover i {
-    transform: scale(1.08);
-}
-
-
-/* ============================================================
-   GENERAL BOOTSTRAP ICON COLORS
-============================================================ */
-
-.bi-database,
-.bi-database-fill,
-.bi-database-fill-check {
-    color: #38bdf8;
-}
-
-.bi-bar-chart-line-fill,
-.bi-graph-up-arrow {
-    color: #a855f7;
-}
-
-.bi-layers-fill {
-    color: #f59e0b;
-}
-
-.bi-lightning-charge-fill {
-    color: #facc15;
-}
-
-.bi-file-earmark-spreadsheet-fill {
-    color: #22c55e;
-}
-
-.bi-file-earmark {
-    color: #60a5fa;
-}
-
-.bi-download {
-    color: #38bdf8;
-}
-
-.bi-cloud-arrow-up {
-    color: #60a5fa;
-}
-
-.bi-cpu {
-    color: #a78bfa;
-}
-
-.bi-shield-check {
-    color: #22c55e;
-}
-
-.bi-check-circle,
-.bi-check-circle-fill {
-    color: #22c55e;
-}
-
-.bi-exclamation-triangle {
-    color: #f59e0b;
-}
-
-.bi-shield-x {
-    color: #ef4444;
-}
-
-.bi-eye {
-    color: #60a5fa;
-}
-
-.bi-search {
-    color: #38bdf8;
-}
-
-.bi-arrow-counterclockwise {
-    color: #a78bfa;
-}
-
-.bi-table {
-    color: #818cf8;
-}
-
-.bi-folder-x {
-    color: #f59e0b;
-}
-
-
-/* ============================================================
-   HEADER ICON
-============================================================ */
-
-.page-header h1 > i {
-    background: linear-gradient(
-        135deg,
-        #38bdf8,
-        #6366f1,
-        #a855f7
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-
-    filter:
-        drop-shadow(0 0 8px rgba(99,102,241,.35));
-}
-
-
-/* ============================================================
-   STATISTICS CARD ICONS
-============================================================ */
-
-.card-body > i.fs-2 {
-    display: inline-block;
-
-    margin-top: 8px;
-
-    transition:
-        transform .2s ease,
-        filter .2s ease;
-}
-
-.card:hover .card-body > i.fs-2 {
-    transform: scale(1.12);
-}
-
-.bi-database.fs-2 {
-    color: #38bdf8 !important;
-
-    filter:
-        drop-shadow(0 0 8px rgba(56,189,248,.40));
-}
-
-.bi-check-circle.fs-2 {
-    color: #22c55e !important;
-
-    filter:
-        drop-shadow(0 0 8px rgba(34,197,94,.40));
-}
-
-.bi-exclamation-triangle.fs-2 {
-    color: #f59e0b !important;
-
-    filter:
-        drop-shadow(0 0 8px rgba(245,158,11,.40));
-}
-
-.bi-shield-x.fs-2 {
-    color: #ef4444 !important;
-
-    filter:
-        drop-shadow(0 0 8px rgba(239,68,68,.40));
-}
-
-
-/* ============================================================
-   BULK ANALYSIS PAGE
-============================================================ */
-
-.bulk-analysis-page {
-    position: relative;
-}
 
 /* ============================================================
    UPLOAD CARD
@@ -518,8 +229,9 @@
 }
 
 .upload-description {
-    color: rgba(255,255,255,.68);
+    color: rgba(255, 255, 255, .68);
 }
+
 
 /* ============================================================
    ANALYSIS PROGRESS
@@ -527,17 +239,22 @@
 
 .analysis-progress-container {
     display: none;
+
     margin-top: 24px;
+
     opacity: 0;
     transform: translateY(12px);
 }
 
 .analysis-progress-container.show {
     display: block;
-    animation: analysisReveal .45s ease forwards;
+
+    animation:
+        analysisReveal .45s ease forwards;
 }
 
 @keyframes analysisReveal {
+
     from {
         opacity: 0;
         transform: translateY(12px);
@@ -549,22 +266,28 @@
     }
 }
 
+
+/* ============================================================
+   ANALYSIS LOADER
+============================================================ */
+
 .analysis-loader-card {
     position: relative;
     overflow: hidden;
 
     border-radius: 24px;
+
     padding: 28px;
 
     background:
         radial-gradient(
             circle at 88% 8%,
-            rgba(99,102,241,.25),
+            rgba(99, 102, 241, .25),
             transparent 34%
         ),
         radial-gradient(
             circle at 5% 100%,
-            rgba(56,189,248,.16),
+            rgba(56, 189, 248, .16),
             transparent 36%
         ),
         linear-gradient(
@@ -574,29 +297,32 @@
             #211c4d 100%
         );
 
-    border: 1px solid rgba(129,140,248,.38);
+    border: 1px solid rgba(129, 140, 248, .38);
 
     box-shadow:
-        0 20px 55px rgba(15,23,42,.34),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 20px 55px rgba(15, 23, 42, .34),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
 }
 
 .analysis-loader-card::before {
     content: "";
 
     position: absolute;
+
     inset: -55%;
 
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        rgba(96,165,250,.00) 105deg,
-        rgba(96,165,250,.10) 145deg,
-        rgba(168,85,247,.13) 180deg,
-        transparent 225deg
-    );
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent 0deg,
+            rgba(96, 165, 250, 0) 105deg,
+            rgba(96, 165, 250, .10) 145deg,
+            rgba(168, 85, 247, .13) 180deg,
+            transparent 225deg
+        );
 
-    animation: analysisAmbient 7s linear infinite;
+    animation:
+        analysisAmbient 7s linear infinite;
 
     pointer-events: none;
 }
@@ -605,27 +331,31 @@
     content: "";
 
     position: absolute;
+
     top: 0;
     left: -35%;
 
     width: 32%;
     height: 100%;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.11),
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, .11),
+            transparent
+        );
 
     transform: skewX(-18deg);
 
-    animation: analysisSweep 3.2s ease-in-out infinite;
+    animation:
+        analysisSweep 3.2s ease-in-out infinite;
 
     pointer-events: none;
 }
 
 @keyframes analysisAmbient {
+
     to {
         transform: rotate(360deg);
     }
@@ -633,7 +363,7 @@
 
 @keyframes analysisSweep {
 
-    0%,20% {
+    0%, 20% {
         left: -35%;
         opacity: 0;
     }
@@ -642,11 +372,12 @@
         opacity: 1;
     }
 
-    72%,100% {
+    72%, 100% {
         left: 120%;
         opacity: 0;
     }
 }
+
 
 /* ============================================================
    ANALYSIS ICON
@@ -668,8 +399,8 @@
     background:
         linear-gradient(
             145deg,
-            rgba(59,130,246,.95),
-            rgba(124,58,237,.95)
+            rgba(59, 130, 246, .95),
+            rgba(124, 58, 237, .95)
         );
 
     color: white;
@@ -677,18 +408,21 @@
     font-size: 27px;
 
     box-shadow:
-        0 10px 30px rgba(79,70,229,.34),
-        0 0 26px rgba(99,102,241,.24),
-        inset 0 1px 0 rgba(255,255,255,.25);
+        0 10px 30px rgba(79, 70, 229, .34),
+        0 0 26px rgba(99, 102, 241, .24),
+        inset 0 1px 0 rgba(255, 255, 255, .25);
 }
 
 .analysis-icon i {
-    animation: analysisIconFloat 2.8s ease-in-out infinite;
+    color: white !important;
+
+    animation:
+        analysisIconFloat 2.8s ease-in-out infinite;
 }
 
 @keyframes analysisIconFloat {
 
-    0%,100% {
+    0%, 100% {
         transform: translateY(0) scale(1);
     }
 
@@ -699,14 +433,15 @@
 
 .analysis-pulse {
     position: absolute;
+
     inset: -5px;
 
     border-radius: 21px;
 
-    border: 1px solid rgba(129,140,248,.65);
+    border: 1px solid rgba(129, 140, 248, .65);
 
     animation:
-        analysisPulse 2.2s cubic-bezier(.2,.7,.3,1)
+        analysisPulse 2.2s cubic-bezier(.2, .7, .3, 1)
         infinite;
 }
 
@@ -717,18 +452,19 @@
         opacity: .72;
     }
 
-    70%,100% {
+    70%, 100% {
         transform: scale(1.28);
         opacity: 0;
     }
 }
+
 
 /* ============================================================
    ANALYSIS TEXT
 ============================================================ */
 
 .analysis-status-text {
-    color: rgba(255,255,255,.78);
+    color: rgba(255, 255, 255, .78);
 
     transition:
         opacity .18s ease,
@@ -737,6 +473,7 @@
 
 .analysis-count-badge {
     display: inline-flex;
+
     align-items: center;
 
     margin-top: 10px;
@@ -745,17 +482,18 @@
 
     border-radius: 999px;
 
-    background: rgba(255,255,255,.075);
+    background: rgba(255, 255, 255, .075);
 
-    border: 1px solid rgba(255,255,255,.11);
+    border: 1px solid rgba(255, 255, 255, .11);
 
-    color: rgba(255,255,255,.82);
+    color: rgba(255, 255, 255, .82);
 
     font-size: 13px;
 }
 
+
 /* ============================================================
-   PROGRESS
+   PROGRESS BAR
 ============================================================ */
 
 .analysis-progress-track {
@@ -768,10 +506,10 @@
 
     border-radius: 999px;
 
-    background: rgba(255,255,255,.105);
+    background: rgba(255, 255, 255, .105);
 
     box-shadow:
-        inset 0 1px 4px rgba(0,0,0,.35);
+        inset 0 1px 4px rgba(0, 0, 0, .35);
 }
 
 .analysis-progress-bar {
@@ -791,11 +529,11 @@
         );
 
     box-shadow:
-        0 0 20px rgba(99,102,241,.65),
-        0 0 7px rgba(56,189,248,.55);
+        0 0 20px rgba(99, 102, 241, .65),
+        0 0 7px rgba(56, 189, 248, .55);
 
     transition:
-        width .35s cubic-bezier(.22,1,.36,1);
+        width .35s cubic-bezier(.22, 1, .36, 1);
 }
 
 .analysis-progress-bar::after {
@@ -813,7 +551,7 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.65),
+            rgba(255, 255, 255, .65),
             transparent
         );
 
@@ -838,6 +576,7 @@
     }
 }
 
+
 /* ============================================================
    DOTS
 ============================================================ */
@@ -860,7 +599,7 @@
     background: #60a5fa;
 
     box-shadow:
-        0 0 10px rgba(96,165,250,.65);
+        0 0 10px rgba(96, 165, 250, .65);
 
     animation:
         analysisDots 1.35s ease-in-out infinite;
@@ -876,7 +615,7 @@
 
 @keyframes analysisDots {
 
-    0%,70%,100% {
+    0%, 70%, 100% {
         transform: scale(.55);
         opacity: .38;
     }
@@ -887,38 +626,58 @@
     }
 }
 
+
 /* ============================================================
    SUCCESS / ERROR
 ============================================================ */
 
 .analysis-complete {
-    border-color: rgba(34,197,94,.5);
+    border-color: rgba(34, 197, 94, .5);
 }
 
 .analysis-error {
-    border-color: rgba(239,68,68,.55);
+    border-color: rgba(239, 68, 68, .55);
 }
+
 
 /* ============================================================
-   SAMPLE CARDS
+   STATISTICS
 ============================================================ */
 
-.sample-dataset-card {
+.card-body > i.fs-2 {
+    display: inline-block;
+
+    margin-top: 8px;
+
     transition:
         transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
+        filter .2s ease;
 }
 
-.sample-dataset-card:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.15) !important;
-
-    border-color:
-        rgba(99,102,241,.35) !important;
+.card:hover .card-body > i.fs-2 {
+    transform: scale(1.12);
 }
+
+.bi-database.fs-2 {
+    color: #38bdf8 !important;
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, .40));
+}
+
+.bi-check-circle.fs-2 {
+    color: #22c55e !important;
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, .40));
+}
+
+.bi-exclamation-triangle.fs-2 {
+    color: #f59e0b !important;
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, .40));
+}
+
+.bi-shield-x.fs-2 {
+    color: #ef4444 !important;
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, .40));
+}
+
 
 /* ============================================================
    TRANSACTION TABLE
@@ -945,8 +704,19 @@
 }
 
 #transactionsTable tbody tr:hover {
-    background-color: rgba(99,102,241,.06);
+    background-color: rgba(99, 102, 241, .06);
 }
+
+#transactionsTable td i {
+    transition:
+        transform .15s ease,
+        filter .15s ease;
+}
+
+#transactionsTable td:hover i {
+    transform: scale(1.08);
+}
+
 
 /* ============================================================
    PAGINATION
@@ -964,7 +734,7 @@
 }
 
 .pagination-info {
-    color: rgba(255,255,255,.65);
+    color: rgba(255, 255, 255, .65);
 
     font-size: 14px;
 }
@@ -983,11 +753,12 @@
 
 .page-number.active {
     box-shadow:
-        0 0 0 2px rgba(99,102,241,.22);
+        0 0 0 2px rgba(99, 102, 241, .22);
 }
 
+
 /* ============================================================
-   LARGE DATASET NOTICE
+   DATASET BADGE
 ============================================================ */
 
 .large-dataset-badge {
@@ -1001,17 +772,18 @@
 
     border-radius: 999px;
 
-    background: rgba(99,102,241,.10);
+    background: rgba(99, 102, 241, .10);
 
-    border: 1px solid rgba(99,102,241,.20);
+    border: 1px solid rgba(99, 102, 241, .20);
 
     color: #8ea2ff;
 
     font-size: 12px;
 }
 
+
 /* ============================================================
-   EMPTY TABLE
+   EMPTY / LOADING TABLE
 ============================================================ */
 
 .table-loading {
@@ -1019,14 +791,15 @@
 
     text-align: center;
 
-    color: rgba(255,255,255,.6);
+    color: rgba(255, 255, 255, .6);
 }
+
 
 /* ============================================================
    MOBILE
 ============================================================ */
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
 
     .analysis-loader-card {
         padding: 20px;
@@ -1051,6 +824,7 @@
 
     .transaction-pagination {
         align-items: flex-start;
+
         flex-direction: column;
     }
 
@@ -1060,6 +834,7 @@
 
 
 <div class="container-fluid py-4 bulk-analysis-page">
+
 
     <!-- ========================================================
          HEADER
@@ -1088,12 +863,11 @@
     <!-- ========================================================
          SAMPLE DATASETS
 
-         ICON LOGIC ONLY:
-         The icon inside each card is selected according to
-         the dataset size.
+         IMPORTANT:
+         SAMPLE DATASETS ARE DOWNLOAD-ONLY.
 
-         NOTHING ELSE IN THE SAMPLE DATASET FUNCTIONALITY
-         HAS BEEN CHANGED.
+         User downloads CSV here and then manually uploads
+         that CSV using the Upload Transaction Dataset section.
     ========================================================= -->
 
     <div class="card shadow-sm mb-5">
@@ -1101,8 +875,6 @@
         <div class="card-body p-4">
 
             <div class="d-flex align-items-center mb-4">
-
-                <!-- HEADER ICON -->
 
                 <div class="sample-dataset-icon-box me-3">
 
@@ -1119,8 +891,9 @@
                     <p class="text-secondary mb-0">
 
                         Don't have your own dataset?
-                        Use one of our ready-made banking
-                        transaction files.
+                        Download one of our ready-made banking
+                        transaction files and upload it manually
+                        below.
 
                     </p>
 
@@ -1135,9 +908,7 @@
 
                     {% for filename in sample_files %}
 
-                        {% set filename_lower =
-                            filename.lower()
-                        %}
+                        {% set filename_lower = filename.lower() %}
 
 
                         {% if "50000" in filename_lower %}
@@ -1264,11 +1035,6 @@
                                         class="d-flex align-items-center mb-3"
                                     >
 
-                                        <!-- ==================================================
-                                             DATASET ICON
-                                             ICON ONLY CHANGE
-                                        ================================================== -->
-
                                         <div
                                             class="sample-dataset-icon-box me-3"
                                         >
@@ -1319,6 +1085,8 @@
                                     </div>
 
 
+                                    <!-- DOWNLOAD ONLY -->
+
                                     <a
                                         href="{{ url_for(
                                             'download_sample',
@@ -1326,14 +1094,6 @@
                                         ) }}"
                                         class="btn btn-outline-primary w-100"
                                     >
-                                    <button
-    type="button"
-    class="btn btn-primary w-100 mt-2 analyze-sample-btn"
-    data-filename="{{ filename }}"
->
-    <i class="bi bi-shield-check me-2"></i>
-    Analyze Dataset
-</button>
 
                                         <i
                                             class="bi bi-download me-2"
@@ -1398,8 +1158,6 @@
 
     <!-- ========================================================
          UPLOAD CARD
-
-         INTERNAL CODE UNCHANGED.
     ========================================================= -->
 
     <div class="card shadow-sm mb-4 upload-card">
@@ -1618,11 +1376,10 @@
 
     <!-- ========================================================
          STATISTICS
-         
-         KEPT EXACTLY AS-IS.
     ========================================================= -->
 
     <div class="row g-4 mb-5">
+
 
         <!-- TOTAL -->
 
@@ -1641,7 +1398,7 @@
                     </h2>
 
                     <i
-                        class="bi bi-database fs-2 text-primary"
+                        class="bi bi-database fs-2"
                     ></i>
 
                 </div>
@@ -1670,7 +1427,7 @@
                     </h2>
 
                     <i
-                        class="bi bi-check-circle fs-2 text-success"
+                        class="bi bi-check-circle fs-2"
                     ></i>
 
                 </div>
@@ -1699,7 +1456,7 @@
                     </h2>
 
                     <i
-                        class="bi bi-exclamation-triangle fs-2 text-warning"
+                        class="bi bi-exclamation-triangle fs-2"
                     ></i>
 
                 </div>
@@ -1728,7 +1485,7 @@
                     </h2>
 
                     <i
-                        class="bi bi-shield-x fs-2 text-danger"
+                        class="bi bi-shield-x fs-2"
                     ></i>
 
                 </div>
@@ -1742,8 +1499,6 @@
 
     <!-- ========================================================
          ANALYZED TRANSACTIONS
-         
-         KEPT EXACTLY AS-IS.
     ========================================================= -->
 
     {% if transactions %}
@@ -2031,7 +1786,7 @@
 
         <!-- ========================================================
              COMPACT TRANSACTION DATA
-        ======================================================== -->
+        ========================================================= -->
 
         <script id="transactionsData" type="application/json">
 [
@@ -2213,7 +1968,7 @@
 
         <!-- ========================================================
              EMPTY STATE
-        ======================================================== -->
+        ========================================================= -->
 
         <div class="card shadow-sm">
 
@@ -2233,8 +1988,8 @@
 
                 <p class="text-secondary mb-0">
 
-                    Upload a CSV dataset or use one
-                    of the sample banking datasets above.
+                    Download a sample CSV above and manually
+                    upload it here, or upload your own CSV dataset.
 
                 </p>
 
@@ -2249,8 +2004,25 @@
 
 <!-- ============================================================
      JAVASCRIPT
-
-     SAME ANALYSIS / UPLOAD / POLLING / TABLE LOGIC
+     
+     IMPORTANT:
+     There is NO sample-analysis JavaScript here.
+     
+     Sample datasets are DOWNLOAD ONLY.
+     
+     The only analysis workflow is:
+     
+     File Selection
+          ↓
+     /upload
+          ↓
+     Job ID
+          ↓
+     /analysis-status/<job_id>
+          ↓
+     Completed
+          ↓
+     Page Reload
 ============================================================ -->
 
 <script>
@@ -2376,11 +2148,6 @@ document.addEventListener(
                 "noTransactionResults"
             );
 
-        const pagination =
-            document.getElementById(
-                "transactionPagination"
-            );
-
         const paginationInfo =
             document.getElementById(
                 "paginationInfo"
@@ -2421,7 +2188,7 @@ document.addEventListener(
 
 
         /* ========================================================
-           LOAD COMPACT TRANSACTION DATA
+           LOAD TRANSACTION DATA
         ======================================================== */
 
         if (transactionDataElement) {
@@ -2485,157 +2252,6 @@ document.addEventListener(
                 ' ' +
                 allTransactions.length.toLocaleString() +
                 ' transactions loaded';
-
-        }
-
-
-        /* ========================================================
-           ANALYSIS MESSAGES
-        ======================================================== */
-
-        const analysisMessages = [
-
-            "Reading transaction dataset...",
-
-            "Preparing transaction records...",
-
-            "Scanning transaction patterns...",
-
-            "Checking fraud indicators...",
-
-            "Calculating risk levels...",
-
-            "Evaluating transaction behaviour...",
-
-            "Generating fraud probabilities...",
-
-            "Finalizing AI analysis..."
-
-        ];
-
-
-        /* ========================================================
-           CSV ROW COUNTER
-        ======================================================== */
-
-        function countCsvRows(file) {
-
-            return new Promise(
-                function (resolve) {
-
-                    if (!file) {
-
-                        resolve(0);
-
-                        return;
-
-                    }
-
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onload =
-                        function (event) {
-
-                            const text =
-                                event.target.result ||
-                                "";
-
-
-                            if (!text.trim()) {
-
-                                resolve(0);
-
-                                return;
-
-                            }
-
-
-                            let rows = 0;
-
-                            let insideQuotes = false;
-
-
-                            for (
-                                let i = 0;
-                                i < text.length;
-                                i++
-                            ) {
-
-                                const character =
-                                    text[i];
-
-
-                                if (
-                                    character === '"'
-                                ) {
-
-                                    if (
-                                        insideQuotes &&
-                                        text[i + 1] === '"'
-                                    ) {
-
-                                        i++;
-
-                                        continue;
-
-                                    }
-
-
-                                    insideQuotes =
-                                        !insideQuotes;
-
-                                }
-
-
-                                if (
-                                    character === "\n" &&
-                                    !insideQuotes
-                                ) {
-
-                                    rows++;
-
-                                }
-
-                            }
-
-
-                            if (
-                                text.length > 0 &&
-                                text[text.length - 1] !== "\n"
-                            ) {
-
-                                rows++;
-
-                            }
-
-
-                            resolve(
-                                Math.max(
-                                    0,
-                                    rows - 1
-                                )
-                            );
-
-                        };
-
-
-                    reader.onerror =
-                        function () {
-
-                            resolve(0);
-
-                        };
-
-
-                    reader.readAsText(
-                        file
-                    );
-
-                }
-            );
 
         }
 
@@ -2750,9 +2366,7 @@ document.addEventListener(
 
         function stopVisualProgress() {
 
-            if (
-                visualProgressTimer
-            ) {
+            if (visualProgressTimer) {
 
                 cancelAnimationFrame(
                     visualProgressTimer
@@ -2818,7 +2432,7 @@ document.addEventListener(
                         visualProgress < 25
                     ) {
 
-                        speed = .030;
+                        speed = 0.030;
 
                     }
 
@@ -2826,7 +2440,7 @@ document.addEventListener(
                         visualProgress < 55
                     ) {
 
-                        speed = .020;
+                        speed = 0.020;
 
                     }
 
@@ -2834,13 +2448,13 @@ document.addEventListener(
                         visualProgress < 78
                     ) {
 
-                        speed = .012;
+                        speed = 0.012;
 
                     }
 
                     else {
 
-                        speed = .005;
+                        speed = 0.005;
 
                     }
 
@@ -2961,7 +2575,10 @@ document.addEventListener(
             try {
 
                 const statusUrl =
-                    "{{ url_for('analysis_status', job_id='JOB_ID_PLACEHOLDER') }}"
+                    "{{ url_for(
+                        'analysis_status',
+                        job_id='JOB_ID_PLACEHOLDER'
+                    ) }}"
                     .replace(
                         "JOB_ID_PLACEHOLDER",
                         encodeURIComponent(
@@ -3079,6 +2696,10 @@ document.addEventListener(
                 }
 
 
+                /* ==================================================
+                   COMPLETED
+                ================================================== */
+
                 if (
                     data.status ===
                     "completed"
@@ -3140,6 +2761,10 @@ document.addEventListener(
 
                 }
 
+
+                /* ==================================================
+                   ERROR
+                ================================================== */
 
                 if (
                     data.status ===
@@ -3239,7 +2864,12 @@ document.addEventListener(
 
 
         /* ========================================================
-           UPLOAD HANDLER
+           UPLOAD / ANALYSIS
+           
+           THIS IS THE ONLY ANALYSIS START FUNCTION.
+           
+           Sample CSVs must first be downloaded and then selected
+           here manually.
         ======================================================== */
 
         async function startAnalysis() {
@@ -3443,13 +3073,11 @@ document.addEventListener(
 
                 else {
 
-                    const responseText =
-                        await response.text();
+                    await response.text();
 
 
                     throw new Error(
-                        "Server returned an unexpected response instead of JSON. " +
-                        "Please check the Flask /upload route."
+                        "Server returned an unexpected response instead of JSON. Please check the Flask /upload route."
                     );
 
                 }
@@ -3527,7 +3155,7 @@ document.addEventListener(
 
 
         /* ========================================================
-           BUTTON CLICK
+           ANALYZE BUTTON
         ======================================================== */
 
         if (analyzeButton) {
@@ -3549,7 +3177,7 @@ document.addEventListener(
 
 
         /* ========================================================
-           PREVENT FORM NATIVE SUBMISSION
+           PREVENT NATIVE FORM SUBMISSION
         ======================================================== */
 
         if (uploadForm) {
@@ -3568,181 +3196,6 @@ document.addEventListener(
             );
 
         }
-        /* ========================================================
-   SERVER-SIDE SAMPLE ANALYSIS
-======================================================== */
-
-document.querySelectorAll(
-    ".analyze-sample-btn"
-).forEach(
-    function (button) {
-
-        button.addEventListener(
-            "click",
-            async function () {
-
-                const filename =
-                    button.dataset.filename;
-
-                if (!filename) {
-                    return;
-                }
-
-                stopPolling();
-                stopVisualProgress();
-
-                currentJobId = null;
-                pageReloading = false;
-
-                if (analysisError) {
-                    analysisError.classList.add(
-                        "d-none"
-                    );
-                }
-
-                if (analysisLoaderCard) {
-                    analysisLoaderCard.classList.remove(
-                        "analysis-error",
-                        "analysis-complete"
-                    );
-                }
-
-                if (analysisIcon) {
-                    analysisIcon.className =
-                        "bi bi-shield-check";
-                }
-
-                if (analysisProgress) {
-                    analysisProgress.classList.add(
-                        "show"
-                    );
-                }
-
-                if (analyzeButton) {
-                    analyzeButton.disabled = true;
-                }
-
-                document
-                    .querySelectorAll(
-                        ".analyze-sample-btn"
-                    )
-                    .forEach(
-                        function (btn) {
-                            btn.disabled = true;
-                        }
-                    );
-
-                setStatus(
-                    "Preparing sample dataset..."
-                );
-
-                setProgress(5);
-
-                startVisualProgress();
-
-                if (analysisCount) {
-                    analysisCount.innerHTML =
-                        '<i class="bi bi-database me-1"></i>' +
-                        "Preparing " +
-                        escapeHtml(filename) +
-                        "...";
-                }
-
-                try {
-
-                    const response =
-                        await fetch(
-                            "/analyze-sample/" +
-                            encodeURIComponent(filename),
-                            {
-                                method: "POST",
-
-                                credentials:
-                                    "same-origin",
-
-                                cache: "no-store",
-
-                                headers: {
-                                    "Accept":
-                                        "application/json"
-                                }
-                            }
-                        );
-
-                    const data =
-                        await response.json();
-
-                    if (
-                        !response.ok ||
-                        !data.success
-                    ) {
-
-                        throw new Error(
-                            data.error ||
-                            "Unable to start sample analysis."
-                        );
-
-                    }
-
-                    currentJobId =
-                        data.job_id;
-
-                    if (!currentJobId) {
-
-                        throw new Error(
-                            "Server did not return an analysis job ID."
-                        );
-
-                    }
-
-                    setStatus(
-                        "AI fraud analysis started..."
-                    );
-
-                    if (analysisBottomText) {
-                        analysisBottomText.textContent =
-                            "Analyzing transactions...";
-                    }
-
-                    if (analysisCount) {
-                        analysisCount.innerHTML =
-                            '<i class="bi bi-database me-1"></i>' +
-                            "AI engine is processing the dataset...";
-                    }
-
-                    pollAnalysisStatus();
-
-                }
-
-                catch (error) {
-
-                    console.error(
-                        "Sample analysis error:",
-                        error
-                    );
-
-                    showAnalysisError(
-                        error.message ||
-                        "Unable to start sample analysis."
-                    );
-
-                    document
-                        .querySelectorAll(
-                            ".analyze-sample-btn"
-                        )
-                        .forEach(
-                            function (btn) {
-                                btn.disabled = false;
-                            }
-                        );
-
-                }
-
-            }
-        );
-
-    }
-)
 
 
         /* ========================================================
@@ -3828,6 +3281,21 @@ document.querySelectorAll(
         }
 
 
+        /* ========================================================
+           PREDICTION MAPPING
+           
+           Handles:
+           Fraud
+           Fraudulent
+           High Risk
+           Risky
+           Suspicious
+           Safe
+           Legitimate
+           Normal
+           Transaction Appears Safe
+        ======================================================== */
+
         function getPredictionType(
             prediction
         ) {
@@ -3835,7 +3303,9 @@ document.querySelectorAll(
             const text =
                 String(
                     prediction || ""
-                ).toLowerCase();
+                )
+                    .trim()
+                    .toLowerCase();
 
 
             if (
@@ -3849,7 +3319,8 @@ document.querySelectorAll(
 
             if (
                 text.includes("risk") ||
-                text.includes("suspicious")
+                text.includes("suspicious") ||
+                text.includes("alert")
             ) {
 
                 return "risky";
@@ -3862,6 +3333,10 @@ document.querySelectorAll(
         }
 
 
+        /* ========================================================
+           RISK MAPPING
+        ======================================================== */
+
         function getRiskType(
             transaction
         ) {
@@ -3869,13 +3344,17 @@ document.querySelectorAll(
             const risk =
                 String(
                     transaction.risk || ""
-                ).toLowerCase();
+                )
+                    .trim()
+                    .toLowerCase();
 
 
             const prediction =
                 String(
                     transaction.prediction || ""
-                ).toLowerCase();
+                )
+                    .trim()
+                    .toLowerCase();
 
 
             if (
@@ -3954,6 +3433,10 @@ document.querySelectorAll(
 
         }
 
+
+        /* ========================================================
+           SEARCH TEXT
+        ======================================================== */
 
         function getSearchText(
             transaction
@@ -4323,7 +3806,7 @@ document.querySelectorAll(
 
 
         /* ========================================================
-           PAGINATION RENDER
+           PAGINATION
         ======================================================== */
 
         function renderPagination() {
@@ -4447,7 +3930,7 @@ document.querySelectorAll(
                 Array.from(
                     pages
                 ).sort(
-                    function (a,b) {
+                    function (a, b) {
                         return a - b;
                     }
                 );
@@ -4764,7 +4247,7 @@ document.querySelectorAll(
 
 
         /* ========================================================
-           RISK
+           RISK FILTER
         ======================================================== */
 
         if (riskFilter) {
@@ -4778,7 +4261,7 @@ document.querySelectorAll(
 
 
         /* ========================================================
-           CLEAR
+           CLEAR SEARCH
         ======================================================== */
 
         if (clearButton) {
@@ -4805,7 +4288,7 @@ document.querySelectorAll(
 
 
         /* ========================================================
-           RESET
+           RESET FILTERS
         ======================================================== */
 
         if (resetButton) {
