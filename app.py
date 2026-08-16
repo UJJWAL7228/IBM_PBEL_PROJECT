@@ -640,7 +640,6 @@ def run_bulk_analysis(
 
         )
 
-
 # ============================================================
 # OFFICIAL SAMPLE FILES
 # ============================================================
@@ -649,15 +648,12 @@ OFFICIAL_SAMPLE_FILES = [
 
     "sample_banking_transactions_500.csv",
 
-    "sample_bank_transfers_25000.csv",
+    "sample_online_payments_10000.csv",
 
-    "sample_digital_wallet_30000.csv",
-
-    "sample_mixed_transactions_50000.csv",
-
-    "sample_online_payments_10000.csv"
+    "sample_bank_transfers_25000.csv"
 
 ]
+
 
 
 # ============================================================
