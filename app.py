@@ -2071,7 +2071,7 @@ def save_uploaded_csv(
 
             file_data,
 
-            access="public",
+            access="private",
 
             content_type="text/csv",
 
@@ -2226,13 +2226,22 @@ def prepare_analysis_file(
     )
 
 
-    response = requests.get(
+    token = os.environ.get(
+    "BLOB_READ_WRITE_TOKEN"
+)
 
-        storage_location,
-
-        timeout=120
-
+if not token:
+    raise RuntimeError(
+        "BLOB_READ_WRITE_TOKEN is not configured."
     )
+
+response = requests.get(
+    storage_location,
+    headers={
+        "Authorization": f"Bearer {token}"
+    },
+    timeout=120
+)
 
 
     response.raise_for_status()
