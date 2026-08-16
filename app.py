@@ -31,7 +31,7 @@ from database import (
     initialize_database
 )
 
-from vercel import blob
+from vercel.blob import put, get
 
 
 # ============================================================
@@ -2008,13 +2008,7 @@ def bulk_analysis():
 # SAVE UPLOADED CSV
 # ============================================================
 
-def save_uploaded_csv(
-
-    file,
-
-    filename
-
-):
+def save_uploaded_csv(file, filename):
 
     """
     LOCAL:
@@ -2034,19 +2028,14 @@ def save_uploaded_csv(
             "BLOB_READ_WRITE_TOKEN"
         )
 
-
         if not token:
 
             raise RuntimeError(
-
-                "BLOB_READ_WRITE_TOKEN is not "
-                "configured in the Vercel environment."
-
+                "BLOB_READ_WRITE_TOKEN is not configured "
+                "in the Vercel environment."
             )
 
-
         file_data = file.read()
-
 
         if not file_data:
 
@@ -2054,31 +2043,19 @@ def save_uploaded_csv(
                 "Uploaded CSV file is empty."
             )
 
-
         blob_path = (
-
             "fraud-analysis/"
-
             f"{uuid.uuid4().hex}_"
-
             f"{filename}"
-
         )
-    
-        uploaded_blob = blob.put(
 
+        uploaded_blob = put(
             blob_path,
-
             file_data,
-
             access="private",
-
             content_type="text/csv",
-
             token=token
-
         )
-
 
         print()
         print("=" * 70)
@@ -2097,86 +2074,55 @@ def save_uploaded_csv(
 
         print("=" * 70)
 
-
-        return uploaded_blob.url
-
-        print("=" * 70)
-
-
-        return blob.url
-
+        return {
+            "pathname": uploaded_blob.pathname,
+            "url": uploaded_blob.url
+        }
 
     # --------------------------------------------------------
     # LOCAL DEVELOPMENT
     # --------------------------------------------------------
 
     filepath = os.path.join(
-
         UPLOAD_FOLDER,
-
         filename
-
     )
 
-
     counter = 1
-
 
     base_name = os.path.splitext(
         filename
     )[0]
 
-
     extension = os.path.splitext(
         filename
     )[1]
 
-
-    while os.path.exists(
-        filepath
-    ):
+    while os.path.exists(filepath):
 
         filename = (
-
             f"{base_name}_"
-
             f"{counter}"
-
             f"{extension}"
-
         )
-
 
         filepath = os.path.join(
-
             UPLOAD_FOLDER,
-
             filename
-
         )
-
 
         counter += 1
 
-
-    file.save(
-        filepath
-    )
-
+    file.save(filepath)
 
     return filepath
-
-
 # ============================================================
 # PREPARE ANALYSIS FILE
 # ============================================================
 
 def prepare_analysis_file(
-
     storage_location,
-
     original_filename
-
 ):
 
     """
@@ -2184,7 +2130,8 @@ def prepare_analysis_file(
         Returns local CSV path.
 
     VERCEL:
-        Downloads private Blob URL into /tmp.
+        Reads private Blob using Vercel Blob SDK
+        and writes it to /tmp for prediction.
     """
 
     # --------------------------------------------------------
@@ -2200,11 +2147,77 @@ def prepare_analysis_file(
     # VERCEL
     # --------------------------------------------------------
 
-    import requests
+    token = os.environ.get(
+        "BLOB_READ_WRITE_TOKEN"
+    )
+
+    if not token:
+
+        raise RuntimeError(
+            "BLOB_READ_WRITE_TOKEN is not configured."
+        )
 
 
-    temp_dir = "/tmp"
+    # storage_location is now a dictionary
+    # containing pathname + url
 
+    if isinstance(storage_location, dict):
+
+        blob_path = storage_location.get(
+            "pathname"
+        )
+
+    else:
+
+        blob_path = storage_location
+
+
+    if not blob_path:
+
+        raise RuntimeError(
+            "Private Blob pathname is missing."
+        )
+
+
+    print(
+        "Reading private Blob:",
+        blob_path
+    )
+
+
+    # --------------------------------------------------------
+    # GET PRIVATE BLOB
+    # --------------------------------------------------------
+
+    result = get(
+
+        blob_path,
+
+        access="private",
+
+        token=token
+
+    )
+
+
+    if result is None:
+
+        raise RuntimeError(
+            "Unable to read uploaded private Blob."
+        )
+
+
+    if result.status_code != 200:
+
+        raise RuntimeError(
+            "Private Blob returned status "
+            f"{result.status_code}."
+        )
+
+
+    # --------------------------------------------------------
+    # SAVE STREAM TO /tmp
+    # --------------------------------------------------------
 
     temp_filename = (
 
@@ -2219,32 +2232,11 @@ def prepare_analysis_file(
 
     temp_filepath = os.path.join(
 
-        temp_dir,
+        "/tmp",
 
         temp_filename
 
     )
-
-
-    token = os.environ.get(
-    "BLOB_READ_WRITE_TOKEN"
-)
-
-if not token:
-    raise RuntimeError(
-        "BLOB_READ_WRITE_TOKEN is not configured."
-    )
-
-response = requests.get(
-    storage_location,
-    headers={
-        "Authorization": f"Bearer {token}"
-    },
-    timeout=120
-)
-
-
-    response.raise_for_status()
 
 
     with open(
@@ -2255,9 +2247,21 @@ response = requests.get(
 
     ) as output_file:
 
-        output_file.write(
-            response.content
-        )
+        stream = result.stream
+
+        while True:
+
+            chunk = stream.read(
+                1024 * 1024
+            )
+
+            if not chunk:
+
+                break
+
+            output_file.write(
+                chunk
+            )
 
 
     if not os.path.isfile(
@@ -2265,10 +2269,7 @@ response = requests.get(
     ):
 
         raise RuntimeError(
-
-            "Unable to prepare Blob file "
-            "for analysis."
-
+            "Unable to prepare Blob file for analysis."
         )
 
 
@@ -2279,7 +2280,6 @@ response = requests.get(
 
 
     return temp_filepath
-
 
 # ============================================================
 # UPLOAD CSV
