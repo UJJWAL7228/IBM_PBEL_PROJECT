@@ -31,6 +31,8 @@ from database import (
     initialize_database
 )
 
+from vercel.blob import put
+
 
 # ============================================================
 # LOAD ENVIRONMENT
@@ -50,6 +52,7 @@ app.secret_key = os.environ.get(
     "ibm_pbel_fraud_detection_secret"
 )
 
+
 # ============================================================
 # PATHS
 # ============================================================
@@ -58,15 +61,27 @@ BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
 )
 
-# Vercel filesystem is read-only except /tmp.
-# Local PC continues using the normal uploads folder.
+
+# ============================================================
+# STORAGE
+# ============================================================
+
 if os.environ.get("VERCEL"):
-    UPLOAD_FOLDER = "/tmp/uploads"
+
+    UPLOAD_FOLDER = None
+
 else:
+
     UPLOAD_FOLDER = os.path.join(
         BASE_DIR,
         "uploads"
     )
+
+    os.makedirs(
+        UPLOAD_FOLDER,
+        exist_ok=True
+    )
+
 
 SAMPLE_FOLDER = os.path.join(
     BASE_DIR,
@@ -74,25 +89,21 @@ SAMPLE_FOLDER = os.path.join(
     "sample"
 )
 
-# Only create writable upload directory.
-os.makedirs(
-    UPLOAD_FOLDER,
-    exist_ok=True
-)
 
-# static/sample should already exist in GitHub.
-# Do not try to create it on Vercel.
 if not os.environ.get("VERCEL"):
+
     os.makedirs(
         SAMPLE_FOLDER,
         exist_ok=True
     )
+
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 app.config["MAX_CONTENT_LENGTH"] = (
     100 * 1024 * 1024
 )
+
 
 # ============================================================
 # CURRENT ANALYSIS
@@ -101,10 +112,15 @@ app.config["MAX_CONTENT_LENGTH"] = (
 current_transactions = []
 
 current_stats = {
+
     "total": 0,
+
     "safe": 0,
+
     "risky": 0,
+
     "fraud": 0
+
 }
 
 
@@ -240,9 +256,7 @@ def update_analysis_job(
 # GET ANALYSIS JOB
 # ============================================================
 
-def get_analysis_job(
-    job_id
-):
+def get_analysis_job(job_id):
 
     with analysis_jobs_lock:
 
@@ -260,8 +274,6 @@ def get_analysis_job(
 
 # ============================================================
 # ANALYSIS PROGRESS CALLBACK
-#
-# predict.py calls this function while processing CSV.
 # ============================================================
 
 def analysis_progress_callback(
@@ -334,9 +346,11 @@ def run_bulk_analysis(
         )
 
         print(
-            "Saved file:",
+            "Analysis file:",
             filepath
         )
+
+        print("=" * 70)
 
 
         # ----------------------------------------------------
@@ -395,9 +409,6 @@ def run_bulk_analysis(
 
         # ----------------------------------------------------
         # RUN PREDICTION
-        #
-        # IMPORTANT:
-        # progress_callback is passed into predict.py.
         # ----------------------------------------------------
 
         result = predict_transaction(
@@ -656,13 +667,11 @@ def get_sample_files():
 
     available_files = []
 
-    os.makedirs(
+    if not os.path.isdir(
+        SAMPLE_FOLDER
+    ):
 
-        SAMPLE_FOLDER,
-
-        exist_ok=True
-
-    )
+        return available_files
 
 
     for filename in (
@@ -815,174 +824,283 @@ def get_fraud_probability(
 
     return None
 
+
 # ============================================================
 # CLASSIFICATION
+#
+# IMPORTANT:
+# Canonical prediction is checked first.
+# This prevents:
+#
+# Fraud prediction
+#      ->
+# "Transaction Appears Safe"
+#
 # ============================================================
 
 def classify_transaction(transaction):
 
-    # --------------------------------------------------------
-    # READ CANONICAL PREDICTION FIRST
-    # --------------------------------------------------------
-
     prediction = str(
+
         transaction.get(
+
             "prediction",
-            transaction.get("Prediction", "")
+
+            transaction.get(
+                "Prediction",
+                ""
+            )
+
         )
+
     ).strip().lower()
+
 
     risk_level = str(
+
         transaction.get(
+
             "risk_level",
-            transaction.get("RiskLevel", "")
+
+            transaction.get(
+                "RiskLevel",
+                ""
+            )
+
         )
+
     ).strip().lower()
+
 
     status = str(
+
         transaction.get(
+
             "status",
-            transaction.get("Status", "")
+
+            transaction.get(
+                "Status",
+                ""
+            )
+
         )
+
     ).strip().lower()
 
-    # --------------------------------------------------------
-    # FRAUD HAS HIGHEST PRIORITY
-    # --------------------------------------------------------
 
-    if prediction in {
-        "fraud",
-        "fraudulent",
-        "fraud detected",
-        "high fraud risk"
-    }:
-        return "fraud"
+    classification = str(
 
-    if "fraud" in prediction:
-        return "fraud"
+        transaction.get(
 
-    if "fraud detected" in status:
-        return "fraud"
+            "classification",
 
-    if "fraud" in status:
-        return "fraud"
+            transaction.get(
+                "Classification",
+                ""
+            )
 
-    # --------------------------------------------------------
-    # RISKY
-    # --------------------------------------------------------
+        )
 
-    if prediction in {
-        "risky",
-        "risk",
-        "medium"
-    }:
-        return "risky"
+    ).strip().lower()
 
-    if risk_level in {
-        "medium",
-        "medium risk",
-        "moderate",
-        "risky"
-    }:
-        return "risky"
 
-    if status in {
-        "requires attention",
-        "warning",
-        "suspicious"
-    }:
-        return "risky"
+    result = str(
 
-    # --------------------------------------------------------
-    # SAFE
-    # --------------------------------------------------------
+        transaction.get(
 
-    if prediction in {
-        "safe",
-        "legitimate",
-        "normal"
-    }:
-        return "safe"
+            "result",
 
-    if risk_level in {
-        "low",
-        "low risk"
-    }:
-        return "safe"
+            transaction.get(
+                "Result",
+                ""
+            )
 
-    if status in {
-        "legitimate",
-        "safe",
-        "transaction appears safe"
-    }:
-        return "safe"
+        )
 
-    # --------------------------------------------------------
-    # NUMERIC FALLBACK
-    # --------------------------------------------------------
+    ).strip().lower()
 
-    numeric_prediction = safe_float(prediction)
-
-    if numeric_prediction is not None:
-
-        if numeric_prediction == 1:
-            return "fraud"
-
-        if numeric_prediction == 0:
-            return "safe"
-
-    # --------------------------------------------------------
-    # FINAL SAFE FALLBACK
-    # --------------------------------------------------------
-
-    return "safe"
 
     # --------------------------------------------------------
     # FRAUD
     # --------------------------------------------------------
 
-    fraud_words = [
+    fraud_values = {
 
         "fraud",
 
         "fraudulent",
 
-        "fraud detected"
+        "fraud detected",
 
-    ]
+        "high fraud risk",
 
+        "high-risk fraud",
 
-    if any(
+        "high risk fraud"
 
-        word in prediction
-
-        for word in fraud_words
-
-    ):
-
-        return "fraud"
+    }
 
 
-    if any(
-
-        word in result
-
-        for word in fraud_words
-
-    ):
+    if prediction in fraud_values:
 
         return "fraud"
 
 
-    if any(
-
-        word in classification
-
-        for word in fraud_words
-
-    ):
+    if risk_level in fraud_values:
 
         return "fraud"
+
+
+    if classification in fraud_values:
+
+        return "fraud"
+
+
+    if "fraud" in prediction:
+
+        return "fraud"
+
+
+    if "fraud" in risk_level:
+
+        return "fraud"
+
+
+    if "fraud" in classification:
+
+        return "fraud"
+
+
+    if "fraud detected" in status:
+
+        return "fraud"
+
+
+    if "fraudulent" in status:
+
+        return "fraud"
+
+
+    # --------------------------------------------------------
+    # RISKY
+    # --------------------------------------------------------
+
+    risky_values = {
+
+        "risky",
+
+        "risk",
+
+        "medium",
+
+        "moderate",
+
+        "medium risk",
+
+        "moderate risk",
+
+        "suspicious",
+
+        "warning",
+
+        "requires attention"
+
+    }
+
+
+    if prediction in risky_values:
+
+        return "risky"
+
+
+    if risk_level in risky_values:
+
+        return "risky"
+
+
+    if classification in risky_values:
+
+        return "risky"
+
+
+    if status in {
+
+        "requires attention",
+
+        "warning",
+
+        "suspicious",
+
+        "risky"
+
+    }:
+
+        return "risky"
+
+
+    if result in risky_values:
+
+        return "risky"
+
+
+    # --------------------------------------------------------
+    # SAFE
+    # --------------------------------------------------------
+
+    safe_values = {
+
+        "safe",
+
+        "legitimate",
+
+        "normal",
+
+        "safe transaction",
+
+        "legitimate transaction",
+
+        "transaction appears safe",
+
+        "low risk",
+
+        "low-risk",
+
+        "low"
+
+    }
+
+
+    if prediction in safe_values:
+
+        return "safe"
+
+
+    if risk_level in safe_values:
+
+        return "safe"
+
+
+    if classification in safe_values:
+
+        return "safe"
+
+
+    if status in {
+
+        "legitimate",
+
+        "safe",
+
+        "transaction appears safe"
+
+    }:
+
+        return "safe"
+
+
+    if result in safe_values:
+
+        return "safe"
 
 
     # --------------------------------------------------------
@@ -990,9 +1108,7 @@ def classify_transaction(transaction):
     # --------------------------------------------------------
 
     numeric_prediction = safe_float(
-
         prediction
-
     )
 
 
@@ -1009,69 +1125,7 @@ def classify_transaction(transaction):
 
 
     # --------------------------------------------------------
-    # RISKY
-    # --------------------------------------------------------
-
-    risky_words = [
-
-        "risky",
-
-        "medium",
-
-        "moderate",
-
-        "suspicious",
-
-        "warning",
-
-        "requires attention",
-
-        "attention",
-
-        "medium risk",
-
-        "high risk",
-
-        "high-risk"
-
-    ]
-
-
-    if any(
-
-        word in risk_level
-
-        for word in risky_words
-
-    ):
-
-        return "risky"
-
-
-    if any(
-
-        word in status
-
-        for word in risky_words
-
-    ):
-
-        return "risky"
-
-
-    if any(
-
-        word in classification
-
-        for word in risky_words
-
-    ):
-
-        return "risky"
-
-
-    # --------------------------------------------------------
-    # PROBABILITY
+    # PROBABILITY FALLBACK
     # --------------------------------------------------------
 
     probability = (
@@ -1097,7 +1151,7 @@ def classify_transaction(transaction):
 
 
     # --------------------------------------------------------
-    # SAFE
+    # TEXT FALLBACK
     # --------------------------------------------------------
 
     combined = " ".join([
@@ -1115,31 +1169,64 @@ def classify_transaction(transaction):
     ])
 
 
-    safe_words = [
+    if "fraud" in combined:
 
-        "safe",
-
-        "legitimate",
-
-        "normal",
-
-        "low risk",
-
-        "low-risk"
-
-    ]
+        return "fraud"
 
 
     if any(
 
         word in combined
 
-        for word in safe_words
+        for word in [
+
+            "risky",
+
+            "suspicious",
+
+            "warning",
+
+            "attention",
+
+            "moderate",
+
+            "medium risk",
+
+            "high risk"
+
+        ]
+
+    ):
+
+        return "risky"
+
+
+    if any(
+
+        word in combined
+
+        for word in [
+
+            "safe",
+
+            "legitimate",
+
+            "normal",
+
+            "low risk",
+
+            "low-risk"
+
+        ]
 
     ):
 
         return "safe"
 
+
+    # --------------------------------------------------------
+    # FINAL SAFE FALLBACK
+    # --------------------------------------------------------
 
     return "safe"
 
@@ -1719,21 +1806,14 @@ def dashboard():
         )
 
 
-    # ============================================================
-    # USE REAL TRANSACTIONS WHEN AVAILABLE
-    # ============================================================
-
     dashboard_transactions = list(
         current_transactions
     ) if current_transactions else []
 
 
-    # ============================================================
+    # --------------------------------------------------------
     # FALLBACK RECENT TRANSACTIONS
-    #
-    # ONLY USED WHEN NO ANALYSIS DATA EXISTS YET.
-    # THIS DOES NOT MODIFY current_transactions.
-    # ============================================================
+    # --------------------------------------------------------
 
     if not dashboard_transactions:
 
@@ -1832,16 +1912,6 @@ def dashboard():
         ]
 
 
-    # ============================================================
-    # STATISTICS
-    #
-    # REAL DATA:
-    #     use existing calculate_transaction_stats()
-    #
-    # FALLBACK:
-    #     calculate stats from the 10 displayed transactions
-    # ============================================================
-
     if current_transactions:
 
         stats = (
@@ -1858,10 +1928,6 @@ def dashboard():
             )
         )
 
-
-    # ============================================================
-    # DASHBOARD
-    # ============================================================
 
     return render_template(
 
@@ -1939,10 +2005,280 @@ def bulk_analysis():
 
 
 # ============================================================
+# SAVE UPLOADED CSV
+# ============================================================
+
+def save_uploaded_csv(
+
+    file,
+
+    filename
+
+):
+
+    """
+    LOCAL:
+        Saves CSV to uploads/.
+
+    VERCEL:
+        Uploads CSV to Vercel Blob.
+    """
+
+    # --------------------------------------------------------
+    # VERCEL BLOB
+    # --------------------------------------------------------
+
+    if os.environ.get("VERCEL"):
+
+        token = os.environ.get(
+            "BLOB_READ_WRITE_TOKEN"
+        )
+
+
+        if not token:
+
+            raise RuntimeError(
+
+                "BLOB_READ_WRITE_TOKEN is not "
+                "configured in the Vercel environment."
+
+            )
+
+
+        file_data = file.read()
+
+
+        if not file_data:
+
+            raise ValueError(
+                "Uploaded CSV file is empty."
+            )
+
+
+        blob_path = (
+
+            "fraud-analysis/"
+
+            f"{uuid.uuid4().hex}_"
+
+            f"{filename}"
+
+        )
+
+
+        blob = put(
+
+            blob_path,
+
+            file_data,
+
+            access="private",
+
+            content_type="text/csv",
+
+            token=token
+
+        )
+
+
+        print()
+        print("=" * 70)
+        print("VERCEL BLOB UPLOAD SUCCESS")
+        print("=" * 70)
+
+        print(
+            "Blob pathname:",
+            blob.pathname
+        )
+
+        print(
+            "Blob URL:",
+            blob.url
+        )
+
+        print("=" * 70)
+
+
+        return blob.url
+
+
+    # --------------------------------------------------------
+    # LOCAL DEVELOPMENT
+    # --------------------------------------------------------
+
+    filepath = os.path.join(
+
+        UPLOAD_FOLDER,
+
+        filename
+
+    )
+
+
+    counter = 1
+
+
+    base_name = os.path.splitext(
+        filename
+    )[0]
+
+
+    extension = os.path.splitext(
+        filename
+    )[1]
+
+
+    while os.path.exists(
+        filepath
+    ):
+
+        filename = (
+
+            f"{base_name}_"
+
+            f"{counter}"
+
+            f"{extension}"
+
+        )
+
+
+        filepath = os.path.join(
+
+            UPLOAD_FOLDER,
+
+            filename
+
+        )
+
+
+        counter += 1
+
+
+    file.save(
+        filepath
+    )
+
+
+    return filepath
+
+
+# ============================================================
+# PREPARE ANALYSIS FILE
+# ============================================================
+
+def prepare_analysis_file(
+
+    storage_location,
+
+    original_filename
+
+):
+
+    """
+    LOCAL:
+        Returns local CSV path.
+
+    VERCEL:
+        Downloads private Blob URL into /tmp.
+    """
+
+    # --------------------------------------------------------
+    # LOCAL
+    # --------------------------------------------------------
+
+    if not os.environ.get("VERCEL"):
+
+        return storage_location
+
+
+    # --------------------------------------------------------
+    # VERCEL
+    # --------------------------------------------------------
+
+    import requests
+
+
+    temp_dir = "/tmp"
+
+
+    temp_filename = (
+
+        f"fraud_analysis_"
+
+        f"{uuid.uuid4().hex}_"
+
+        f"{secure_filename(original_filename)}"
+
+    )
+
+
+    temp_filepath = os.path.join(
+
+        temp_dir,
+
+        temp_filename
+
+    )
+
+
+    response = requests.get(
+
+        storage_location,
+
+        timeout=120
+
+    )
+
+
+    response.raise_for_status()
+
+
+    with open(
+
+        temp_filepath,
+
+        "wb"
+
+    ) as output_file:
+
+        output_file.write(
+            response.content
+        )
+
+
+    if not os.path.isfile(
+        temp_filepath
+    ):
+
+        raise RuntimeError(
+
+            "Unable to prepare Blob file "
+            "for analysis."
+
+        )
+
+
+    print(
+        "Temporary analysis file:",
+        temp_filepath
+    )
+
+
+    return temp_filepath
+
+
+# ============================================================
 # UPLOAD CSV
 #
-# Upload returns immediately.
-# Analysis continues in background thread.
+# IMPORTANT:
+# This route now uses save_uploaded_csv()
+# instead of directly writing to UPLOAD_FOLDER.
+#
+# Therefore:
+#
+# LOCAL  -> uploads/
+# VERCEL -> Vercel Blob
 # ============================================================
 
 @app.route(
@@ -2026,61 +2362,54 @@ def upload():
         }), 400
 
 
-    base_name = os.path.splitext(
-        filename
-    )[0]
-
-
-    extension = os.path.splitext(
-        filename
-    )[1]
-
-
-    filepath = os.path.join(
-
-        UPLOAD_FOLDER,
-
-        filename
-
-    )
-
-
-    counter = 1
-
-
-    while os.path.exists(
-        filepath
-    ):
-
-        filename = (
-
-            f"{base_name}_"
-            f"{counter}"
-            f"{extension}"
-
-        )
-
-
-        filepath = os.path.join(
-
-            UPLOAD_FOLDER,
-
-            filename
-
-        )
-
-
-        counter += 1
-
-
     try:
 
-        file.save(
-            filepath
+        # ----------------------------------------------------
+        # SAVE FILE
+        #
+        # LOCAL:
+        #   returns local path
+        #
+        # VERCEL:
+        #   returns Blob URL
+        # ----------------------------------------------------
+
+        storage_location = (
+            save_uploaded_csv(
+                file,
+                filename
+            )
+        )
+
+
+        # ----------------------------------------------------
+        # PREPARE FILE FOR PREDICTION
+        #
+        # LOCAL:
+        #   same local path
+        #
+        # VERCEL:
+        #   downloads Blob to /tmp
+        # ----------------------------------------------------
+
+        analysis_filepath = (
+            prepare_analysis_file(
+
+                storage_location,
+
+                original_filename
+
+            )
         )
 
 
     except Exception as error:
+
+        print(
+            "Upload storage error:",
+            repr(error)
+        )
+
 
         return jsonify({
 
@@ -2089,7 +2418,7 @@ def upload():
 
             "error":
                 (
-                    "Unable to save file: "
+                    "Unable to save uploaded CSV: "
                     f"{error}"
                 )
 
@@ -2117,7 +2446,7 @@ def upload():
 
             job_id,
 
-            filepath,
+            analysis_filepath,
 
             original_filename
 
@@ -2740,9 +3069,7 @@ def transaction_details(
 
                 "MerchantName",
 
-                "Merchant_Name",
-
-                "App"
+                "Merchant_Name"
 
             )
 
