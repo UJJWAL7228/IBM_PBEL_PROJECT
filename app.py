@@ -2128,7 +2128,6 @@ def save_uploaded_csv(file, filename):
 def prepare_analysis_file(storage_location):
     """
     Downloads a private Vercel Blob into /tmp for analysis.
-    Works with the current Vercel Python Blob SDK.
     """
 
     if not os.environ.get("VERCEL"):
@@ -2155,9 +2154,12 @@ def prepare_analysis_file(storage_location):
             "Private Blob URL/path is missing."
         )
 
-    print("Reading private Blob:", blob_url)
+    print(
+        "Reading private Blob:",
+        blob_url
+    )
 
-    # Temporary file inside Vercel's writable /tmp directory
+    # Temporary file inside Vercel writable /tmp
     filename = os.path.basename(
         str(blob_url).split("?")[0]
     )
@@ -2172,16 +2174,18 @@ def prepare_analysis_file(storage_location):
 
     try:
 
-        # Current Vercel Python SDK
+        print(
+            "Downloading private Blob..."
+        )
+
         with BlobClient(token=token) as client:
 
             client.download_file(
                 blob_url,
-                temp_filepath,
-                overwrite=True
+                temp_filepath
             )
 
-        # Verify file actually downloaded
+        # Verify file exists
         if not os.path.exists(temp_filepath):
             raise RuntimeError(
                 "Private Blob download did not create a file."
@@ -2215,8 +2219,6 @@ def prepare_analysis_file(storage_location):
         raise RuntimeError(
             f"Unable to download private Blob for analysis: {e}"
         )
-
-    return temp_filepath
 # ============================================================
 # UPLOAD CSV
 #
