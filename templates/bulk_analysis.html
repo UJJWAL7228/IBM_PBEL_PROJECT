@@ -4354,6 +4354,91 @@ document.addEventListener(
 
     }
 );
+/* ============================================================
+   MOBILE CSV FILE PICKER
+   Does NOT change analysis/upload backend logic.
+   Makes the upload area easier to use on phones.
+============================================================ */
+
+(function () {
+    const fileInput = document.getElementById("datasetFile");
+
+    if (!fileInput) return;
+
+    // Make sure mobile browsers treat this as a CSV picker.
+    fileInput.setAttribute("accept", ".csv,text/csv");
+
+    // Show a useful message when a file is selected.
+    fileInput.addEventListener("change", function () {
+        if (!this.files || !this.files.length) {
+            return;
+        }
+
+        const selectedFile = this.files[0];
+
+        console.log(
+            "CSV selected:",
+            selectedFile.name,
+            selectedFile.size,
+            "bytes"
+        );
+
+        // Keep the existing input visible and usable.
+        // Do NOT submit or analyze automatically.
+        // The existing Analyze Dataset button remains responsible
+        // for starting analysis.
+    });
+})();
+/* ============================================================
+   MOBILE FILE INPUT FIX
+============================================================ */
+
+#datasetFile {
+    position: relative;
+    z-index: 20 !important;
+    width: 100%;
+    min-height: 52px;
+    cursor: pointer;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+}
+
+#datasetFile::file-selector-button {
+    min-height: 46px;
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #datasetFile {
+        min-height: 56px;
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    #datasetFile::file-selector-button {
+        min-height: 46px;
+        padding: 10px 14px;
+        margin-right: 10px;
+        font-size: 15px;
+    }
+}
+/* ============================================================
+   MOBILE FILE INPUT TOUCH FIX
+   Does not affect analysis.
+============================================================ */
+
+(function () {
+    const fileInput = document.getElementById("datasetFile");
+
+    if (!fileInput) return;
+
+    fileInput.style.pointerEvents = "auto";
+
+    fileInput.addEventListener("touchstart", function () {
+        this.style.pointerEvents = "auto";
+    }, { passive: true });
+})();
 
 </script>
 
